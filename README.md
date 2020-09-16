@@ -18,7 +18,7 @@
 | Day | Morning Exercise | Lectures | Labs | Homework |
 |:---:|:-----------:|:-------:|:-----------:|:-----------:|
 | w01d01 | Introduction to SEIR | Navigating terminal (Morning), Intro to JavaScript and Programming, Conditionals, Booleans, Loops (Afternoon) | Just the Beginning | Homework, The First |
-| w01d02 | Setting Up for Success | Git and GitHub (Morning), CSS Lesson (Afternoon) | Git/GitHub, Booleans and Loops | Fake Resume and GitHub Practice |
+| w01d02 | Review | Git and GitHub (Morning), CSS Lesson (Afternoon) | Git/GitHub, Booleans and Loops | Fake Resume and GitHub Practice |
 | w01d03 | Git Pull Upstream Master | Intro to Conditionals and Loops (Morning), Arrays and Iteration (Afternoon) | Loops and Conditionals, Arrays and Conditionals | JS Conditionals Loops Arrays |
 | w01d04 | HTML Mockup Pt.1 | Functions (Morning), Scope (Afternoon) | Problem Solving | JS Functions Scope Problem Solving |
 | w01d05 | HTML Mockup Pt.2 | Program Design (Morning), Objects (Afternoon) | Waffles Pseudocode, Objects | Complete Morning and Afternoon Labs |
