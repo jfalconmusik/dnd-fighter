@@ -10,7 +10,6 @@
 | Afternoon Lesson | 1h:15min - 2:00 hours |
 | Second Lab | 30 min to 100 min |
 
-
 **Outcomes Meetings are Wednesdays from 1pm EST to 2:30**
 
 ## Unit 1: Front-End Development
