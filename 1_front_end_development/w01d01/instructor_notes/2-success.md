@@ -18,7 +18,6 @@
 
 - The maximum point of learning is right at the edge of learning and panic.<br>
 
-
 - This experience is a rollercoaster.<br>
 
 <hr>
