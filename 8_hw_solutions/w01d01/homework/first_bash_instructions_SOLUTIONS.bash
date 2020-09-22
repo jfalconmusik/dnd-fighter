@@ -15,3 +15,5 @@
 # cp ../../death_star/storm_trooper.txt tatooine
 # mv luke.txt ../millinium_falcon
 # mv obi_wan.txt ../millinium_falcon
+# mv millenium_falcon ../galaxy_far_far_away
+# mv millenium_falcon ../death_star
