@@ -54,7 +54,7 @@ Now, let's get started with some reps
 
 ## Intro to Pseudocoding
 
-You'll be learning more about [pseudo-coding](https://en.wikipedia.org/wiki/Pseudocode) next week, but as a quick introduction:
+You'll be learning more about [pseudo-coding](https://en.wikipedia.org/wiki/Pseudocode) this week, but as a quick introduction:
 Pseudo-coding is writing out what you think the question is asking or structuring your answer in **human language** rather than *computer language*. Before you create a variable or write out a loop, write down what you're thinking (like you're explaining it to another person) before you solve the problem.
 
 Let's take some time to practice a bit of pseudo-coding! Read the problems below and try to write out some // commented out pseudo-code for them without writing any actual code. Try to see past any convoluted language, redundancy, or complexity to get to the core of the problem. Remember, we're not trying to solve the problem, but write out how to solve the problem.
