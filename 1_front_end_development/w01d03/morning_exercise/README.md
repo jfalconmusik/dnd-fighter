@@ -56,10 +56,6 @@ Let's take some time to make sure we all submitted hw correctly and we are able 
 
 - `git push origin master` - this sends your work to your remote copy of the class repo
 
-- Homework submission: create a github issue on the instructor repo that has a link to the location of your homework on your copy of the class repo
-
-![hw submission](HW_submission.png)
-
 ### What Success Looks like
 
 -  `git status`
