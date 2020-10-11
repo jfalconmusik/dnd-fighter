@@ -10,10 +10,10 @@ body {
 .buttonContainer {
   width: 100vw;
   height: 100vh;
-  left: 7%;
-  top: 8%;
+  left: 6.5%;
+  top: 12%;
   position: fixed;
-  transform: rotate(33deg) scale(1.2);
+  transform: rotate(33deg) scale(1.25);
 }
 
 .rotator {

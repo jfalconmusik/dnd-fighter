@@ -7,6 +7,7 @@ import './App.css';
 
 
 // https://codepen.io/raurir/pen/qtEmn <---- source of pentagram.
+// css tricks is where I got the triangles.
 
 // No need for context, cuz so small. No need for router either.
 
@@ -23,7 +24,6 @@ function App() {
   // here are some fun backgrounds we can add:
 
   const backgroundArray = [
-    "",
     "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/faa48d2d-12c2-43d1-bf23-b5e99857825b/dd0rzgs-2f7a9734-9e7d-4386-86f3-080d67f743e5.png/v1/fill/w_1024,h_576,q_80,strp/the_sacred_tree___daily_deviation_by_ellysiumn_dd0rzgs-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD01NzYiLCJwYXRoIjoiXC9mXC9mYWE0OGQyZC0xMmMyLTQzZDEtYmYyMy1iNWU5OTg1NzgyNWJcL2RkMHJ6Z3MtMmY3YTk3MzQtOWU3ZC00Mzg2LTg2ZjMtMDgwZDY3Zjc0M2U1LnBuZyIsIndpZHRoIjoiPD0xMDI0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.L3OaGbTtLfZgyqdudpEIoLqj9amBTCkCUUkstvbSvrc",
     "https://wallpaperaccess.com/full/2195679.jpg",
     "https://www.hdwallback.net/wp-content/uploads/2018/01/Awesome-Night-Time-Wide-Hd-New-Best-Desktop-Background-Full-Free-Hd-Wallpaper-Artworks-Desktop-Images-For-Apple.jpg",
@@ -67,7 +67,7 @@ console.log("went right")
         setBackgroundImg(backgroundArray[backgroundArray.indexOf(backgroundImg) + 1 ])
         console.log("moved forward")
       } else {
-        setBackgroundImg("")
+        setBackgroundImg(backgroundArray[0])
         console.log("to the beginning")
       }
     }
