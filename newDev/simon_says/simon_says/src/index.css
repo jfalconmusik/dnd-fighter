@@ -3,17 +3,20 @@ body {
 }
 
 .shell {
-  transform: scale(3);
+  transform: scale(3) rotate(33deg);
   position: fixed;
 }
 
 .buttonContainer {
   width: 100vw;
   height: 100vh;
-  left: 8%;
-  top: -1%;
+  left: 7%;
+  top: 8%;
   position: fixed;
-  transform: scale(1.2);
+  transform: rotate(33deg) scale(1.2);
+}
+
+.rotator {
 }
 
 .modal {
@@ -105,6 +108,21 @@ body {
 .arrow {
 }
 
+#backgrounds {
+  z-index: 99;
+  float: right;
+  bottom: 20%;
+  margin-bottom: -5%;
+  margin-top: 5%;
+  left: 40%;
+  position: relative;
+}
+
+#backgrounds > button {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .arrow :hover {
   box-shadow: 10px 10px 5px grey;
 }
@@ -144,7 +162,7 @@ body {
   position: absolute;
   width: 200px;
   height: 200px;
-  border: 12px solid #500;
+  border: 12px solid black;
   border-radius: 112px;
   left: 150px;
   top: 150px;
@@ -166,7 +184,7 @@ li {
   width: 20px;
   margin-left: 30px;
   width: 10px;
-  background: #500;
+  background: black;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
 }
@@ -176,9 +194,9 @@ li {
   margin-left: 28px;
   height: 50px;
   width: 14px;
-  background: #500;
-  border-left: 2px solid #100;
-  border-right: 2px solid #100;
+  background: black;
+  border-left: 2px solid darkgray;
+  border-right: 2px solid gray;
 }
 
 .n0 {
