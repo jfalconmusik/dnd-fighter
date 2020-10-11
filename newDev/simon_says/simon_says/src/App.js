@@ -112,20 +112,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div class="shell">
-        <div class="base">
-          <div class="circle"></div>
-          <div class="bar n0"><li></li></div>
-          <div class="bar n1"><li></li></div>
-          <div class="bar n2"><li></li></div>
-          <div class="bar n3"><li></li></div>
-          <div class="bar n4"><li></li></div>
-          <div class="overbar n0"><li></li></div>
-          <div class="overbar n1"><li></li></div>
-          <div class="overbar n2"><li></li></div>
-          <div class="overbar n3"><li></li></div>
-          <div class="overbar n4"><li></li></div>
+        <div className="shell">
+        <div className="base">
+          <div className="circle"></div>
+            <div className="bar n0"><li></li></div>
+            <div className="bar n1"><li></li></div>
+            <div className="bar n2"><li></li></div>
+            <div className="bar n3"><li></li></div>
+            <div className="bar n4"><li></li></div>
+            <div className="overbar n0"><li></li></div>
+            <div className="overbar n1"><li></li></div>
+            <div className="overbar n2"><li></li></div>
+            <div className="overbar n3"><li></li></div>
+            <div className="overbar n4"><li></li></div>
+          </div>
         </div>
+        <div className="buttonContainer">
+          <button type="button" className="downright-arrow"></button>
+          <button type="button" className="downleft-arrow"></button>
+          <button type="button" className="down-arrow"></button>
+          <button type="button" className="topright-arrow"></button>
+          <button type="button" className="topleft-arrow"></button>
+      
         </div>
       </header>
     </div>
