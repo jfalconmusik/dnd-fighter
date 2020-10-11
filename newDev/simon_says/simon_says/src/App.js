@@ -1,46 +1,57 @@
 import React, {useState, useEffect, Fragment } from "react"
 import {Howl, Howler} from 'howler'; // audio
-import { SketchPicker } from 'react-color' // color picker.
+import { ChromePicker } from 'react-color' // color picker.
 import logo from './logo.svg';
 import './App.css';
 
 
 // https://codepen.io/raurir/pen/qtEmn <---- source of pentagram.
-//
-//
-// May I use react?
-// 
-// so you know what? Put fucking wubs into this game, dude. Yes.
-// OR just do sets. A dub set. A metal set. A smooth jazz set. You could do it in a pentragram shape or something, that would be cool. Then you could do pentatonic.
-// with the colors, you should build in some nice presets.
+
+// No need for context, cuz so small. No need for router either.
 
 
-function SimonSays() {
+
+
+function App() {
+
   //
   // how about a game of simon says?
-  //===========
-  // COLORS : an array of all possible colors that the buttons will have.
-  //===========
-  //
-  const colors = [
-    "red",
-    "blue",
-    "green",
-    "yellow",
-    "orange",
-    "purple",
-    "turquoise",
-  ];
-  // how many buttons does the user want? We will propagate from the colors array.
-  const [buttonColors, setButtonColors] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+
+
+
+
+const [colorPickDisplayed, setColorPickDisplayed] = useState(false)
+const [chosenColor, setChosenColor] = useState("#fff")
+
+
+  const [downColor, setDownColor] = useState("maroon");
+  const [downrightColor, setDownrightColor] = useState("maroon");
+  const [downleftColor, setDownleftColor] = useState("maroon");
+  const [toprightColor, setToprightColor] = useState("maroon");
+  const [topleftColor, setTopleftColor] = useState("maroon");
+
+
+
+
+useEffect(() => {
+
+  if (colorPickDisplayed) {
+
+  }
+
+}, [colorPickDisplayed])
+
+
+
+
+
+
 
   // ==============
   // NOTES: what are the urls for all these electric guitar notes?
   // =============
   const notes = { e: "url", a: "url", d: "url", g: "etc..." };
 
-  const [currentScale, setCurrentScale] = useState();
-  // we need to remember the name of the scale we're using.
   //
   // And we need to remember what sequence of notes the user must copy. We're going to spread these notes into an array so we can keep pushing new notes.
   const [currentNotes, setCurrentNotes] = useState([]);
@@ -57,8 +68,8 @@ function SimonSays() {
 
   // Choice logic, did the user pick the right note?
 
-  const handleClick = (buttonColor) => {
-    if (buttonColor == nextButton)
+  const handleClick = (buttonId) => {
+    if (buttonId == nextButton)
       if (sequenceCurrentPlace < sequence.length) {
         setSequenceCurrentPlace(sequenceCurrentPlace + 1);
       } else {
@@ -103,12 +114,7 @@ function SimonSays() {
   //     </div>
   //   </div>
   // );
-}
 
-
-
-
-function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -128,13 +134,47 @@ function App() {
           </div>
         </div>
         <div className="buttonContainer">
-          <button type="button" className="downright-arrow"></button>
-          <button type="button" className="downleft-arrow"></button>
-          <button type="button" className="down-arrow"></button>
-          <button type="button" className="topright-arrow"></button>
-          <button type="button" className="topleft-arrow"></button>
-      
+          <button 
+            type="button" 
+            id="downright-arrow"
+            onClick={() => handleClick("downright")}
+            style={{"background-color": downrightColor}}></button>
+          <button 
+            type="button" 
+            id="downleft-arrow"
+            onClick={() => handleClick("downleft")}
+            style={{"background-color": downleftColor }}></button>
+          <button 
+            type="button" 
+            id="down-arrow"
+            onClick={() => handleClick("down")}
+            style={{"background-color": downColor }}></button>
+          <button 
+            type="button" 
+            id="topright-arrow"
+            onClick={() => handleClick("topright")}
+            style={{"background-color": toprightColor }}></button>
+          <button 
+            type="button"
+            id="topleft-arrow"
+            onClick={() => handleClick("topleft")}
+            style={{"background-color": topleftColor }}></button>
         </div>
+        <div>
+          <div class="modal">
+            <p>Pick your color and then click a button!</p>
+          </div>
+              <ChromePicker 
+                id="color-picker"
+                color={`${chosenColor}`} 
+                onChangeComplete={() => setChosenColor(color)}
+                style={{"display": `${colorPickDisplayed ? "initial" : "none"}`}}
+              
+                />
+        </div>
+          <button type="button" id="options"></button>
+          <button type="button" id="colors" onClick={() => {setColorPickDisplayed(!colorPickDisplayed)}}
+            >{!colorPickDisplayed ? "Colors" : "Keep Playing"}</button>
       </header>
     </div>
   );
