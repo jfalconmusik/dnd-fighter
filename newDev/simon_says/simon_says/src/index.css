@@ -10,8 +10,17 @@ body {
 .buttonContainer {
   width: 100vw;
   height: 100vh;
-  left: 6%;
-  position: relative;
+  left: 8%;
+  top: -1%;
+  position: fixed;
+  transform: scale(1.2);
+}
+
+.modal {
+  position: fixed;
+  left: 80%;
+  bottom: 27%;
+  font-size: medium;
 }
 
 #topleft-arrow {
@@ -23,9 +32,9 @@ body {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid maroon;
-  bottom: -18%;
-  left: -22%;
+  border-bottom: 100px solid #e01810;
+  bottom: -21%;
+  left: -22.5%;
   position: relative;
   transform: rotate(-35deg);
 }
@@ -38,9 +47,9 @@ body {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid maroon;
-  bottom: -18%;
-  left: -6%;
+  border-bottom: 100px solid #ffffff;
+  bottom: -21%;
+  left: -7.7%;
   position: relative;
   transform: rotate(35deg);
 }
@@ -54,11 +63,11 @@ body {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid maroon;
-  bottom: -40%;
-  left: 15%;
+  border-bottom: 100px solid #c04dc6;
+  bottom: -38%;
+  left: 13%;
   position: relative;
-  transform: rotate(109deg);
+  transform: rotate(110deg);
 }
 
 #downleft-arrow {
@@ -70,11 +79,11 @@ body {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid maroon;
-  bottom: -40%;
-  left: -7%;
+  border-bottom: 100px solid#CFE010;
+  bottom: -38%;
+  left: -7.7%;
   position: relative;
-  transform: rotate(-109deg);
+  transform: rotate(-110deg);
 }
 
 #down-arrow {
@@ -86,21 +95,42 @@ body {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid maroon;
-  bottom: -52%;
-  left: -5%;
+  border-bottom: 100px solid #2b51ca;
+  bottom: -49.5%;
+  left: -6%;
   position: relative;
   transform: rotate(-180deg);
 }
 
+.arrow {
+}
+
+.arrow :hover {
+  box-shadow: 10px 10px 5px grey;
+}
+
 #color-picker {
-  position: fixed;
+  position: relative;
+  left: 60vw;
+  margin-left: 100%;
+  float: right;
+}
+
+.colorPicker {
+  left: 300%;
+  top: 50%;
+  margin-top: 10%;
+  position: relative;
 }
 
 #colors {
   background-color: black;
   color: white;
   border-radius: 25px;
+  position: relative;
+  left: 40%;
+  bottom: 20%;
+  z-index: 99;
 }
 
 .base {

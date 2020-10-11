@@ -9,8 +9,7 @@ import './App.css';
 
 // No need for context, cuz so small. No need for router either.
 
-
-
+// allow the user to choose from a fun list of background images.
 
 function App() {
 
@@ -21,12 +20,24 @@ function App() {
 
 
 const [colorPickDisplayed, setColorPickDisplayed] = useState(false)
-const [chosenColor, setChosenColor] = useState("#fff")
+const [chosenColor, setChosenColor] = useState("#fffff")
+
+useEffect(() => {
+  console.log(chosenColor);
+}, [chosenColor])
+
+useEffect(() => {
+  console.log(colorPickDisplayed);
+}, [colorPickDisplayed])
 
 
 function handleColor(target) {
   if (colorPickDisplayed) {
-    target.style.backgroundColor = `${chosenColor}`
+    if (target.className == "arrow") {
+
+      target.style.borderBottom = `100px solid ${chosenColor}`
+      console.log(target)
+    }
   }
 }
 
@@ -57,7 +68,11 @@ function handleColor(target) {
 
   // Choice logic, did the user pick the right note?
 
-  const handleClick = (buttonId) => {
+  const handleClick = (buttonId, target) => {
+
+
+    handleColor(target)
+
     if (buttonId == nextButton)
       if (sequenceCurrentPlace < sequence.length) {
         setSequenceCurrentPlace(sequenceCurrentPlace + 1);
@@ -75,6 +90,10 @@ function handleColor(target) {
   const generateNewSequence = () => {};
   //
 
+
+  function handleColorPickDisplay() {
+    setColorPickDisplayed(!colorPickDisplayed)
+  }
   // return (
   //   <div>
   //     <div id="simonSays" class="center">
@@ -122,42 +141,54 @@ function handleColor(target) {
             <div className="overbar n4"><li></li></div>
           </div>
         </div>
-        <div className="buttonContainer" onClick={(e) => {handleColor(e.target)}}>
-          <button 
-            type="button" 
-            id="downright-arrow"
-            onClick={() => handleClick("downright")}></button>
-          <button 
-            type="button" 
-            id="downleft-arrow"
-            onClick={() => handleClick("downleft")}></button>
-          <button 
-            type="button" 
-            id="down-arrow"
-            onClick={() => handleClick("down")}></button>
-          <button 
-            type="button" 
-            id="topright-arrow"
-            onClick={() => handleClick("topright")}></button>
-          <button 
-            type="button"
-            id="topleft-arrow"
-            onClick={() => handleClick("topleft")}></button>
+        <div className="buttonContainer"> 
+            <button 
+              className='arrow'
+              type="button" 
+              id="downright-arrow"
+              onClick={(e) =>  
+                handleClick("downright", e.target)}></button>
+            <button 
+              className="arrow"
+              type="button" 
+              id="downleft-arrow"
+              onClick={(e) => 
+                handleClick("downleft", e.target)}></button>
+            <button 
+              className="arrow"
+              type="button" 
+              id="down-arrow"
+              onClick={(e) => 
+                handleClick("down-arrow", e.target)}></button>
+            <button 
+              className="arrow"
+              type="button" 
+              id="topright-arrow"
+              onClick={(e) => 
+                handleClick("topright", e.target)}></button>
+            <button 
+              className="arrow"
+              type="button"
+              id="topleft-arrow"
+              onClick={(e) => 
+                handleClick("topleft", e.target)}></button>
         </div>
-        <div>
-          <div class="modal">
+        <div style={{"visibility": `${colorPickDisplayed ? "initial" : "hidden"}`}}>
+          <div className="modal">
             <p>Pick your color and then click a button!</p>
           </div>
               <ChromePicker 
                 id="color-picker"
+                className="colorPicker"
                 color={`${chosenColor}`} 
-                onChangeComplete={() => setChosenColor(color.hex)}
-                style={{"display": `${colorPickDisplayed ? "initial" : "none"}`}}
+                onChangeComplete={(e) => setChosenColor(e.hex)}
+                
               
                 />
         </div>
+      
           <button type="button" id="options"></button>
-          <button type="button" id="colors" onClick={() => {setColorPickDisplayed(!colorPickDisplayed)}}
+          <button type="button" id="colors" onClick={() => {handleColorPickDisplay()}}
             >{!colorPickDisplayed ? "Colors" : "Keep Playing"}</button>
       </header>
     </div>
