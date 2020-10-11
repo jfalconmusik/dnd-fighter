@@ -97,6 +97,12 @@ body {
   position: fixed;
 }
 
+#colors {
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+}
+
 .base {
   width: 300px;
   height: 50vh;

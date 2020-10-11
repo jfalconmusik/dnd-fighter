@@ -24,22 +24,11 @@ const [colorPickDisplayed, setColorPickDisplayed] = useState(false)
 const [chosenColor, setChosenColor] = useState("#fff")
 
 
-  const [downColor, setDownColor] = useState("maroon");
-  const [downrightColor, setDownrightColor] = useState("maroon");
-  const [downleftColor, setDownleftColor] = useState("maroon");
-  const [toprightColor, setToprightColor] = useState("maroon");
-  const [topleftColor, setTopleftColor] = useState("maroon");
-
-
-
-
-useEffect(() => {
-
+function handleColor(target) {
   if (colorPickDisplayed) {
-
+    target.style.backgroundColor = `${chosenColor}`
   }
-
-}, [colorPickDisplayed])
+}
 
 
 
@@ -120,7 +109,7 @@ useEffect(() => {
       <header className="App-header">
         <div className="shell">
         <div className="base">
-          <div className="circle"></div>
+          <div className="circle" onClick={(e) => {handleColor(e.target)}}></div>
             <div className="bar n0"><li></li></div>
             <div className="bar n1"><li></li></div>
             <div className="bar n2"><li></li></div>
@@ -133,32 +122,27 @@ useEffect(() => {
             <div className="overbar n4"><li></li></div>
           </div>
         </div>
-        <div className="buttonContainer">
+        <div className="buttonContainer" onClick={(e) => {handleColor(e.target)}}>
           <button 
             type="button" 
             id="downright-arrow"
-            onClick={() => handleClick("downright")}
-            style={{"background-color": downrightColor}}></button>
+            onClick={() => handleClick("downright")}></button>
           <button 
             type="button" 
             id="downleft-arrow"
-            onClick={() => handleClick("downleft")}
-            style={{"background-color": downleftColor }}></button>
+            onClick={() => handleClick("downleft")}></button>
           <button 
             type="button" 
             id="down-arrow"
-            onClick={() => handleClick("down")}
-            style={{"background-color": downColor }}></button>
+            onClick={() => handleClick("down")}></button>
           <button 
             type="button" 
             id="topright-arrow"
-            onClick={() => handleClick("topright")}
-            style={{"background-color": toprightColor }}></button>
+            onClick={() => handleClick("topright")}></button>
           <button 
             type="button"
             id="topleft-arrow"
-            onClick={() => handleClick("topleft")}
-            style={{"background-color": topleftColor }}></button>
+            onClick={() => handleClick("topleft")}></button>
         </div>
         <div>
           <div class="modal">
@@ -167,7 +151,7 @@ useEffect(() => {
               <ChromePicker 
                 id="color-picker"
                 color={`${chosenColor}`} 
-                onChangeComplete={() => setChosenColor(color)}
+                onChangeComplete={() => setChosenColor(color.hex)}
                 style={{"display": `${colorPickDisplayed ? "initial" : "none"}`}}
               
                 />
