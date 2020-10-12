@@ -1,16 +1,13 @@
 import React, {useState, useEffect, Fragment } from "react"
 import {Howl, Howler} from 'howler'; // audio
 import { ChromePicker } from 'react-color' // color picker.
-import {useSpring, animated, config, interpolate} from 'react-spring'
+import {useSpring, animated, config} from 'react-spring'
 import logo from './logo.svg';
 import './App.css';
 
 
 // https://codepen.io/raurir/pen/qtEmn <---- source of pentagram.
 // https://css-tricks.com/the-shapes-of-css/ <-------- css tricks is where I got the triangles
-
-
-// some inspiration fror the clicky button came from: https://stackoverflow.com/questions/55130413/animated-button-with-react-spring
 
 // No need for context, cuz so small. No need for router either.
 
@@ -102,18 +99,9 @@ function App() {
     ]
   }
   // one sample on cloud is not used here ^
-
-
-
-
-
 const instrumentCycle = (direction) => {
 
   }
-
-
-
-
 
   const [currentInstrument, setCurrentInstrument] = useState(soundSets.Celestial)
 
@@ -154,6 +142,9 @@ console.log("went right")
   }
 
 
+// animation props  ------     From the React Spring documentation:
+const spring = useSpring({opacity: 1, from: {opacity: 0}, config: config.wobbly})
+// const bounce = useSpring({x: state ? 1 : 0})
 
 
 
@@ -184,20 +175,9 @@ function handleColor(target) {
 const [downPressed, setDownPressed] = useState(false);
 const [downRightPressed, setDownRightPressed] = useState(false);
 const [downLeftPressed, setDownLeftPressed] = useState(false);
-const [topRightPressed, setTopRightPressed] = useState(false);
-const [topLeftPressed, setTopLeftPressed] = useState(false);
+const [upRightPressed, setUpRightPressed] = useState(false);
+const [upLeftPressed, setUpLeftPressed] = useState(false);
 
-
-// animation props  ------     From the React Spring documentation:
-const spring = useSpring({opacity: 1, from: {opacity: 0}, config: config.wobbly})
-
-
-const springDownRight = useSpring({from: {scale: 1}, to: {scale: downRightPressed? 0.8 : 1, transform: "rotate(110deg)"}})
-const springDownLeft = useSpring({from: {scale: 1}, to: {scale: downLeftPressed? 0.8 : 1, transform: "rotate(-110deg)"}})
-const springDown = useSpring({from: {scale: 1}, to: {scale: downPressed? 0.8 : 1, transform: "rotate(-180deg)"}})
-const springTopRight = useSpring({from: {scale: 1}, to: {scale: topRightPressed? 0.8 : 1, transform: "rotate(35deg)"}})
-const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0.8 : 1, transform: "rotate(-35deg)"}})
-// const bounce = useSpring({x: state ? 1 : 0})
 
 
 
@@ -275,129 +255,46 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
             </div>
           </div>
         <div className="buttonContainer rotator"> 
-            <animated.button 
+            <a.button 
               className='arrow'
               type="button" 
               id="downright-arrow"
-              props={springDownRight}
-              style={{
-                borderColor: "white transparent",
-                backgroundColor: "transparent",
-                borderStyle: "solid",
-                borderWidth: "0px 20px 20px 20px",
-                width: "0",
-                height: "0",
-                borderLeft: "50px solid transparent",
-                borderRight: "50px solid transparent",
-                borderBottom: "100px solid #c04dc6",
-                bottom: "-38%",
-                left: "13%",
-                position: "relative",
-                transform: springDownRight.scale.interpolate(scale => `scale(${scale})`)
-              }}
                 onMouseDown={() => setDownRightPressed(true)}
                 onMouseUp={() => setDownRightPressed(false)}
               onClick={(e) =>  
-                handleClick("downright", e.target)}></animated.button>
-            <animated.button 
+                handleClick("downright", e.target)}></a.button>
+            <a.button 
               className="arrow"
               type="button" 
               id="downleft-arrow"
-              props={springDownLeft}
-              style={{
-                borderColor: "white transparent",
-                backgroundColor: "transparent",
-                borderStyle: "solid",
-                borderWidth: "0px 20px 20px 20px",
-                width: "0",
-                height: "0",
-                borderLeft: "50px solid transparent",
-                borderRight: "50px solid transparent",
-                borderBottom: "100px solid #c04dc6",
-                borderBottom: "100px solid#CFE010",
-                bottom: "-38%",
-                left: "-7.7%",
-                position: "relative",
-                transform: springDownLeft.scale.interpolate(scale => `scale(${scale})`)  }}
                 onMouseDown={() => setDownLeftPressed(true)}
                 onMouseUp={() => setDownLeftPressed(false)}
               onClick={(e) => 
-                handleClick("downleft", e.target)}></animated.button>
-            <animated.button 
+                handleClick("downleft", e.target)}></a.button>
+            <a.button 
               className="arrow"
               type="button" 
               id="down-arrow"
-              props={springDown}
-              style={{
-                borderColor: "white transparent",
-                backgroundColor: "transparent",
-                borderStyle: "solid",
-                borderWidth: "0px 20px 20px 20px",
-                width: "0",
-                height: "0",
-                borderLeft: "50px solid transparent",
-                borderRight: "50px solid transparent",
-                borderBottom: "100px solid #2b51ca",
-                bottom: "-49.5%",
-                left: "-6%",
-                position: "relative",
-                transform: springDown.scale.interpolate(scale => `scale(${scale})`)
-              }}
                 onMouseDown={() => setDownPressed(true)}
                 onMouseUp={() => setDownPressed(false)}
               onClick={(e) => 
-                handleClick("downarrow", e.target)}></animated.button>
-            <animated.button 
+                handleClick("downarrow", e.target)}></a.button>
+            <a.button 
               className="arrow"
               type="button" 
               id="topright-arrow"
-              props={springTopRight}
-              style={{
-                borderColor: "white transparent",
-                backgroundColor: "transparent",
-                borderStyle: "solid",
-                borderWidth: "0px 20px 20px 20px",
-                width: "0",
-                height: "0",
-                borderLeft: "50px solid transparent",
-                borderRight: "50px solid transparent",
-                borderBottom: "100px solid #ffffff",
-                bottom: "-21%",
-                left: "-7.7%",
-                position: "relative",
-                transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
-              }}
                 onMouseDown={() => setTopRightPressed(true)}
                 onMouseUp={() => setTopRightPressed(false)}
               onClick={(e) => 
-                handleClick("topright", e.target)}></animated.button>
-                <animated.div props={springTopLeft} style={{  display: "fixed", transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)}}>
-                      <animated.button 
-                        className="arrow"
-                        type="button"
-                        id="topleft-arrow"
-                        props={springTopLeft}
-                        style={{
-                          borderColor: "white transparent",
-                          backgroundColor: "transparent",
-                          borderStyle: "solid",
-                          borderWidth: "0px 20px 20px 20px",
-                          width: "0",
-                          height: "0",
-                          borderLeft: "50px solid transparent",
-                          borderRight: "50px solid transparent",
-                          borderBottom: "100px solid #e01810",
-                          bottom: "-21%",
-                          left: "-22.5%",
-                          position: "relative",
-                          // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
-                        
-                        }}
-                          onMouseDown={() => setTopLeftPressed(true)}
-                          onMouseUp={() => setTopLeftPressed(false)}
-                        onClick={(e) => 
-                          handleClick("topleft", e.target)}></animated.button>
-                          </animated.div>
+                handleClick("topright", e.target)}></a.button>
+            <a.button 
+              className="arrow"
+              type="button"
+              id="topleft-arrow"
+                onMouseDown={() => setTopLeftPressed(true)}
+                onMouseUp={() => setTopLeftPressed(false)}
+              onClick={(e) => 
+                handleClick("topleft", e.target)}></a.button>
         </div>
         <span id="centerConsole">
                 <img id="playButton" src={`${playButton}`} onClick={() => startGame()}/>

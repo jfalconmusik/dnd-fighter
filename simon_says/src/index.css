@@ -199,6 +199,28 @@ li {
   border-right: 2px solid gray;
 }
 
+#instruments {
+  left: 40%;
+  bottom: 20%;
+  position: relative;
+  margin-top: 10%;
+}
+
+#playButton {
+  background-color: white;
+  border-radius: 50%;
+  transform: scale(0.05);
+  z-index: 99;
+  position: fixed;
+  right: -2.5%;
+  bottom: -51%;
+  margin: 0 auto;
+}
+
+#playButton :hover {
+  transform: rotate3d(360deg);
+}
+
 .n0 {
   -webkit-transform: rotate(90deg);
 }
