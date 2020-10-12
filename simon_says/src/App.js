@@ -38,6 +38,59 @@ function App() {
     "https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg"
   ]
 
+  const soundSets = {
+    Rewind: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_a.wav?alt=media&token=656cb418-ab87-4b65-a577-afa1c82f99a8",
+    "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_as.wav?alt=media&token=1624f2eb-590d-409c-a195-9d76c4454bbb",
+    "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_d.wav?alt=media&token=d56cf44b-938c-444b-90cf-ffd756d7330b",
+    "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_d5.wav?alt=media&token=0a82fe2e-a385-47b0-bb51-4f92a1f273fd",
+    "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_e.wav?alt=media&token=60dbc985-d6a2-4986-91a0-621b5eca3695"
+    ],
+    Oni: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on1.wav?alt=media&token=7a831f4e-684f-4839-a362-860d883a11d1",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on2.wav?alt=media&token=fdafd6e7-2a22-42f3-8df4-e0521c648fcc",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on3.wav?alt=media&token=12f1d2dc-97c8-42e4-ab03-2e95e7d86d04",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on4.wav?alt=media&token=4d3bc9b8-6c93-4f95-b0fb-67fb13687e1e",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on5.wav?alt=media&token=62a1ccf7-cb67-4099-9e06-0b3771a7880e"
+    ],
+    Kick: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_a.wav?alt=media&token=1bb38446-f2c8-44ca-92dc-703e307f5272",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_as.wav?alt=media&token=d97e7df0-cce1-469d-ad0d-c10276576d85",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_c.wav?alt=media&token=eb71f000-54c8-43ec-87dd-0873911c95df",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_e.wav?alt=media&token=2966e3e2-bdb9-4685-b6d3-5f71456eca85",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_g.wav?alt=media&token=64253230-7a53-4c4a-ab7c-986c224806bb"
+    ],
+    Celestial: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_a.wav?alt=media&token=0366fb38-21f5-435a-a316-cb5ef4a771b2",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_as.wav?alt=media&token=42a65832-6215-4655-9300-a86436bf081a",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_d.wav?alt=media&token=14e060fe-0a22-4008-a637-6d6d28e1605c",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.c,om/o/gyoza_e.wav?alt=media&token=a2222f70-4301-46f9-bc76-2826c9039008",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_g.wav?alt=media&token=45fa468e-cc08-477a-be2f-3876c0fa8f95"
+    ],
+    Bendy: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_a.wav?alt=media&token=c8705e0e-f85d-4b35-8501-d780951c6bc6",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_as.wav?alt=media&token=242da369-19f9-4541-9766-7ddfe0ddaecc",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_d.wav?alt=media&token=64948261-760b-4d5b-b02f-f50ffdbc38ff",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_e.wav?alt=media&token=d4d0ebfa-4d67-462b-9a16-08d173ec75cd",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_g.wav?alt=media&token=8178ac1f-d3b8-4f25-a980-c8a4a6bc9643"
+
+    ],
+    Bass: [
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_as.wav?alt=media&token=673a3cc5-bd77-45a0-9fe4-465a454ac34c",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d.wav?alt=media&token=e4dc1629-54bd-46c3-a56e-6a30191df24f",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d3.wav?alt=media&token=3209289a-36bc-4a0a-b7c0-b7853a507331",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_e.wav?alt=media&token=73c87579-ac98-45d5-af3a-d8d56dd65fb7",
+      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_fs.wav?alt=media&token=cec6e1d2-8877-4d96-a5c1-f8c4e1940af9",
+    ]
+  }
+  // one sample on cloud is not used here ^
+
+  const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
+
+
+
+
+
   const [backgroundImg, setBackgroundImg] = useState("https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg")
 
   useEffect(() => {
@@ -240,6 +293,9 @@ function handleColor(target) {
               onClick={(e) => 
                 handleClick("topleft", e.target)}></button>
         </div>
+        <span id="centerConsole">
+                <img src={playButton} onClick={() => startGame()}/>
+        </span>
         <div style={{"visibility": `${colorPickDisplayed ? "initial" : "hidden"}`}}>
           <div className="modal">
             <p>Pick your color and then click a button!</p>
