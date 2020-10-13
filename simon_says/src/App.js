@@ -53,60 +53,59 @@ function App() {
     Rewind: {
       name: "Rewind",
       set: [
-            "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav",
-            "../public/sounds/rewind_as.wav",
-            "../public/sounds/rewind_d.wav",
-            "../public/sounds/rewind_d5.wav",
-            "../public/sounds/rewind_e.wav",
-          ] } ,
+        "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_a.wav?alt=media&token=63e4402f-a82d-4adf-a2bd-2d2b61a36673",
+        "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_as.wav?alt=media&token=bbece949-f581-421d-9bff-dbcfd3e75533",
+        "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_d.wav?alt=media&token=289c7b97-398b-489d-ae26-0d5f530c6aa6",
+        "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_d5.wav?alt=media&token=23891bda-f996-403e-99ca-bc4540cd07b7",
+        "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_e.wav?alt=media&token=5814671e-9bd7-4fc3-a4d6-54878a7dcb21"
+        ] } , 
     Oni: {
       name: "Oni",
       set:   [
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on1.wav?alt=media&token=7a831f4e-684f-4839-a362-860d883a11d1",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on2.wav?alt=media&token=fdafd6e7-2a22-42f3-8df4-e0521c648fcc",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on3.wav?alt=media&token=12f1d2dc-97c8-42e4-ab03-2e95e7d86d04",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on4.wav?alt=media&token=4d3bc9b8-6c93-4f95-b0fb-67fb13687e1e",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/on5.wav?alt=media&token=62a1ccf7-cb67-4099-9e06-0b3771a7880e"
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on1.wav?alt=media&token=2fcbbc02-fd3d-4070-a722-91e69e18f5fe",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on2.wav?alt=media&token=41832de0-5cb9-495d-9c83-abd8e560eb09",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on3.wav?alt=media&token=8f5a3150-7e79-4625-999f-95288df6f16c",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on4.wav?alt=media&token=780eb3ee-42c3-44a3-ab67-ca2a507a9575",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on5.wav?alt=media&token=4405bf15-9613-4407-9e12-df40a4041e8d"
     ] } ,
     Kick: {
       name: "Kick",
       set:  [
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_a.wav?alt=media&token=1bb38446-f2c8-44ca-92dc-703e307f5272",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_as.wav?alt=media&token=d97e7df0-cce1-469d-ad0d-c10276576d85",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_c.wav?alt=media&token=eb71f000-54c8-43ec-87dd-0873911c95df",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_e.wav?alt=media&token=2966e3e2-bdb9-4685-b6d3-5f71456eca85",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/hit_g.wav?alt=media&token=64253230-7a53-4c4a-ab7c-986c224806bb"
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/hit_a.wav?alt=media&token=51202a93-d013-4ada-b70e-a3b16988946e",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/hit_as.wav?alt=media&token=88ffbf8f-6cda-463b-bc21-0988599b06d8",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/hit_c.wav?alt=media&token=c950a69a-5d9d-4ccd-b494-d6cb78f2d4dc",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/hit_e.wav?alt=media&token=2213a65c-48ea-4846-a3b5-1a3cf3a28b84",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/hit_g.wav?alt=media&token=6c117824-562d-4c33-95f0-3262d92f360b"
     ] },
     Celestial: {
       name: "Celestial", 
       set: [
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_a.wav?alt=media&token=0366fb38-21f5-435a-a316-cb5ef4a771b2",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_as.wav?alt=media&token=42a65832-6215-4655-9300-a86436bf081a",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_d.wav?alt=media&token=14e060fe-0a22-4008-a637-6d6d28e1605c",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.c,om/o/gyoza_e.wav?alt=media&token=a2222f70-4301-46f9-bc76-2826c9039008",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/gyoza_g.wav?alt=media&token=45fa468e-cc08-477a-be2f-3876c0fa8f95"
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_a.wav?alt=media&token=6407d6e1-9afa-43df-8e96-9f88fac3b988",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_as.wav?alt=media&token=d7020c7a-508f-4254-8c69-a2e7c1bcf407",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_d.wav?alt=media&token=aaef5e22-3668-44fc-833f-6b15c02fdb76",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_e.wav?alt=media&token=3bd0e6a1-5061-4084-8bea-2b5c4f277ca4",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_g.wav?alt=media&token=3b107b27-9a03-4cc6-88ec-ee54eb2a7428"
     ]
     }
     ,
     Bendy:  {
       name: "Bendy",
       set:  [
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_a.wav?alt=media&token=c8705e0e-f85d-4b35-8501-d780951c6bc6",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_as.wav?alt=media&token=242da369-19f9-4541-9766-7ddfe0ddaecc",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_d.wav?alt=media&token=64948261-760b-4d5b-b02f-f50ffdbc38ff",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_e.wav?alt=media&token=d4d0ebfa-4d67-462b-9a16-08d173ec75cd",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_g.wav?alt=media&token=8178ac1f-d3b8-4f25-a980-c8a4a6bc9643"
-
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_a.wav?alt=media&token=980747bf-be3c-4ca5-97d0-724561e61bc2",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_as.wav?alt=media&token=a01738fe-648f-4285-9be5-d6eb20ab3b7d",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_d.wav?alt=media&token=19f78f3a-a252-48ab-91bc-e9e96be4e812",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_e.wav?alt=media&token=f56900d5-31db-451d-afbe-fa88e8cbf14d",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_g.wav?alt=media&token=83dfcf5e-4a21-4c5f-826e-195f45de1c05"
     ]
    } ,
     Bass: {
       name: "Bass",
       set:  [
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_as.wav?alt=media&token=673a3cc5-bd77-45a0-9fe4-465a454ac34c",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d.wav?alt=media&token=e4dc1629-54bd-46c3-a56e-6a30191df24f",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d3.wav?alt=media&token=3209289a-36bc-4a0a-b7c0-b7853a507331",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_e.wav?alt=media&token=73c87579-ac98-45d5-af3a-d8d56dd65fb7",
-      "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_fs.wav?alt=media&token=cec6e1d2-8877-4d96-a5c1-f8c4e1940af9",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_as.wav?alt=media&token=e02621f8-4876-4d9b-ba4a-96c7fc2780d2",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_d.wav?alt=media&token=65ff35d3-859a-443c-a435-e6230bb3ef32",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_d3.wav?alt=media&token=2bc78b3f-003b-475d-a716-723837691488",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_e.wav?alt=media&token=8150925b-14f3-4ef0-b465-6b7022108d38",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_fs.wav?alt=media&token=78d01dae-a242-4dcf-8bb5-d9af6947d1e1",
     ]
     }
    
@@ -285,6 +284,10 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 //
 
+const playSound = new Howl({
+  src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
+})
+
 
 
   const handleClick = (buttonId, target) => {
@@ -292,7 +295,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     if (buttonId == "topright") {
         let newSound = new Howl({
           // src: `${topRightSound}`
-          src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
+          src: `${topRightSound}`
         })
 
         console.log(newSound)
@@ -360,7 +363,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   };
 
   const startGame = () => {
-    
+    console.log(playSound)
+    playSound.play()
   }
   
   const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
