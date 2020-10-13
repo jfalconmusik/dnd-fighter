@@ -285,22 +285,25 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   const optionsArray = ['topleft', 'topright', 'downleft', 'downright', 'down']
 
 
+      let newArr = []
+      
+
   const startGame = () => {
     console.log(`game started = ${gameStarted}`)
+    newArr = []
     if (!gameStarted) {
 
       
       setGameStarted(true)
       
-      
-      const newArr = []
-      
-      
+    
       for (let i = 0; i < 4; i++) {
         newArr.push(optionsArray[Math.floor(Math.random() * optionsArray.length)])
       }
       
       setSequence([...newArr])
+      console.log(newArr)
+      playSequence(newArr)
 
     } else {
       setGameStarted(false)
@@ -311,10 +314,14 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   }
 
 
-  const playSequence = (newStep) => {
+  const playSequence = (sequence, newStep) => {
 
   console.log(`playing sequence. gamestarted is ${gameStarted}`)
-    if (gameStarted) {
+
+  console.log(sequence)
+
+    if ((sequence.length > 0)) {
+      // this really should only run if the game HAS started, but this is how it is for now, for debugging.
 
     setComputersTurn(true)
     setPlayersTurn(false)
@@ -322,51 +329,73 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     setTimeout(() => {
 
-      sequence.forEach(item => {
+      
+      sequence.forEach(item =>  {
 
         setTimeout(() => {
           console.log(`sequence: ${sequence.indexOf(item)}, ${item}`)
 
           if (item == "down") {
 
-            setDownPressed(true)
+            setTimeout(() => {
+              setDownPressed(true)
+            }, Number((sequence.indexOf(item) + 1) * 500))
+              /////
+                  setTimeout(() => {
+                    setDownPressed(false)
+                    handleClick(item, "computer")
+
+                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                } else if (item == "downleft") {
+
 
             setTimeout(() => {
-              setDownPressed(false)
-            }, 500)
-          } else if (item == "downleft") {
+              setDownLeftPressed(true)
+            }, Number((sequence.indexOf(item) + 1) * 500))
+            /////
+                  setTimeout(() => {
+                    setDownLeftPressed(false)
+                    handleClick(item, "computer")
 
-            setDownLeftPressed(true)
-
-            setTimeout(() => {
-              setDownLeftPressed(false)
-            }, 500)
-          } else if (item == "downright") {
-
-            setDownRightPressed(true)
+                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                } else if (item == "downright") {
+                
 
             setTimeout(() => {
-              setDownRightPressed(false)
-            }, 500)
-          } else if (item == "topleft") {
+              setDownRightPressed(true)
+            }, Number((sequence.indexOf(item) + 1) * 500))
+            /////
+                  setTimeout(() => {
+                    setDownRightPressed(false)
+                    handleClick(item, "computer")
 
-            setTopLeftPressed(true)
+                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                } else if (item == "topleft") {
+              
+            setTimeout(() => {
+              setTopLeftPressed(true)
+            }, Number((sequence.indexOf(item) + 1) * 500))
+            /////
+                  setTimeout(() => {
+                    setTopLeftPressed(false)
+                    handleClick(item, "computer")
+
+                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                } else if (item == "topright") {
 
             setTimeout(() => {
-              setTopLeftPressed(false)
-            }, 500)
-          } else if (item == "topright") {
+              
+              setTopRightPressed(true)
+            }, Number((sequence.indexOf(item) + 1) * 500))
+            ////
+                  setTimeout(() => {
+                    setTopRightPressed(false)
+                    handleClick(item, "computer")
 
-            setTopRightPressed(true)
+                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                }
 
-            setTimeout(() => {
-              setTopRightPressed(false)
-            }, 500)
-          }
-
-          handleClick(item, "computer")
-
-        }, 1000)
+        }, 500)
 
       })
 
@@ -481,14 +510,14 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     setPlayerClickCount(0)
     setSequence([...sequence, newStep])
-    playSequence(newStep)
+    playSequence(sequence, newStep)
   }
 
 
 
 
 
-  const handleClick = (buttonId, user) => {
+  const handleClick = (buttonId, user, target) => {
 
 
     if (user !== "player") {
@@ -577,8 +606,10 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     }
 
 
+    if (target) {
 
-    handleColor(target)
+      handleColor(target)
+    }
 
     // if (buttonId == nextButton)
     //   if (sequenceCurrentPlace < sequence.length) {
@@ -593,7 +624,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   };
 
   
-  // const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
+  const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
 
   // Make sure to add some clever css effects for the button lights...
 
@@ -658,7 +689,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                             onMouseDown={() => setDownRightPressed(true)}
                             onMouseUp={() => setDownRightPressed(false)}
                           onClick={(e) =>  
-                            handleClick("downright", "player")}></animated.button>
+                            handleClick("downright", "player", e.target)}></animated.button>
           </animated.section>
                   <animated.section props={springDownLeft} style={{  
                   display: "relative", 
@@ -696,7 +727,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                         onMouseDown={() => setDownLeftPressed(true)}
                         onMouseUp={() => setDownLeftPressed(false)}
                       onClick={(e) => 
-                        handleClick("downleft", "player")}></animated.button>
+                        handleClick("downleft", "player", e.target)}></animated.button>
                 </animated.section>
                 <animated.section props={springDown} style={{  
                   display: "relative", 
@@ -728,7 +759,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                               onMouseDown={() => setDownPressed(true)}
                               onMouseUp={() => setDownPressed(false)}
                             onClick={(e) => 
-                              handleClick("down", "player")}></animated.button>
+                              handleClick("down", "player", e.target)}></animated.button>
                     </animated.section>
                   <animated.section props={springTopRight} style={{  
                   display: "relative", 
@@ -760,7 +791,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                             onMouseDown={() => setTopRightPressed(true)}
                             onMouseUp={() => setTopRightPressed(false)}
                           onClick={(e) => 
-                            handleClick("topright", "player")}></animated.button>
+                            handleClick("topright", "player", e.target)}></animated.button>
                 </animated.section>
                 <animated.section props={springTopLeft} style={{  
                   display: "relative", 
@@ -788,7 +819,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           bottom: "-0%",
                           left: "-30%",
                           marginBottom: "0%",
-
                           position: "relative",
                           // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
                         
@@ -796,7 +826,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           onMouseDown={() => setTopLeftPressed(true)}
                           onMouseUp={() => setTopLeftPressed(false)}
                         onClick={(e) => 
-                          handleClick("topleft", "player")}></animated.button>
+                          handleClick("topleft", "player", e.target)}></animated.button>
                           </animated.section>
         </div>
         <animated.section
@@ -807,7 +837,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                 onMouseDown={() => setPlayPressed(true)}
                 onMouseUp={() => setPlayPressed(false)}>
                 <img 
-                  id="playButton" src={`${playButton}`} onClick={() => {startGame(); playSequence()}}/>
+                  id="playButton" src={`${playButton}`} onClick={() => {startGame()}}/>
         </animated.section>
         <div style={{"visibility": `${colorPickDisplayed ? "initial" : "hidden"}`}}>
           <span className="modal">
