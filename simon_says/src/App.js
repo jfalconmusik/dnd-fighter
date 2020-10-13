@@ -298,7 +298,10 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
       
     
       for (let i = 0; i < 4; i++) {
-        newArr.push(optionsArray[Math.floor(Math.random() * optionsArray.length)])
+
+        // we have to concat i onto the end so that the exact option can be looked up in the sequence
+
+        newArr.push(`${optionsArray[Math.floor(Math.random() * optionsArray.length)]}-${i}`)
       }
       
       setSequence([...newArr])
@@ -314,7 +317,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   }
 
 
-  const playSequence = (sequence, newStep) => {
+  const playSequence = (sequence, newStepArg) => {
 
   console.log(`playing sequence. gamestarted is ${gameStarted}`)
 
@@ -330,77 +333,81 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     setTimeout(() => {
 
       
-      sequence.forEach(item =>  {
+      sequence.forEach(i =>  {
 
-        setTimeout(() => {
-          console.log(`sequence: ${sequence.indexOf(item)}, ${item}`)
+        let itemArr = i.split("-")
+
+        let item = itemArr[0]
+        let itemIndex = itemArr[1]
+
+          console.log(`sequence: ${item} ${itemIndex}`)
 
           if (item == "down") {
 
             setTimeout(() => {
               setDownPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 500))
+            }, Number((itemIndex + 1) * 1000))
               /////
                   setTimeout(() => {
                     setDownPressed(false)
                     handleClick(item, "computer")
 
-                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                  }, Number((itemIndex + 1) * 1000 - 500))
                 } else if (item == "downleft") {
 
 
             setTimeout(() => {
               setDownLeftPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 500))
+            }, Number((itemIndex + 1) * 1000))
             /////
                   setTimeout(() => {
                     setDownLeftPressed(false)
                     handleClick(item, "computer")
 
-                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                  }, Number((itemIndex + 1) * 1000 - 500))
                 } else if (item == "downright") {
                 
 
             setTimeout(() => {
               setDownRightPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 500))
+            }, Number((sequence.indexOf(item) + 1) * 1000))
             /////
                   setTimeout(() => {
                     setDownRightPressed(false)
                     handleClick(item, "computer")
 
-                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                  }, Number((itemIndex + 1) * 1000 - 500))
                 } else if (item == "topleft") {
               
             setTimeout(() => {
               setTopLeftPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 500))
+            }, Number((itemIndex + 1) * 1000))
             /////
                   setTimeout(() => {
                     setTopLeftPressed(false)
                     handleClick(item, "computer")
 
-                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                  }, Number((itemIndex + 1) * 1000 - 500))
                 } else if (item == "topright") {
 
             setTimeout(() => {
               
               setTopRightPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 500))
+            }, Number((itemIndex + 1) * 1000))
             ////
                   setTimeout(() => {
                     setTopRightPressed(false)
                     handleClick(item, "computer")
 
-                  }, Number((sequence.indexOf(item) + 1) * 1000))
+                  }, Number((itemIndex + 1) * 1000 - 500))
                 }
-
-        }, 500)
-
       })
 
-      if (newStep) {
+      if (newStepArg) {
 
+        let arr = newStepArg.split("-")
+
+        let newStep = arr[0]
         // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
         // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
         if (newStep == "down") {
@@ -505,7 +512,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
 
-    let newStep = optionsArray[Math.floor(Math.random * optionsArray.length)]
+    let newStep = `${optionsArray[Math.floor(Math.random * optionsArray.length)]}-${optionsArray.length - 1}`
     let thisSequence = [...sequence, newStep]
 
     setPlayerClickCount(0)
