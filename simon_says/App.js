@@ -2,7 +2,6 @@ import React, {useState, useEffect, Fragment } from "react"
 import {Howl, Howler} from 'howler'; // audio
 import { ChromePicker } from 'react-color' // color picker.
 import {useSpring, animated, config, interpolate} from 'react-spring'
-import ReactAudioPlayer from 'react-audio-player';
 import logo from './logo.svg';
 import './App.css';
 import firebase from "firebase"
@@ -613,11 +612,6 @@ const playSound = new Howl({
                     <button onClick={() => instrumentCycle("left")}>◄</button>
                     <button onClick={() => instrumentCycle("right")}>►</button>
               </span>
-              <ReactAudioPlayer
-                    src="https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_a.wav?alt=media&token=63e4402f-a82d-4adf-a2bd-2d2b61a36673"
-                    autoPlay
-                    controls
-                  />
       </header>
     </animated.div>
   );
