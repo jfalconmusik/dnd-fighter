@@ -4,6 +4,7 @@ import { ChromePicker } from 'react-color' // color picker.
 import {useSpring, animated, config, interpolate} from 'react-spring'
 import logo from './logo.svg';
 import './App.css';
+import firebase from "firebase"
 
 
 // https://codepen.io/raurir/pen/qtEmn <---- source of pentagram.
@@ -28,7 +29,7 @@ function App() {
   //
   // how about a game of simon says?
 
-
+/////////////////////////////////////////////////
   // here are some fun backgrounds we can add:
 
   const backgroundArray = [
@@ -46,17 +47,17 @@ function App() {
     "https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg"
   ]
 
-
+ 
   
   const soundSets = {
     Rewind: {
       name: "Rewind",
       set: [
-            "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_a.wav?alt=media&token=656cb418-ab87-4b65-a577-afa1c82f99a8",
-          "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_as.wav?alt=media&token=1624f2eb-590d-409c-a195-9d76c4454bbb",
-          "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_d.wav?alt=media&token=d56cf44b-938c-444b-90cf-ffd756d7330b",
-          "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_d5.wav?alt=media&token=0a82fe2e-a385-47b0-bb51-4f92a1f273fd",
-          "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/rewind_e.wav?alt=media&token=60dbc985-d6a2-4986-91a0-621b5eca3695"
+            "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav",
+            "../public/sounds/rewind_as.wav",
+            "../public/sounds/rewind_d.wav",
+            "../public/sounds/rewind_d5.wav",
+            "../public/sounds/rewind_e.wav",
           ] } ,
     Oni: {
       name: "Oni",
@@ -87,21 +88,28 @@ function App() {
     ]
     }
     ,
-    Bendy: [
+    Bendy:  {
+      name: "Bendy",
+      set:  [
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_a.wav?alt=media&token=c8705e0e-f85d-4b35-8501-d780951c6bc6",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_as.wav?alt=media&token=242da369-19f9-4541-9766-7ddfe0ddaecc",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_d.wav?alt=media&token=64948261-760b-4d5b-b02f-f50ffdbc38ff",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_e.wav?alt=media&token=d4d0ebfa-4d67-462b-9a16-08d173ec75cd",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/bend_g.wav?alt=media&token=8178ac1f-d3b8-4f25-a980-c8a4a6bc9643"
 
-    ],
-    Bass: [
+    ]
+   } ,
+    Bass: {
+      name: "Bass",
+      set:  [
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_as.wav?alt=media&token=673a3cc5-bd77-45a0-9fe4-465a454ac34c",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d.wav?alt=media&token=e4dc1629-54bd-46c3-a56e-6a30191df24f",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_d3.wav?alt=media&token=3209289a-36bc-4a0a-b7c0-b7853a507331",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_e.wav?alt=media&token=73c87579-ac98-45d5-af3a-d8d56dd65fb7",
       "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/808_fs.wav?alt=media&token=cec6e1d2-8877-4d96-a5c1-f8c4e1940af9",
     ]
+    }
+   
   }
   // one sample on cloud is not used here ^
 
@@ -109,15 +117,54 @@ function App() {
 
 
 
-const instrumentCycle = (direction) => {
 
-  }
+  const instrumentCycle = (direction) => {
+
+    const instrumentNamesArray = ["Celestial", "Bendy", "Bass", "Rewind", "Oni", "Kick"]
+
+    if (direction == "right") {
+
+      if (instrumentNamesArray.indexOf(currentInstrument.name) < 5) {
+        setCurrentInstrument(soundSets[`${instrumentNamesArray[instrumentNamesArray.indexOf(currentInstrument.name) + 1]}`])
+      } else {
+        setCurrentInstrument(soundSets.Celestial)
+      }
+    } else if (direction == "left") {
+
+      if (instrumentNamesArray.indexOf(currentInstrument.name) > 0) {
+        setCurrentInstrument(soundSets[`${instrumentNamesArray[instrumentNamesArray.indexOf(currentInstrument.name) - 1]}`])
+      } else {
+        setCurrentInstrument(soundSets.Kick)
+      }
+    }
 
 
+
+    }
 
 
 
   const [currentInstrument, setCurrentInstrument] = useState(soundSets.Celestial)
+  const [topRightSound, setTopRightSound] = useState("")
+  const [topLeftSound, setTopLeftSound] = useState("")
+  const [downRightSound, setDownRightSound] = useState("")
+  const [downLeftSound, setDownLeftSound] = useState("")
+  const [downSound, setDownSound] = useState("")
+  
+
+  useEffect(() => {
+
+    setTopRightSound(currentInstrument.set[0])
+    setTopLeftSound(currentInstrument.set[1])
+    setDownLeftSound(currentInstrument.set[2])
+    setDownRightSound(currentInstrument.set[3])
+    setDownSound(currentInstrument.set[4])
+
+  }, [currentInstrument])
+
+
+
+
 
   
   const [backgroundImg, setBackgroundImg] = useState("https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg")
@@ -231,7 +278,71 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   // Choice logic, did the user pick the right note?
 
+
+
+
+
+
+//
+
+
+
   const handleClick = (buttonId, target) => {
+
+    if (buttonId == "topright") {
+        let newSound = new Howl({
+          // src: `${topRightSound}`
+          src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
+        })
+
+        console.log(newSound)
+        console.log(`topright played: ${newSound.src}`)
+        newSound.play()
+
+    } else if (buttonId == "topleft") {
+        let newSound = new Howl({
+          src: `${topLeftSound}`
+        })
+
+        console.log(newSound)
+        console.log(`topleft played: ${newSound.src}`)
+        newSound.play()
+
+    } else if (buttonId == "downright") {
+        let newSound = new Howl({
+          src: `${downRightSound}`
+        })
+
+        console.log(newSound)
+        console.log(`downright played: ${newSound.src}`)
+        newSound.play()
+
+    } else if (buttonId == "downleft") {
+        let newSound = new Howl({
+          src: `${downLeftSound}`
+        })
+
+        console.log(newSound)
+        console.log(`downleft played: ${newSound.src}`)
+        newSound.play()
+
+    } else if (buttonId == "down") {
+        let newSound = new Howl({
+          src: `${downSound}`
+        })
+
+        console.log(newSound)
+        console.log(`down played: ${newSound.src}`)
+        newSound.play()
+
+    }
+
+
+
+
+
+
+
 
 
     handleColor(target)
@@ -321,7 +432,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                             onMouseUp={() => setDownRightPressed(false)}
                           onClick={(e) =>  
                             handleClick("downright", e.target)}></animated.button>
-                   </animated.section>
+          </animated.section>
                   <animated.section props={springDownLeft} style={{  
                   display: "relative", 
                   width: "20%",
@@ -390,7 +501,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                               onMouseDown={() => setDownPressed(true)}
                               onMouseUp={() => setDownPressed(false)}
                             onClick={(e) => 
-                              handleClick("downarrow", e.target)}></animated.button>
+                              handleClick("down", e.target)}></animated.button>
                     </animated.section>
                   <animated.section props={springTopRight} style={{  
                   display: "relative", 
