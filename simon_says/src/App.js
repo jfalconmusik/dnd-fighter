@@ -191,7 +191,7 @@ function App() {
       }
     
     } else if (direction === "right") {
-console.log("went right")
+    console.log("went right")
       if (backgroundArray.indexOf(backgroundImg < 12)) {
         setBackgroundImg(backgroundArray[backgroundArray.indexOf(backgroundImg) + 1 ])
         console.log("moved forward")
@@ -261,8 +261,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 // const bounce = useSpring({x: state ? 1 : 0})
 
 
-
-
   // And we need to remember what sequence of notes the user must copy. We're going to spread these notes into an array so we can keep pushing new notes.
   const [currentNotes, setCurrentNotes] = useState([]);
   //
@@ -270,11 +268,110 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   const [sequence, setSequence] = useState([]);
   const [sequenceCurrentPlace, setSequenceCurrentPlace] = useState(0);
   const [nextButton, setNextButton] = useState("red");
+  const [gameStarted, setGameStarted] = useState(false)
+
+  //
+  const [computersTurn, setComputersTurn] = useState(false)
+  const [playersTurn, setPlayersTurn] = useState(false)
+  const [playerClickCount, setPlayerClickCount] = useState(0)
   //
   // every time we advance within the current sequence, a new correct choice has to be set.
   useEffect(() => {
     setNextButton(currentNotes[sequenceCurrentPlace]);
   }, [sequenceCurrentPlace]);
+
+
+
+  const startGame = () => {
+
+    if (!gameStarted) {
+
+      
+      setGameStarted(true)
+      const optionsArray = ['topleft', 'topright', 'downleft', 'downright', 'down']
+      
+      
+      const newArr = []
+      
+      
+      for (let i = 0; i < 4; i++) {
+        newArr.push(optionsArray[Math.floor(Math.random() * optionsArray.length)])
+      }
+      
+
+      setSequence([...newArr])
+
+    }
+    // console.log(playSound)
+    // playSound.play()
+  }
+
+
+  const playSequence = () => {
+
+    setComputersTurn(true)
+    setPlayersTurn(false)
+
+
+    setTimeout(() => {
+
+      sequence.forEach(item => {
+
+        setTimeout(() => {
+          console.log(`sequence: ${sequence.indexOf(item)}`)
+
+          if (item == "down") {
+
+            setDownPressed(true)
+
+            setTimeout(() => {
+              setDownPressed(false)
+            }, 500)
+          } else if (item == "downleft") {
+
+            setDownLeftPressed(true)
+
+            setTimeout(() => {
+              setDownLeftPressed(false)
+            }, 500)
+          } else if (item == "downright") {
+
+            setDownRightPressed(true)
+
+            setTimeout(() => {
+              setDownRightPressed(false)
+            }, 500)
+          } else if (item == "topleft") {
+
+            setTopLeftPressed(true)
+
+            setTimeout(() => {
+              setTopLeftPressed(false)
+            }, 500)
+          } else if (item == "topright") {
+
+            setTopRightPressed(true)
+
+            setTimeout(() => {
+              setTopRightPressed(false)
+            }, 500)
+          }
+
+          handleClick(item, "computer")
+
+        }, 1000)
+
+      })
+
+    }, 1000)
+
+    setComputersTurn(false)
+    setPlayersTurn(true)
+
+  }
+
+
+
 
   // Choice logic, did the user pick the right note?
 
@@ -285,13 +382,18 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 //
 
-const playSound = new Howl({
-  src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
-})
+// const playSound = new Howl({
+//   src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
+// })
 
 
 
-  const handleClick = (buttonId, target) => {
+  const handleClick = (buttonId, user) => {
+
+
+    if (user !== "player") {
+      setPlayerClickCount(0)
+    }
 
     if (buttonId == "topright") {
         let newSound = new Howl({
@@ -356,7 +458,10 @@ const playSound = new Howl({
 
     }
 
+    if (user === "player" && playersTurn) {
 
+
+    }
 
 
 
@@ -378,17 +483,10 @@ const playSound = new Howl({
       }
   };
 
-  const startGame = () => {
-    console.log(playSound)
-    playSound.play()
-  }
   
-  const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
+  // const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
 
   // Make sure to add some clever css effects for the button lights...
-
-  const generateNewSequence = () => {};
-  //
 
 
   function handleColorPickDisplay() {
@@ -451,7 +549,7 @@ const playSound = new Howl({
                             onMouseDown={() => setDownRightPressed(true)}
                             onMouseUp={() => setDownRightPressed(false)}
                           onClick={(e) =>  
-                            handleClick("downright", e.target)}></animated.button>
+                            handleClick("downright", "player")}></animated.button>
           </animated.section>
                   <animated.section props={springDownLeft} style={{  
                   display: "relative", 
@@ -489,7 +587,7 @@ const playSound = new Howl({
                         onMouseDown={() => setDownLeftPressed(true)}
                         onMouseUp={() => setDownLeftPressed(false)}
                       onClick={(e) => 
-                        handleClick("downleft", e.target)}></animated.button>
+                        handleClick("downleft", "player")}></animated.button>
                 </animated.section>
                 <animated.section props={springDown} style={{  
                   display: "relative", 
@@ -521,7 +619,7 @@ const playSound = new Howl({
                               onMouseDown={() => setDownPressed(true)}
                               onMouseUp={() => setDownPressed(false)}
                             onClick={(e) => 
-                              handleClick("down", e.target)}></animated.button>
+                              handleClick("down", "player")}></animated.button>
                     </animated.section>
                   <animated.section props={springTopRight} style={{  
                   display: "relative", 
@@ -553,7 +651,7 @@ const playSound = new Howl({
                             onMouseDown={() => setTopRightPressed(true)}
                             onMouseUp={() => setTopRightPressed(false)}
                           onClick={(e) => 
-                            handleClick("topright", e.target)}></animated.button>
+                            handleClick("topright", "player")}></animated.button>
                 </animated.section>
                 <animated.section props={springTopLeft} style={{  
                   display: "relative", 
@@ -589,7 +687,7 @@ const playSound = new Howl({
                           onMouseDown={() => setTopLeftPressed(true)}
                           onMouseUp={() => setTopLeftPressed(false)}
                         onClick={(e) => 
-                          handleClick("topleft", e.target)}></animated.button>
+                          handleClick("topleft", "player")}></animated.button>
                           </animated.section>
         </div>
         <animated.section
@@ -600,7 +698,7 @@ const playSound = new Howl({
                 onMouseDown={() => setPlayPressed(true)}
                 onMouseUp={() => setPlayPressed(false)}>
                 <img 
-                  id="playButton" src={`${playButton}`} onClick={() => startGame()}/>
+                  id="playButton" src={`${playButton}`} onClick={() => {startGame(); playSequence()}}/>
         </animated.section>
         <div style={{"visibility": `${colorPickDisplayed ? "initial" : "hidden"}`}}>
           <span className="modal">
