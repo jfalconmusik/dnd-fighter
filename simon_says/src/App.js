@@ -109,7 +109,7 @@ function App() {
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/808_fs.wav?alt=media&token=78d01dae-a242-4dcf-8bb5-d9af6947d1e1",
     ]
     }
-   
+
   }
   // one sample on cloud is not used here ^
 
@@ -329,7 +329,13 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     setComputersTurn(true)
     setPlayersTurn(false)
 
-
+///////////
+///////////
+//////////
+///////////
+/////////////
+///////////
+//////////
     setTimeout(() => {
 
       
@@ -346,108 +352,123 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
             setTimeout(() => {
               setDownPressed(true)
-            }, Number((itemIndex + 1) * 1000))
+              handleClick(item, "computer")
+            }, Number((itemIndex + 1) * 250))
               /////
                   setTimeout(() => {
                     setDownPressed(false)
-                    handleClick(item, "computer")
 
-                  }, Number((itemIndex + 1) * 1000 - 500))
+                  }, Number((itemIndex + 1) * 400))
                 } else if (item == "downleft") {
 
 
             setTimeout(() => {
               setDownLeftPressed(true)
-            }, Number((itemIndex + 1) * 1000))
+              handleClick(item, "computer")
+            }, Number((itemIndex + 1) * 250))
             /////
                   setTimeout(() => {
                     setDownLeftPressed(false)
-                    handleClick(item, "computer")
 
-                  }, Number((itemIndex + 1) * 1000 - 500))
+                  }, Number((itemIndex + 1) * 400))
                 } else if (item == "downright") {
                 
 
             setTimeout(() => {
               setDownRightPressed(true)
-            }, Number((sequence.indexOf(item) + 1) * 1000))
+              handleClick(item, "computer")
+            }, Number((itemIndex + 1) * 250))
             /////
                   setTimeout(() => {
                     setDownRightPressed(false)
-                    handleClick(item, "computer")
 
-                  }, Number((itemIndex + 1) * 1000 - 500))
+                  }, Number((itemIndex + 1) * 400))
                 } else if (item == "topleft") {
               
             setTimeout(() => {
               setTopLeftPressed(true)
-            }, Number((itemIndex + 1) * 1000))
+              handleClick(item, "computer")
+            }, Number((itemIndex + 1) * 250))
             /////
                   setTimeout(() => {
                     setTopLeftPressed(false)
-                    handleClick(item, "computer")
 
-                  }, Number((itemIndex + 1) * 1000 - 500))
+                  }, Number((itemIndex + 1) * 400))
                 } else if (item == "topright") {
 
             setTimeout(() => {
               
               setTopRightPressed(true)
-            }, Number((itemIndex + 1) * 1000))
+              handleClick(item, "computer")
+            }, Number((itemIndex + 1) * 250))
             ////
                   setTimeout(() => {
                     setTopRightPressed(false)
-                    handleClick(item, "computer")
 
-                  }, Number((itemIndex + 1) * 1000 - 500))
+                  }, Number((itemIndex + 1) * 400))
                 }
       })
 
       if (newStepArg) {
 
         let arr = newStepArg.split("-")
+        console.log(newStepArg)
 
         let newStep = arr[0]
         // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
         // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
         if (newStep == "down") {
 
-          setDownPressed(true)
-
+          setTimeout(() => {
+            setDownPressed(true)
+            handleClick(newStep, "computer")
+          }, 500)
+          
           setTimeout(() => {
             setDownPressed(false)
           }, 500)
         } else if (newStep == "downleft") {
 
-          setDownLeftPressed(true)
+          setTimeout(() => {
+            setDownLeftPressed(true)
+            handleClick(newStep, "computer")
+          }, 500)
 
           setTimeout(() => {
             setDownLeftPressed(false)
           }, 500)
         } else if (newStep == "downright") {
 
-          setDownRightPressed(true)
+          setTimeout(() => {
+            setDownRightPressed(true)
+            handleClick(newStep, "computer")
+          }, 500)
 
           setTimeout(() => {
             setDownRightPressed(false)
           }, 500)
         } else if (newStep == "topleft") {
 
-          setTopLeftPressed(true)
+          setTimeout(() => {
+            setTopLeftPressed(true)
+            handleClick(newStep, "computer")
+          }, 500)
 
           setTimeout(() => {
             setTopLeftPressed(false)
           }, 500)
         } else if (newStep == "topright") {
 
-          setTopRightPressed(true)
+          setTimeout(() => {
+            setTopRightPressed(true)
+            handleClick(newStep, "computer")
+          }, 500)
 
           setTimeout(() => {
             setTopRightPressed(false)
           }, 500)
         }
 
-        handleClick(newStep, "computer")
 
       }
 
@@ -502,6 +523,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
       setHighScore(sequence.length)
     }
 
+
+
     document.getElementById('playButton').style.backgroundColor = "gold"
 
     setTimeout(() => {
@@ -512,7 +535,10 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
 
-    let newStep = `${optionsArray[Math.floor(Math.random * optionsArray.length)]}-${optionsArray.length - 1}`
+    let newStep = `${optionsArray[Math.floor(Math.random() * optionsArray.length)]}-${sequence.length}`
+    console.log(optionsArray)
+    console.log(optionsArray[Math.floor(Math.random * sequence.length)])
+    console.log(`this is new step:${newStep}`)
     let thisSequence = [...sequence, newStep]
 
     setPlayerClickCount(0)
@@ -537,10 +563,14 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
       let thisTurn = playerClickCount
 
+      let roundArr = sequence[thisTurn].split("-")
+
+      let currentItem = roundArr[0]
+
       
-      if (sequence[thisTurn] !== buttonId) {
+      if (currentItem !== buttonId) {
         loseGame() // still have to write lose game logic.
-      } else if (sequence[thisTurn] === buttonId && (playerClickCount + 1) == sequence.length) {
+      } else if (currentItem === buttonId && (playerClickCount + 1) == sequence.length) {
         completeRound()
       }
       
