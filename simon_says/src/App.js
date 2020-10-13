@@ -336,10 +336,19 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 /////////////
 ///////////
 //////////
+
+
+      let newSeq = [...sequence]
+
+      if (newStepArg) {
+        newSeq.push(newStepArg)
+      }
+
+
     setTimeout(() => {
 
       
-      sequence.forEach(i =>  {
+      newSeq.forEach(i =>  {
 
         let itemArr = i.split("-")
 
@@ -409,68 +418,68 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                 }
       })
 
-      if (newStepArg) {
+      // if (newStepArg) {
 
-        let arr = newStepArg.split("-")
-        console.log(newStepArg)
+      //   let arr = newStepArg.split("-")
+      //   console.log(newStepArg)
 
-        let newStep = arr[0]
-        // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
-        // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
-        if (newStep == "down") {
+      //   let newStep = arr[0]
+      //   // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
+      //   // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
+      //   if (newStep == "down") {
 
-          setTimeout(() => {
-            setDownPressed(true)
-            handleClick(newStep, "computer")
-          }, 500)
+      //     setTimeout(() => {
+      //       setDownPressed(true)
+      //       handleClick(newStep, "computer")
+      //     }, 500)
           
-          setTimeout(() => {
-            setDownPressed(false)
-          }, 500)
-        } else if (newStep == "downleft") {
+      //     setTimeout(() => {
+      //       setDownPressed(false)
+      //     }, 500)
+      //   } else if (newStep == "downleft") {
 
-          setTimeout(() => {
-            setDownLeftPressed(true)
-            handleClick(newStep, "computer")
-          }, 500)
+      //     setTimeout(() => {
+      //       setDownLeftPressed(true)
+      //       handleClick(newStep, "computer")
+      //     }, 500)
 
-          setTimeout(() => {
-            setDownLeftPressed(false)
-          }, 500)
-        } else if (newStep == "downright") {
+      //     setTimeout(() => {
+      //       setDownLeftPressed(false)
+      //     }, 500)
+      //   } else if (newStep == "downright") {
 
-          setTimeout(() => {
-            setDownRightPressed(true)
-            handleClick(newStep, "computer")
-          }, 500)
+      //     setTimeout(() => {
+      //       setDownRightPressed(true)
+      //       handleClick(newStep, "computer")
+      //     }, 500)
 
-          setTimeout(() => {
-            setDownRightPressed(false)
-          }, 500)
-        } else if (newStep == "topleft") {
+      //     setTimeout(() => {
+      //       setDownRightPressed(false)
+      //     }, 500)
+      //   } else if (newStep == "topleft") {
 
-          setTimeout(() => {
-            setTopLeftPressed(true)
-            handleClick(newStep, "computer")
-          }, 500)
+      //     setTimeout(() => {
+      //       setTopLeftPressed(true)
+      //       handleClick(newStep, "computer")
+      //     }, 500)
 
-          setTimeout(() => {
-            setTopLeftPressed(false)
-          }, 500)
-        } else if (newStep == "topright") {
+      //     setTimeout(() => {
+      //       setTopLeftPressed(false)
+      //     }, 500)
+      //   } else if (newStep == "topright") {
 
-          setTimeout(() => {
-            setTopRightPressed(true)
-            handleClick(newStep, "computer")
-          }, 500)
+      //     setTimeout(() => {
+      //       setTopRightPressed(true)
+      //       handleClick(newStep, "computer")
+      //     }, 500)
 
-          setTimeout(() => {
-            setTopRightPressed(false)
-          }, 500)
-        }
+      //     setTimeout(() => {
+      //       setTopRightPressed(false)
+      //     }, 500)
+      //   }
 
 
-      }
+      // }
 
     }, 1000)
 
