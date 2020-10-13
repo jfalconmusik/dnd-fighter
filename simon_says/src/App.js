@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment } from "react"
 import {Howl, Howler} from 'howler'; // audio
 import { ChromePicker } from 'react-color' // color picker.
 import {useSpring, animated, config, interpolate} from 'react-spring'
+// import useSound from 'use-sound'
 import ReactAudioPlayer from 'react-audio-player';
 import logo from './logo.svg';
 import './App.css';
@@ -64,7 +65,7 @@ function App() {
       name: "Oni",
       set:   [
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on1.wav?alt=media&token=2fcbbc02-fd3d-4070-a722-91e69e18f5fe",
-      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on2.wav?alt=media&token=41832de0-5cb9-495d-9c83-abd8e560eb09",
+      "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/onRedo.wav?alt=media&token=87e0a0f2-f5b3-4b19-9891-bc6a704cedcc",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on3.wav?alt=media&token=8f5a3150-7e79-4625-999f-95288df6f16c",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on4.wav?alt=media&token=780eb3ee-42c3-44a3-ab67-ca2a507a9575",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/on5.wav?alt=media&token=4405bf15-9613-4407-9e12-df40a4041e8d"
@@ -86,8 +87,7 @@ function App() {
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_d.wav?alt=media&token=aaef5e22-3668-44fc-833f-6b15c02fdb76",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_e.wav?alt=media&token=3bd0e6a1-5061-4084-8bea-2b5c4f277ca4",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/gyoza_g.wav?alt=media&token=3b107b27-9a03-4cc6-88ec-ee54eb2a7428"
-    ]
-    }
+    ]}
     ,
     Bendy:  {
       name: "Bendy",
@@ -98,7 +98,7 @@ function App() {
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_e.wav?alt=media&token=f56900d5-31db-451d-afbe-fa88e8cbf14d",
       "https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/bend_g.wav?alt=media&token=83dfcf5e-4a21-4c5f-826e-195f45de1c05"
     ]
-   } ,
+    } ,
     Bass: {
       name: "Bass",
       set:  [
@@ -296,48 +296,63 @@ const playSound = new Howl({
     if (buttonId == "topright") {
         let newSound = new Howl({
           // src: `${topRightSound}`
-          src: `${topRightSound}`
+          src: `${topRightSound}`,
+          buffer: true,
+          html5: true
         })
 
         console.log(newSound)
         console.log(`topright played: ${newSound.src}`)
         newSound.play()
+        // useSound(topRightSound)
 
     } else if (buttonId == "topleft") {
         let newSound = new Howl({
-          src: `${topLeftSound}`
+          src: `${topLeftSound}`,
+          buffer: true,
+          html5: true
         })
 
         console.log(newSound)
         console.log(`topleft played: ${newSound.src}`)
         newSound.play()
+        // useSound(topLeftSound)
 
     } else if (buttonId == "downright") {
         let newSound = new Howl({
-          src: `${downRightSound}`
+          src: `${downRightSound}`,
+          buffer: true,
+          html5: true
         })
 
         console.log(newSound)
         console.log(`downright played: ${newSound.src}`)
         newSound.play()
+        // useSound(downRightSound)
 
     } else if (buttonId == "downleft") {
         let newSound = new Howl({
-          src: `${downLeftSound}`
+          src: `${downLeftSound}`,
+          buffer: true,
+          html5: true
         })
 
         console.log(newSound)
         console.log(`downleft played: ${newSound.src}`)
         newSound.play()
+        // useSound(downLeftSound)
 
     } else if (buttonId == "down") {
         let newSound = new Howl({
-          src: `${downSound}`
+          src: `${downSound}`,
+          buffer: true,
+          html5: true
         })
 
         console.log(newSound)
         console.log(`down played: ${newSound.src}`)
         newSound.play()
+        // useSound(downSound)
 
     }
 
