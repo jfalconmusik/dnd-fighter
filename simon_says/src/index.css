@@ -8,10 +8,10 @@ body {
 }
 
 .buttonContainer {
-  width: 100vw;
-  height: 100vh;
-  left: 6.5%;
-  top: 12%;
+  width: 20vw;
+  height: 10vh;
+  left: 50%;
+  top: 100%;
   position: fixed;
   transform: rotate(33deg) scale(1.25);
 }
@@ -37,7 +37,7 @@ body {
   border-right: 50px solid transparent;
   border-bottom: 100px solid #e01810;
   bottom: -21%;
-  left: -22.5%;
+  left: 50%;
   position: relative;
   transform: rotate(-35deg);
 }

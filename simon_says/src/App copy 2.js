@@ -20,8 +20,6 @@ import './App.css';
 
 // game built. instruments pickable. high score. animations. responsive.
 
-// temporary modals to show info.
-
 function App() {
 
 
@@ -183,22 +181,11 @@ function handleColor(target) {
 }
 
 // button pressed state...
-const [playPressed, setPlayPressed] = useState(false);
 const [downPressed, setDownPressed] = useState(false);
 const [downRightPressed, setDownRightPressed] = useState(false);
 const [downLeftPressed, setDownLeftPressed] = useState(false);
 const [topRightPressed, setTopRightPressed] = useState(false);
 const [topLeftPressed, setTopLeftPressed] = useState(false);
-
-
-
-useEffect(() => {
-  if (playPressed) {
-    document.getElementById('playButton').style.backgroundColor = "#06d6a0"
-  } else {
-    document.getElementById('playButton').style.backgroundColor = "white"
-  }
-}, [playPressed])
 
 
 // animation props  ------     From the React Spring documentation:
@@ -210,7 +197,6 @@ const springDownLeft = useSpring({from: {scale: 1}, to: {scale: downLeftPressed?
 const springDown = useSpring({from: {scale: 1}, to: {scale: downPressed? 0.8 : 1, transform: "rotate(-180deg)"}})
 const springTopRight = useSpring({from: {scale: 1}, to: {scale: topRightPressed? 0.8 : 1, transform: "rotate(35deg)"}})
 const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0.8 : 1, transform: "rotate(-35deg)"}})
-// const springPlayButton = useSpring({from: {scale: 0.05}, to: {scale: playPressed? 1 : 0.03}})
 // const bounce = useSpring({x: state ? 1 : 0})
 
 
@@ -289,148 +275,108 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
             </div>
           </div>
         <div className="buttonContainer rotator"> 
-        <animated.section props={springDownRight} style={{  
-                  display: "relative", 
-                  width: "20%",
-                  marginTop: "-74%",
-                  marginLeft: "-19%",
+            <animated.button 
+              className='arrow'
+              type="button" 
+              id="downright-arrow"
+              props={springDownRight}
+              style={{
+                borderColor: "white transparent",
+                backgroundColor: "transparent",
+                borderStyle: "solid",
+                borderWidth: "0px 20px 20px 20px",
+                width: "0",
+                height: "0",
+                borderLeft: "50px solid transparent",
+                borderRight: "50px solid transparent",
+                borderBottom: "100px solid #c04dc6",
+                bottom: "-38%",
+                left: "13%",
+                position: "relative",
+                transform: springDownRight.scale.interpolate(scale => `scale(${scale})`)
+              }}
+                onMouseDown={() => setDownRightPressed(true)}
+                onMouseUp={() => setDownRightPressed(false)}
+              onClick={(e) =>  
+                handleClick("downright", e.target)}></animated.button>
+            <animated.button 
+              className="arrow"
+              type="button" 
+              id="downleft-arrow"
+              props={springDownLeft}
+              style={{
+                borderColor: "white transparent",
+                backgroundColor: "transparent",
+                borderStyle: "solid",
+                borderWidth: "0px 20px 20px 20px",
+                width: "0",
+                height: "0",
+                borderLeft: "50px solid transparent",
+                borderRight: "50px solid transparent",
+                borderBottom: "100px solid #c04dc6",
+                borderBottom: "100px solid#CFE010",
+                bottom: "-38%",
+                left: "-7.7%",
+                position: "relative",
+                transform: springDownLeft.scale.interpolate(scale => `scale(${scale})`)  }}
+                onMouseDown={() => setDownLeftPressed(true)}
+                onMouseUp={() => setDownLeftPressed(false)}
+              onClick={(e) => 
+                handleClick("downleft", e.target)}></animated.button>
+            <animated.button 
+              className="arrow"
+              type="button" 
+              id="down-arrow"
+              props={springDown}
+              style={{
+                borderColor: "white transparent",
+                backgroundColor: "transparent",
+                borderStyle: "solid",
+                borderWidth: "0px 20px 20px 20px",
+                width: "0",
+                height: "0",
+                borderLeft: "50px solid transparent",
+                borderRight: "50px solid transparent",
+                borderBottom: "100px solid #2b51ca",
+                bottom: "-49.5%",
+                left: "-6%",
+                position: "relative",
+                transform: springDown.scale.interpolate(scale => `scale(${scale})`)
+              }}
+                onMouseDown={() => setDownPressed(true)}
+                onMouseUp={() => setDownPressed(false)}
+              onClick={(e) => 
+                handleClick("downarrow", e.target)}></animated.button>
+            <animated.button 
+              className="arrow"
+              type="button" 
+              id="topright-arrow"
+              props={springTopRight}
+              style={{
+                borderColor: "white transparent",
+                backgroundColor: "transparent",
+                borderStyle: "solid",
+                borderWidth: "0px 20px 20px 20px",
+                width: "0",
+                height: "0",
+                borderLeft: "50px solid transparent",
+                borderRight: "50px solid transparent",
+                borderBottom: "100px solid #ffffff",
+                bottom: "-21%",
+                left: "-7.7%",
+                position: "relative",
+                transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
+              }}
+                onMouseDown={() => setTopRightPressed(true)}
+                onMouseUp={() => setTopRightPressed(false)}
+              onClick={(e) => 
+                handleClick("topright", e.target)}></animated.button>
+                <animated.div props={springTopLeft} style={{  
+                  display: "fixed", 
+                  width: "90%",
+                  marginTop: "2em",
+                  marginLeft: "10em",
                   height: "auto",
-                  
-                transform: springDownRight.scale.interpolate(scale => `scale(${scale})`)}}>
-                        <animated.button 
-                          className='arrow'
-                          type="button" 
-                          id="downright-arrow"
-                          props={springDownRight}
-                          style={{
-                            borderColor: "white transparent",
-                            backgroundColor: "transparent",
-                            borderStyle: "solid",
-                            borderWidth: "0px 20px 20px 20px",
-                            width: "0",
-                            height: "0",
-                            borderLeft: "50px solid transparent",
-                            borderRight: "50px solid transparent",
-                            borderBottom: "100px solid #c04dc6",
-                            bottom: "-38%",
-                            left: "13%",
-                            position: "relative",
-                        
-                          }}
-                            onMouseDown={() => setDownRightPressed(true)}
-                            onMouseUp={() => setDownRightPressed(false)}
-                          onClick={(e) =>  
-                            handleClick("downright", e.target)}></animated.button>
-                   </animated.section>
-                  <animated.section props={springDownLeft} style={{  
-                  display: "relative", 
-                  width: "20%",
-                  marginTop: "-33%",
-                  marginLeft: "-85%",
-            
-                  left: "10%",
-                  right: "00%",
-                  top: "0%",
-                  height: "auto",
-                  zIndex: 70,
-                  
-                transform: springDownLeft.scale.interpolate(scale => `scale(${scale})`)}}>
-                    <animated.button 
-                      className="arrow"
-                      type="button" 
-                      id="downleft-arrow"
-                      props={springDownLeft}
-                      style={{
-                        borderColor: "white transparent",
-                        backgroundColor: "transparent",
-                        borderStyle: "solid",
-                        borderWidth: "0px 20px 20px 20px",
-                        width: "0",
-                        height: "0",
-                        borderLeft: "50px solid transparent",
-                        borderRight: "50px solid transparent",
-                        borderBottom: "100px solid #c04dc6",
-                        borderBottom: "100px solid#CFE010",
-                        bottom: "-38%",
-                        left: "-7.7%",
-                        position: "relative",
-                      }}
-                        onMouseDown={() => setDownLeftPressed(true)}
-                        onMouseUp={() => setDownLeftPressed(false)}
-                      onClick={(e) => 
-                        handleClick("downleft", e.target)}></animated.button>
-                </animated.section>
-                <animated.section props={springDown} style={{  
-                  display: "relative", 
-                  width: "20%",
-                  marginTop: "-10%",
-                  marginLeft: "-50%",
-                  height: "auto",
-                  
-                transform: springDown.scale.interpolate(scale => `scale(${scale})`)}}>
-                          <animated.button 
-                            className="arrow"
-                            type="button" 
-                            id="down-arrow"
-                            props={springDown}
-                            style={{
-                              borderColor: "white transparent",
-                              backgroundColor: "transparent",
-                              borderStyle: "solid",
-                              borderWidth: "0px 20px 20px 20px",
-                              width: "0",
-                              height: "0",
-                              borderLeft: "50px solid transparent",
-                              borderRight: "50px solid transparent",
-                              borderBottom: "100px solid #2b51ca",
-                              bottom: "-49.5%",
-                              left: "-6%",
-                              position: "relative",
-                            }}
-                              onMouseDown={() => setDownPressed(true)}
-                              onMouseUp={() => setDownPressed(false)}
-                            onClick={(e) => 
-                              handleClick("downarrow", e.target)}></animated.button>
-                    </animated.section>
-                  <animated.section props={springTopRight} style={{  
-                  display: "relative", 
-                  width: "20%",
-                  marginTop: "-100%",
-                  marginLeft: "-30%",
-                  height: "auto",
-                transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)}}>
-                        <animated.button 
-                          className="arrow"
-                          type="button" 
-                          id="topright-arrow"
-                          props={springTopRight}
-                          style={{
-                            borderColor: "white transparent",
-                            backgroundColor: "transparent",
-                            borderStyle: "solid",
-                            borderWidth: "0px 20px 20px 20px",
-                            width: "0",
-                            height: "0",
-                            borderLeft: "50px solid transparent",
-                            borderRight: "50px solid transparent",
-                            borderBottom: "100px solid #ffffff",
-                            bottom: "0%",
-                            left: "0%",
-                            position: "relative",
-                            // transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
-                          }}
-                            onMouseDown={() => setTopRightPressed(true)}
-                            onMouseUp={() => setTopRightPressed(false)}
-                          onClick={(e) => 
-                            handleClick("topright", e.target)}></animated.button>
-                </animated.section>
-                <animated.section props={springTopLeft} style={{  
-                  display: "relative", 
-                  width: "20%",
-                  marginTop: "-30%",
-                  marginLeft: "-65%",
-                  height: "auto",
-                  
                 transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)}}>
                       <animated.button 
                         className="arrow"
@@ -447,10 +393,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           borderLeft: "50px solid transparent",
                           borderRight: "50px solid transparent",
                           borderBottom: "100px solid #e01810",
-                          bottom: "-0%",
-                          left: "-30%",
-                          marginBottom: "0%",
-
+                          bottom: "-21%",
+                          left: "-22.5%",
                           position: "relative",
                           // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
                         
@@ -459,18 +403,11 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           onMouseUp={() => setTopLeftPressed(false)}
                         onClick={(e) => 
                           handleClick("topleft", e.target)}></animated.button>
-                          </animated.section>
+                          </animated.div>
         </div>
-        <animated.section
-          style={{
-              // transform: springPlayButton.scale.interpolate(scale => `scale(${scale})`)
-          }}
-                id="centerConsole" 
-                onMouseDown={() => setPlayPressed(true)}
-                onMouseUp={() => setPlayPressed(false)}>
-                <img 
-                  id="playButton" src={`${playButton}`} onClick={() => startGame()}/>
-        </animated.section>
+        <span id="centerConsole">
+                <img id="playButton" src={`${playButton}`} onClick={() => startGame()}/>
+        </span>
         <div style={{"visibility": `${colorPickDisplayed ? "initial" : "hidden"}`}}>
           <span className="modal">
             {/* <p>Pick your color and then click a button!</p> */}
