@@ -275,6 +275,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
   const [playersTurn, setPlayersTurn] = useState(false)
   const [playerClickCount, setPlayerClickCount] = useState(0)
   //
+  const [highScore, setHighScore] = useState(0)
+  //
   // every time we advance within the current sequence, a new correct choice has to be set.
   useEffect(() => {
     setNextButton(currentNotes[sequenceCurrentPlace]);
@@ -303,7 +305,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     } else {
       setGameStarted(false)
-      loseGame();
+      loseGame(); 
     }
     // console.log(playSound)
     // playSound.play()
@@ -312,6 +314,9 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   const playSequence = (newStep) => {
 
+    if (gameStarted) {
+
+   
     setComputersTurn(true)
     setPlayersTurn(false)
 
@@ -321,7 +326,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
       sequence.forEach(item => {
 
         setTimeout(() => {
-          console.log(`sequence: ${sequence.indexOf(item)}`)
+          console.log(`sequence: ${sequence.indexOf(item)}, ${item}`)
 
           if (item == "down") {
 
@@ -415,6 +420,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     setComputersTurn(false)
     setPlayersTurn(true)
+    }
 
   }
 
@@ -436,6 +442,15 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
   const loseGame = () => {
+
+    document.getElementById('playButton').style.backgroundColor = "red"
+
+    setTimeout(() => {
+
+      document.getElementById('playButton').style.backgroundColor = "white"
+
+    }, 1000)
+
     // animation, then:
     setPlayerClickCount(0)
     setSequence([])
@@ -446,9 +461,24 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   const completeRound = () => {
     // animation, then:
+    if (sequence.length > highScore) {
+      setHighScore(sequence.length)
+    }
+
+    document.getElementById('playButton').style.backgroundColor = "gold"
+
+    setTimeout(() => {
+
+      document.getElementById('playButton').style.backgroundColor = "white"
+
+    }, 1000)
+
+
+
     let newStep = optionsArray[Math.floor(Math.random * optionsArray.length)]
     let thisSequence = [...sequence, newStep]
 
+    setPlayerClickCount(0)
     setSequence([...sequence, newStep])
     playSequence(newStep)
   }
@@ -549,16 +579,16 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     handleColor(target)
 
-    if (buttonId == nextButton)
-      if (sequenceCurrentPlace < sequence.length) {
-        setSequenceCurrentPlace(sequenceCurrentPlace + 1);
-      } else {
-        setSequence([
-          ...sequence,
-          Math.floor(Math.random * currentNotes.length),
-        ]);
-        setSequenceCurrentPlace(0);
-      }
+    // if (buttonId == nextButton)
+    //   if (sequenceCurrentPlace < sequence.length) {
+    //     setSequenceCurrentPlace(sequenceCurrentPlace + 1);
+    //   } else {
+    //     setSequence([
+    //       ...sequence,
+    //       Math.floor(Math.random * currentNotes.length),
+    //     ]);
+    //     setSequenceCurrentPlace(0);
+    //   }
   };
 
   
@@ -804,11 +834,9 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                     <button onClick={() => instrumentCycle("left")}>◄</button>
                     <button onClick={() => instrumentCycle("right")}>►</button>
               </span>
-              <ReactAudioPlayer
-                    src="https://firebasestorage.googleapis.com/v0/b/musicgame-9c202.appspot.com/o/rewind_a.wav?alt=media&token=63e4402f-a82d-4adf-a2bd-2d2b61a36673"
-                    autoPlay
-                    controls
-                  />
+              <span>
+        <p style={{"display": `${(highScore > 0) ? "initial" : "none"}`}}>{`High Score: ${highScore}`}</p>
+              </span>
       </header>
     </animated.div>
   );
