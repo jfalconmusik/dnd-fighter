@@ -280,6 +280,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     setNextButton(currentNotes[sequenceCurrentPlace]);
   }, [sequenceCurrentPlace]);
 
+  const optionsArray = ['topleft', 'topright', 'downleft', 'downright', 'down']
 
 
   const startGame = () => {
@@ -288,7 +289,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
       
       setGameStarted(true)
-      const optionsArray = ['topleft', 'topright', 'downleft', 'downright', 'down']
       
       
       const newArr = []
@@ -301,13 +301,16 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
       setSequence([...newArr])
 
+    } else {
+      setGameStarted(false)
+      loseGame();
     }
     // console.log(playSound)
     // playSound.play()
   }
 
 
-  const playSequence = () => {
+  const playSequence = (newStep) => {
 
     setComputersTurn(true)
     setPlayersTurn(false)
@@ -363,6 +366,51 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
       })
 
+      if (newStep) {
+
+        // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
+        // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
+        if (newStep == "down") {
+
+          setDownPressed(true)
+
+          setTimeout(() => {
+            setDownPressed(false)
+          }, 500)
+        } else if (newStep == "downleft") {
+
+          setDownLeftPressed(true)
+
+          setTimeout(() => {
+            setDownLeftPressed(false)
+          }, 500)
+        } else if (newStep == "downright") {
+
+          setDownRightPressed(true)
+
+          setTimeout(() => {
+            setDownRightPressed(false)
+          }, 500)
+        } else if (newStep == "topleft") {
+
+          setTopLeftPressed(true)
+
+          setTimeout(() => {
+            setTopLeftPressed(false)
+          }, 500)
+        } else if (newStep == "topright") {
+
+          setTopRightPressed(true)
+
+          setTimeout(() => {
+            setTopRightPressed(false)
+          }, 500)
+        }
+
+        handleClick(newStep, "computer")
+
+      }
+
     }, 1000)
 
     setComputersTurn(false)
@@ -387,13 +435,52 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 // })
 
 
+  const loseGame = () => {
+    // animation, then:
+    setPlayerClickCount(0)
+    setSequence([])
+    setPlayersTurn(false)
+    setComputersTurn(false)
+  }
+
+
+  const completeRound = () => {
+    // animation, then:
+    let newStep = optionsArray[Math.floor(Math.random * optionsArray.length)]
+    let thisSequence = [...sequence, newStep]
+
+    setSequence([...sequence, newStep])
+    playSequence(newStep)
+  }
+
+
+
+
 
   const handleClick = (buttonId, user) => {
 
 
     if (user !== "player") {
       setPlayerClickCount(0)
+
     }
+
+
+    if (user === "player" && playersTurn) {
+
+      let thisTurn = playerClickCount
+
+      
+      if (sequence[thisTurn] !== buttonId) {
+        loseGame() // still have to write lose game logic.
+      } else if (sequence[thisTurn] === buttonId && (playerClickCount + 1) == sequence.length) {
+        completeRound()
+      }
+      
+      setPlayerClickCount(playerClickCount + 1)
+    }
+
+
 
     if (buttonId == "topright") {
         let newSound = new Howl({
@@ -457,15 +544,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
         // useSound(downSound)
 
     }
-
-    if (user === "player" && playersTurn) {
-
-
-    }
-
-
-
-
 
 
 
