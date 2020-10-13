@@ -286,7 +286,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
   const startGame = () => {
-
+    console.log(`game started = ${gameStarted}`)
     if (!gameStarted) {
 
       
@@ -300,7 +300,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
         newArr.push(optionsArray[Math.floor(Math.random() * optionsArray.length)])
       }
       
-
       setSequence([...newArr])
 
     } else {
@@ -314,9 +313,9 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   const playSequence = (newStep) => {
 
+  console.log(`playing sequence. gamestarted is ${gameStarted}`)
     if (gameStarted) {
 
-   
     setComputersTurn(true)
     setPlayersTurn(false)
 
@@ -442,6 +441,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
   const loseGame = () => {
+    console.log("game lost")
 
     document.getElementById('playButton').style.backgroundColor = "red"
 
@@ -460,6 +460,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
   const completeRound = () => {
+    console.log("round completed")
     // animation, then:
     if (sequence.length > highScore) {
       setHighScore(sequence.length)
