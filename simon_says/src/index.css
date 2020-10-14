@@ -252,6 +252,10 @@ li {
   transform: rotate3d(360deg);
 }
 
+#infoContainer {
+  font-size: medium;
+}
+
 .n0 {
   -webkit-transform: rotate(90deg);
 }
