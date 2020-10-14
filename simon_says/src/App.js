@@ -562,6 +562,7 @@ function App() {
           backgroundSize: "100vw 100vh",
           maxHeight: "100vh",
           margin: "0 auto",
+          flexDirection: "column",
         }}
       >
         <div
@@ -570,118 +571,133 @@ function App() {
         >
           <div id="mainContent">
             <div
-              className="buttonContainer"
               style={{
-                top: "20vh",
-                marginBottom: "100vh",
-                marginLeft: "-20%",
-                marginRight: "0%",
-                justifyContent: "space-between",
                 position: "fixed",
-                height: "50vh",
-                width: "40vw",
-                right: "0vw",
-                zIndex: "90",
+                margin: "0 auto",
+                right: "44%",
+                left: "22%",
+                bottom: "100%",
               }}
             >
-              <animated.img
-                className="arrow"
-                type="button"
-                id="downright-arrow"
-                src={triYellow}
-                props={springDownRight}
+              <div
+                className="buttonContainer"
                 style={{
-                  position: "absolute",
+                  top: "20vh",
+                  marginBottom: "100vh",
+                  margin: "0 auto",
+                  display: "inline-block",
                   justifyContent: "space-between",
-                  right: "38%",
-                  top: "20%",
-                  transform: springDownRight.scale.interpolate(
-                    (scale) => `scale(${scale})`
-                  ),
-                }}
-                onMouseDown={() => setDownRightPressed(true)}
-                onMouseUp={() => setDownRightPressed(false)}
-                onClick={(e) => handleClick("downright", "player", e.target)}
-              ></animated.img>
-              <animated.img
-                className="arrow"
-                type="button"
-                id="downleft-arrow"
-                src={triBlue}
-                props={springDownLeft}
-                style={{
                   position: "absolute",
-                  top: "60%",
-                  right: "30%",
-                  transform: springDownLeft.scale.interpolate(
-                    (scale) => `scale(${scale})`
-                  ),
+                  left: "27%",
+                  right: "27%",
+                  height: "50vh",
+                  width: "40vw",
+                  zIndex: "90",
                 }}
-                onMouseDown={() => setDownLeftPressed(true)}
-                onMouseUp={() => setDownLeftPressed(false)}
-                onClick={(e) => handleClick("downleft", "player", e.target)}
-              ></animated.img>
-              <animated.img
-                className="arrow"
-                type="button"
-                id="down-arrow"
-                props={springDown}
-                src={triPurple}
-                style={{
-                  position: "absolute",
-                  justifyContent: "space-between",
-                  top: "60%",
-                  right: "-1%",
-                  transform: springDown.scale.interpolate(
-                    (scale) => `scale(${scale})`
-                  ),
-                }}
-                onMouseDown={() => setDownPressed(true)}
-                onMouseUp={() => setDownPressed(false)}
-                onClick={(e) => handleClick("down", "player", e.target)}
-              ></animated.img>
+              >
+                <animated.img
+                  className="arrow"
+                  type="button"
+                  id="downright-arrow"
+                  src={triYellow}
+                  props={springDownRight}
+                  style={{
+                    position: "absolute",
+                    justifyContent: "space-between",
+                    right: "45%",
+                    top: "20%",
+                    transform: springDownRight.scale.interpolate(
+                      (scale) => `scale(${scale})`
+                    ),
+                  }}
+                  onMouseDown={() => setDownRightPressed(true)}
+                  onMouseUp={() => setDownRightPressed(false)}
+                  onClick={(e) => handleClick("downright", "player", e.target)}
+                ></animated.img>
+                <animated.img
+                  className="arrow"
+                  type="button"
+                  id="downleft-arrow"
+                  src={triBlue}
+                  props={springDownLeft}
+                  style={{
+                    position: "absolute",
+                    top: "60%",
+                    right: "40%",
+                    transform: springDownLeft.scale.interpolate(
+                      (scale) => `scale(${scale})`
+                    ),
+                  }}
+                  onMouseDown={() => setDownLeftPressed(true)}
+                  onMouseUp={() => setDownLeftPressed(false)}
+                  onClick={(e) => handleClick("downleft", "player", e.target)}
+                ></animated.img>
+                <animated.img
+                  className="arrow"
+                  type="button"
+                  id="down-arrow"
+                  props={springDown}
+                  src={triPurple}
+                  style={{
+                    position: "absolute",
+                    justifyContent: "space-between",
+                    top: "60%",
+                    right: "10%",
+                    transform: springDown.scale.interpolate(
+                      (scale) => `scale(${scale})`
+                    ),
+                  }}
+                  onMouseDown={() => setDownPressed(true)}
+                  onMouseUp={() => setDownPressed(false)}
+                  onClick={(e) => handleClick("down", "player", e.target)}
+                ></animated.img>
 
-              <animated.img
-                className="arrow"
-                type="button"
-                id="topright-arrow"
-                props={springTopRight}
-                src={triWhite}
-                style={{
-                  position: "absolute",
-                  justifyContent: "space-between",
+                <animated.img
+                  className="arrow"
+                  type="button"
+                  id="topright-arrow"
+                  props={springTopRight}
+                  src={triWhite}
+                  style={{
+                    position: "absolute",
+                    justifyContent: "space-between",
 
-                  right: "-7%",
-                  top: "20%",
-                  transform: springTopRight.scale.interpolate(
-                    (scale) => `scale(${scale})`
-                  ),
-                  // transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
-                }}
-                onMouseDown={() => setTopRightPressed(true)}
-                onMouseUp={() => setTopRightPressed(false)}
-                onClick={(e) => handleClick("topright", "player", e.target)}
-              ></animated.img>
-              <animated.img
-                className="arrow"
-                type="button"
-                id="topleft-arrow"
-                src={triRed}
-                props={springTopLeft}
-                style={{
-                  position: "absolute",
-                  justifyContent: "space-between",
-                  right: "15%",
-                  bottom: "75%",
-                  transform: springTopLeft.scale.interpolate(
-                    (scale) => `scale(${scale})`
-                  ),
-                  // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
-                }}
-                onMouseDown={() => setTopLeftPressed(true)}
-                onMouseUp={() => setTopLeftPressed(false)}
-                onClick={(e) => handleClick("topleft", "player", e.target)}
-              ></animated.img>
+                    right: "5%",
+                    top: "20%",
+                    transform: springTopRight.scale.interpolate(
+                      (scale) => `scale(${scale})`
+                    ),
+                    // transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
+                  }}
+                  onMouseDown={() => setTopRightPressed(true)}
+                  onMouseUp={() => setTopRightPressed(false)}
+                  onClick={(e) => handleClick("topright", "player", e.target)}
+                ></animated.img>
+                <animated.img
+                  className="arrow"
+                  type="button"
+                  id="topleft-arrow"
+                  src={triRed}
+                  props={springTopLeft}
+                  style={{
+                    position: "absolute",
+                    margin: "0 auto",
+                    marginRight: "-35%",
+                    display: "inline-block",
+                    justifyContent: "space-between",
+                    right: "60%",
+                    left: "40%",
+                    bottom: "75%",
+                    transform: springTopLeft.scale.interpolate(
+                      (scale) => `scale(${scale})`
+                    ),
+                    // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
+                  }}
+                  onMouseDown={() => setTopLeftPressed(true)}
+                  onMouseUp={() => setTopLeftPressed(false)}
+                  onClick={(e) => handleClick("topleft", "player", e.target)}
+                ></animated.img>
+              </div>
             </div>
             <div id="wrapper">
               <img
