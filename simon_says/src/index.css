@@ -28,7 +28,7 @@ body {
 
 #topleft-arrow {
   /* border-color: white transparent; */
-  width: 18em;
+  width: 10em;
   height: auto;
   background-color: transparent;
   /* border-style: solid;
@@ -46,7 +46,7 @@ body {
 }
 #topright-arrow {
   /* border-color: white transparent; */
-  width: 18em;
+  width: 10em;
   height: auto;
   background-color: transparent;
   /* border-style: solid;
@@ -65,7 +65,7 @@ body {
 
 #downright-arrow {
   /* border-color: white transparent; */
-  width: 18em;
+  width: 10em;
   height: auto;
   background-color: transparent;
   /* border-style: solid;
@@ -84,7 +84,7 @@ body {
 
 #downleft-arrow {
   /* border-color: white transparent; */
-  width: 18em;
+  width: 10em;
   height: auto;
   background-color: transparent;
   /* border-style: solid;
@@ -103,7 +103,7 @@ body {
 
 #down-arrow {
   /* border-color: white transparent; */
-  width: 18em;
+  width: 10em;
   height: auto;
   background-color: transparent;
   /* border-style: solid;

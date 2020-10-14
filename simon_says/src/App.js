@@ -576,24 +576,34 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                       "margin": "0 auto", 
                       }}>
                 <div className="">
-                  <img src={pentacle} style={{
-                    "margin": "0 auto", 
-                    "maxWidth": "100vw", 
-                    "maxHeight": "100vh", 
-                    "position": "fixed", 
-                    "right": "24%",
-                    "bottom": "3%",
-                    "zIndex": "40"}}/>
+              
+                    <img src={pentacle} style={{
+                      "margin": "0 auto", 
+                      // "marginBottom": "20%",
+                      // "width": "50vw",
+                      // "height": "50vw",
+                      "maxWidth": "100vw", 
+                      "maxHeight": "100vh", 
+                      "position": "fixed", 
+                      "right": "24%",
+                      "bottom": "3%",
+                      "zIndex": "40",
+                      "display": "none",
+                      // "transform": "scale(.8)"
+                      
+                      }}/>
+                 
                 </div>
                       <div className="buttonContainer" style={{
                         "top": "20vh",
                         "marginBottom": "100vh", 
-                        "marginLeft": "-15%",
+                        "marginLeft": "-20%",
+                        "marginRight": "0%",
                         "justifyContent": "space-between",
                         "position": "fixed",
                         "height": "50vh", 
                         "width": "40vw", 
-                        "right": "140vw",
+                        "right": "0vw",
                         "zIndex": "90"}}> 
                         <animated.img
                           className='arrow'
@@ -604,8 +614,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           style={{
                             position: "absolute",
                             justifyContent: "space-between",
-                            right: "47%",
-                            top: "10%",
+                            right: "38%",
+                            top: "20%",
                             transform: springDownRight.scale.interpolate(scale => `scale(${scale})`)
                           }}
                             onMouseDown={() => setDownRightPressed(true)}
@@ -620,8 +630,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                       props={springDownLeft}
                       style={{
                         position: "absolute",
-                        top: "70%",
-                        right: "38%",
+                        top: "60%",
+                        right: "30%",
                         transform: springDownLeft.scale.interpolate(scale => `scale(${scale})`)
                       }}
                         onMouseDown={() => setDownLeftPressed(true)}
@@ -637,8 +647,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                             style={{
                               position: "absolute",
                               justifyContent: "space-between",
-                              top: "70%",
-                              right: "-5%",
+                              top: "60%",
+                              right: "3%",
                               transform: springDown.scale.interpolate(scale => `scale(${scale})`)
                             }}
                               onMouseDown={() => setDownPressed(true)}
@@ -656,8 +666,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                             position: "absolute",
                             justifyContent: "space-between",
                             
-                            right: "-15%",
-                            top: "10%",
+                            right: "-7%",
+                            top: "20%",
                             transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
                             // transform: springTopRight.scale.interpolate(scale => `scale(${scale})`)
                           }}
@@ -675,7 +685,7 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
                           position: "absolute",
                           justifyContent: "space-between",
                           right: "15%",
-                          bottom: "70%",
+                          bottom: "75%",
                           transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
                           // transform: springTopLeft.scale.interpolate(scale => `scale(${scale})`)
                         
