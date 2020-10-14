@@ -3,17 +3,17 @@ body {
 }
 
 .shell {
-  transform: scale(3) rotate(33deg);
+  /* transform: scale(3) rotate(33deg); */
   position: fixed;
 }
 
 .buttonContainer {
   width: 20vw;
   height: 10vh;
-  left: 50%;
+  left: 47%;
   top: 100%;
   position: fixed;
-  transform: rotate(33deg) scale(1.25);
+  /* transform: rotate(33deg) scale(1.25); */
 }
 
 .rotator {
@@ -27,9 +27,11 @@ body {
 }
 
 #topleft-arrow {
-  border-color: white transparent;
+  /* border-color: white transparent; */
+  width: 18em;
+  height: auto;
   background-color: transparent;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 0px 20px 20px 20px;
   width: 0;
   height: 0;
@@ -39,74 +41,82 @@ body {
   bottom: -21%;
   left: 50%;
   position: relative;
-  transform: rotate(-35deg);
+  transform: rotate(-35deg); */
   outline: 0;
 }
 #topright-arrow {
-  border-color: white transparent;
+  /* border-color: white transparent; */
+  width: 18em;
+  height: auto;
   background-color: transparent;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 0px 20px 20px 20px;
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid #ffffff;
+  border-bottom: 100px solid #e01810;
   bottom: -21%;
-  left: -7.7%;
+  left: 50%;
   position: relative;
-  transform: rotate(35deg);
+  transform: rotate(-35deg); */
   outline: 0;
 }
 
 #downright-arrow {
-  border-color: white transparent;
+  /* border-color: white transparent; */
+  width: 18em;
+  height: auto;
   background-color: transparent;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 0px 20px 20px 20px;
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid #c04dc6;
-  bottom: -38%;
-  left: 13%;
+  border-bottom: 100px solid #e01810;
+  bottom: -21%;
+  left: 50%;
   position: relative;
-  transform: rotate(110deg);
+  transform: rotate(-35deg); */
   outline: 0;
 }
 
 #downleft-arrow {
-  border-color: white transparent;
+  /* border-color: white transparent; */
+  width: 18em;
+  height: auto;
   background-color: transparent;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 0px 20px 20px 20px;
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid#CFE010;
-  bottom: -38%;
-  left: -7.7%;
+  border-bottom: 100px solid #e01810;
+  bottom: -21%;
+  left: 50%;
   position: relative;
-  transform: rotate(-110deg);
+  transform: rotate(-35deg); */
   outline: 0;
 }
 
 #down-arrow {
-  border-color: white transparent;
+  /* border-color: white transparent; */
+  width: 18em;
+  height: auto;
   background-color: transparent;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 0px 20px 20px 20px;
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid #2b51ca;
-  bottom: -49.5%;
-  left: -6%;
+  border-bottom: 100px solid #e01810;
+  bottom: -21%;
+  left: 50%;
   position: relative;
-  transform: rotate(-180deg);
+  transform: rotate(-35deg); */
   outline: 0;
 }
 
@@ -117,7 +127,7 @@ body {
   z-index: 99;
   float: right;
   bottom: 20%;
-  margin-bottom: -5%;
+  margin-bottom: 5%;
   margin-top: 5%;
   left: 40%;
   position: relative;
@@ -205,10 +215,26 @@ li {
 }
 
 #instruments {
-  left: 40%;
-  bottom: 20%;
+  /* left: 40%;
+  bottom: 20%; */
   position: relative;
-  margin-top: 10%;
+  margin-top: 20%;
+}
+
+#optContainer {
+  left: 40%;
+  bottom: -10%;
+  top: 20%;
+  position: relative;
+  flex-direction: row;
+}
+
+#opt2 {
+  left: 40%;
+  bottom: -10%;
+  top: 20%;
+  position: relative;
+  flex-direction: row;
 }
 
 #playButton {
