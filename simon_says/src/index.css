@@ -240,7 +240,7 @@ li {
 #playButton {
   background-color: white;
   border-radius: 50%;
-  transform: scale(0.05);
+  transform: scale(0.06);
   z-index: 99;
   position: fixed;
   right: -2.5%;

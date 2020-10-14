@@ -623,7 +623,7 @@ function App() {
                   style={{
                     position: "absolute",
                     top: "60%",
-                    right: "40%",
+                    right: "45%",
                     transform: springDownLeft.scale.interpolate(
                       (scale) => `scale(${scale})`
                     ),
@@ -642,7 +642,8 @@ function App() {
                     position: "absolute",
                     justifyContent: "space-between",
                     top: "60%",
-                    right: "10%",
+                    right: "0%",
+                    left: "60%",
                     transform: springDown.scale.interpolate(
                       (scale) => `scale(${scale})`
                     ),
@@ -663,6 +664,7 @@ function App() {
                     justifyContent: "space-between",
 
                     right: "5%",
+                    left: "60%",
                     top: "20%",
                     transform: springTopRight.scale.interpolate(
                       (scale) => `scale(${scale})`
@@ -682,11 +684,12 @@ function App() {
                   style={{
                     position: "absolute",
                     margin: "0 auto",
-                    marginRight: "-35%",
+                    marginRight: "0px",
+                    marginLeft: "-80px",
                     display: "inline-block",
                     justifyContent: "space-between",
-                    right: "60%",
-                    left: "40%",
+                    right: "50%",
+                    left: "50%",
                     bottom: "75%",
                     transform: springTopLeft.scale.interpolate(
                       (scale) => `scale(${scale})`
