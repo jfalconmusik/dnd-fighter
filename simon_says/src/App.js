@@ -48,8 +48,9 @@ function App() {
     "https://animal-wallpaper.com/wallpaper/aesthetic-minimalist-wallpapers-1080p-For-Background-HD-Wallpaper.jpg",
     "https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg"
   ]
-
- 
+  
+  const [backgroundImg, setBackgroundImg] = useState("https://eskipaper.com/images/best-wallpapers-2.jpg")
+  
   
   const soundSets = {
     Rewind: {
@@ -112,6 +113,7 @@ function App() {
 
   }
   // one sample on cloud is not used here ^
+  const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
 
 
 
@@ -138,8 +140,6 @@ function App() {
       }
     }
 
-
-
     }
 
 
@@ -152,6 +152,8 @@ function App() {
   const [downSound, setDownSound] = useState("")
   
 
+
+
   useEffect(() => {
 
     setTopRightSound(currentInstrument.set[0])
@@ -163,14 +165,8 @@ function App() {
   }, [currentInstrument])
 
 
-
-
-
-  
-  const [backgroundImg, setBackgroundImg] = useState("https://wallpapersite.com/images/wallpapers/stained-glass-2560x1440-spiral-ceiling-hd-5159.jpg")
-  
   useEffect(() => {
-
+    // this just tells me if the background changes
     console.log("effect fired")
     console.log(document.getElementById("App-header").style.backgroundImage)
     console.log(backgroundImg)
@@ -284,26 +280,20 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   const optionsArray = ['topleft', 'topright', 'downleft', 'downright', 'down']
 
-
-      let newArr = []
+  let newArr = []
       
 
   const startGame = () => {
     console.log(`game started = ${gameStarted}`)
     newArr = []
     if (!gameStarted) {
-
-      
       setGameStarted(true)
       
-    
       for (let i = 0; i < 4; i++) {
 
         // we have to concat i onto the end so that the exact option can be looked up in the sequence
-
         newArr.push(`${optionsArray[Math.floor(Math.random() * optionsArray.length)]}-${i}`)
       }
-      
       setSequence([...newArr])
       console.log(newArr)
       playSequence(newArr)
@@ -318,25 +308,13 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
 
   const playSequence = (sequence, newStepArg) => {
-
   console.log(`playing sequence. gamestarted is ${gameStarted}`)
-
-  console.log(sequence)
 
     if ((sequence.length > 0)) {
       // this really should only run if the game HAS started, but this is how it is for now, for debugging.
 
     setComputersTurn(true)
     setPlayersTurn(false)
-
-///////////
-///////////
-//////////
-///////////
-/////////////
-///////////
-//////////
-
 
       let newSeq = [...sequence]
 
@@ -347,7 +325,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
     setTimeout(() => {
 
-      
       newSeq.forEach(i =>  {
 
         let itemArr = i.split("-")
@@ -362,124 +339,61 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
             setTimeout(() => {
               setDownPressed(true)
               handleClick(item, "computer")
-            }, Number((itemIndex + 1) * 250))
+            }, Number((itemIndex + 1) * 200))
               /////
                   setTimeout(() => {
                     setDownPressed(false)
 
-                  }, Number((itemIndex + 1) * 400))
+                  }, Number((itemIndex + 1) * 300))
                 } else if (item == "downleft") {
 
 
             setTimeout(() => {
               setDownLeftPressed(true)
               handleClick(item, "computer")
-            }, Number((itemIndex + 1) * 250))
+            }, Number((itemIndex + 1) * 200))
             /////
                   setTimeout(() => {
                     setDownLeftPressed(false)
 
-                  }, Number((itemIndex + 1) * 400))
+                  }, Number((itemIndex + 1) * 300))
                 } else if (item == "downright") {
                 
 
             setTimeout(() => {
               setDownRightPressed(true)
               handleClick(item, "computer")
-            }, Number((itemIndex + 1) * 250))
+            }, Number((itemIndex + 1) * 200))
             /////
                   setTimeout(() => {
                     setDownRightPressed(false)
 
-                  }, Number((itemIndex + 1) * 400))
+                  }, Number((itemIndex + 1) * 300))
                 } else if (item == "topleft") {
               
             setTimeout(() => {
               setTopLeftPressed(true)
               handleClick(item, "computer")
-            }, Number((itemIndex + 1) * 250))
+            }, Number((itemIndex + 1) * 200))
             /////
                   setTimeout(() => {
                     setTopLeftPressed(false)
 
-                  }, Number((itemIndex + 1) * 400))
+                  }, Number((itemIndex + 1) * 300))
                 } else if (item == "topright") {
 
             setTimeout(() => {
               
               setTopRightPressed(true)
               handleClick(item, "computer")
-            }, Number((itemIndex + 1) * 250))
+            }, Number((itemIndex + 1) * 200))
             ////
                   setTimeout(() => {
                     setTopRightPressed(false)
 
-                  }, Number((itemIndex + 1) * 400))
+                  }, Number((itemIndex + 1) * 300))
                 }
       })
-
-      // if (newStepArg) {
-
-      //   let arr = newStepArg.split("-")
-      //   console.log(newStepArg)
-
-      //   let newStep = arr[0]
-      //   // the above is fine for reading values currently in the sequence, but sometimes functions have a hard time with state, as they can't 
-      //   // get the updated value from within their current scope. for that reason, we may have to pass any new steps into this function. here goes.
-      //   if (newStep == "down") {
-
-      //     setTimeout(() => {
-      //       setDownPressed(true)
-      //       handleClick(newStep, "computer")
-      //     }, 500)
-          
-      //     setTimeout(() => {
-      //       setDownPressed(false)
-      //     }, 500)
-      //   } else if (newStep == "downleft") {
-
-      //     setTimeout(() => {
-      //       setDownLeftPressed(true)
-      //       handleClick(newStep, "computer")
-      //     }, 500)
-
-      //     setTimeout(() => {
-      //       setDownLeftPressed(false)
-      //     }, 500)
-      //   } else if (newStep == "downright") {
-
-      //     setTimeout(() => {
-      //       setDownRightPressed(true)
-      //       handleClick(newStep, "computer")
-      //     }, 500)
-
-      //     setTimeout(() => {
-      //       setDownRightPressed(false)
-      //     }, 500)
-      //   } else if (newStep == "topleft") {
-
-      //     setTimeout(() => {
-      //       setTopLeftPressed(true)
-      //       handleClick(newStep, "computer")
-      //     }, 500)
-
-      //     setTimeout(() => {
-      //       setTopLeftPressed(false)
-      //     }, 500)
-      //   } else if (newStep == "topright") {
-
-      //     setTimeout(() => {
-      //       setTopRightPressed(true)
-      //       handleClick(newStep, "computer")
-      //     }, 500)
-
-      //     setTimeout(() => {
-      //       setTopRightPressed(false)
-      //     }, 500)
-      //   }
-
-
-      // }
 
     }, 1000)
 
@@ -489,21 +403,6 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   }
 
-
-
-
-  // Choice logic, did the user pick the right note?
-
-
-
-
-
-
-//
-
-// const playSound = new Howl({
-//   src: "/Users/jessefalconmusik/simon_says/public/sounds/rewind_a.wav"
-// })
 
 
   const loseGame = () => {
@@ -522,8 +421,8 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
     setSequence([])
     setPlayersTurn(false)
     setComputersTurn(false)
+    setGameStarted(false)
   }
-
 
   const completeRound = () => {
     console.log("round completed")
@@ -532,14 +431,10 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
       setHighScore(sequence.length)
     }
 
-
-
     document.getElementById('playButton').style.backgroundColor = "gold"
 
     setTimeout(() => {
-
       document.getElementById('playButton').style.backgroundColor = "white"
-
     }, 1000)
 
 
@@ -561,19 +456,14 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
 
   const handleClick = (buttonId, user, target) => {
 
-
     if (user !== "player") {
       setPlayerClickCount(0)
 
     }
 
-
     if (user === "player" && playersTurn) {
-
       let thisTurn = playerClickCount
-
       let roundArr = sequence[thisTurn].split("-")
-
       let currentItem = roundArr[0]
 
       
@@ -657,23 +547,9 @@ const springTopLeft = useSpring({from: {scale: 1}, to: {scale: topLeftPressed? 0
       handleColor(target)
     }
 
-    // if (buttonId == nextButton)
-    //   if (sequenceCurrentPlace < sequence.length) {
-    //     setSequenceCurrentPlace(sequenceCurrentPlace + 1);
-    //   } else {
-    //     setSequence([
-    //       ...sequence,
-    //       Math.floor(Math.random * currentNotes.length),
-    //     ]);
-    //     setSequenceCurrentPlace(0);
-    //   }
   };
 
   
-  const playButton = "https://firebasestorage.googleapis.com/v0/b/jfalconmusik.appspot.com/o/power-button.svg?alt=media&token=b6863fa6-ad6a-4b14-aaad-fd2d24b9cf73"
-
-  // Make sure to add some clever css effects for the button lights...
-
 
   function handleColorPickDisplay() {
     setColorPickDisplayed(!colorPickDisplayed)
