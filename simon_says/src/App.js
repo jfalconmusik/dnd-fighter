@@ -26,10 +26,6 @@ function App() {
   //
   // how about a game of simon says?
 
-  // let's set an isLargeScreen hook:
-
-  const [isLargeScreen, setIsLargeScreen] = useState(true);
-
   /////////////////////////////////////////////////
   // here are some fun backgrounds we can add:
 
@@ -222,6 +218,8 @@ function App() {
       }
     }
   }
+
+  // NONE of this code is currently used! However, if one wanted to add it back in, one could change the colors of each individual button.
 
   // Color picker logic:
   const [colorPickDisplayed, setColorPickDisplayed] = useState(false);
