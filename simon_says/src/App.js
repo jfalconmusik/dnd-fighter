@@ -563,10 +563,7 @@ function App() {
           flexDirection: "column",
         }}
       >
-        <div
-          id="flexContainer"
-          style={{ flexDirection: `${isLargeScreen ? "column" : "row"}` }}
-        >
+        <div id="flexContainer" style={{ flexDirection: `column` }}>
           <div id="mainContent">
             <div
               style={{
