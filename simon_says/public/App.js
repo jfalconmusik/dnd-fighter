@@ -11,15 +11,6 @@ import firebase from "firebase";
 
 // some inspiration fror the clicky button came from: https://stackoverflow.com/questions/55130413/animated-button-with-react-spring
 
-// No need for context, cuz so small. No need for router either.
-
-// allow the user to choose from a fun list of background images.
-// in order to make sure the images don't just break horrifically, they have to stay constant size.
-
-// game built. instruments pickable. high score. animations. responsive.
-
-// temporary modals to show info.
-
 function App() {
   //
   // how about a game of simon says?
@@ -104,7 +95,6 @@ function App() {
       ],
     },
   };
-  // one sample on cloud is not used here ^
 
   const instrumentCycle = (direction) => {
     const instrumentNamesArray = [
