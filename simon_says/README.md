@@ -18,4 +18,12 @@ The playSequence() function also uses the forEach method for every item in the s
 
 #####
 
+#####
+
 all external code inspirations are listed at the top of App.js
+
+#####
+
+#####
+
+-- The background images are simply called from miscellaneous urls, but the sounds are stored on Firebase.
