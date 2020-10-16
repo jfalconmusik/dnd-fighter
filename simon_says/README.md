@@ -4,7 +4,7 @@ Now who doesn't love the classic game of Simon Says?
 
 This game was built using React, a fantastic frontend library developed by Facebook. You'll love it. Everything just makes sense. All of my state is maintained within "hooks" => these are simply variables of certain types with readily defined methods for updating them as needed.
 
-Simon says is quite simple. There are five basic buttons, plus the start button. On starting the game, a random sequence of four buttons will be pressed by the computer. The job of the player is to repeat this pattern. If the user is successful, the computer will add another random button to the sequence. The player will continually copy the computer until the player runs out of memory (lol).
+Simon says is simple. There are five basic buttons, plus the start button. On starting the game, a random sequence of four buttons will be pressed by the computer. The job of the player is to repeat this pattern. If the user is successful, the computer will add another random button to the sequence. The player will continually copy the computer until the player runs out of memory (lol).
 
 The animations for the button presses comes from React Spring, a beautiful styling library. The sounds are played using Howler.js. Both of these were downloaded using Node Package Manager.
 
