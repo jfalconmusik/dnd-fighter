@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include ('./partials/headers.ejs') %>
+    <div class="container">
+      <a href="/character/new"><button>New Character</button></a>
+      <ul>
+        <% for (let character of characters) {%>
+
+        <li><%=character.name%></li>
+        <li><%=character.level%></li>
+        <li><%=character.sign%></li>
+
+        <img src="<%=character.img%>" />
+        <a href="/character/<%=character._id%>">See Dossier</a>
+        <% } %>
+      </ul>
+      <%- include ('./partials/footer.ejs') %>
+    </div>
+  </body>
+</html>

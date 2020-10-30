@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include ('./partials/headers.ejs') %>
+    <div class="container">
+      <h1>New Character</h1>
+      <form action="/character" method="POST">
+        Name: <input type="text" name="name" id="name" /> Back Story:<input
+          type="textarea"
+          name="backStory"
+          id="backStory"
+        />
+        Sign:
+        <input type="select" name="sign" id="sign" />
+        Image: <input type="text" name="img" id="img" />
+        <br />
+        <button><a href="/character">Back to Character Select</a></button>
+      </form>
+    </div>
+    <%- include ('./partials/footer.ejs') %>
+  </body>
+</html>

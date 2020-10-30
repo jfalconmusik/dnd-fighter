@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+    <div class="container">
+      <%- include ('./partials/headers.ejs') %>
+      <h1>Redistribute skill points for <%=product.name%>?</h1>
+      <p><%=product.description%></p>
+      <p>In Stock: <%=product.qty%></p>
+      <p>$<%=product.price%></p>
+      <img src="<%=product.img%>" />
+
+      <form action="/product/<%= product._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" />
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="name" />
+        <label for="qty">In Stock:</label>
+        <input type="text" name="qty" id="qty" />
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price" />
+        <label for="img">Image Url:</label>
+        <input type="text" name="img" id="img" />
+        <input type="submit" value="Update Product" />
+      </form>
+
+      <button><a href="/product">Back to Index</a></button>
+      <%- include ('./partials/footer.ejs') %>
+    </div>
+  </body>
+</html>

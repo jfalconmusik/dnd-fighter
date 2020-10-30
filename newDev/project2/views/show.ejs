@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+     <%- include ('./partials/headers.ejs') %>
+     <div class="container">
+    <h1><%=character.name%></h1>
+    <p><%=character.backStory%></p>
+    <p>Level:<%=character.level%></p>
+    <p>Exp:<%=character.exp%></p>
+    <p>Gp:<%=character.gp%></p>
+    <p>Abilities:</p>
+    <% for (let ability of character.abilities) { %>
+      <p><%=ability.name%></p>
+      <p><%=ability.description%></p>
+    <img src="<%=character.img%>"></img>
+
+
+    <!-- <% if (product.qty > 0) { %>
+      <form action="/product/<%=product._id%>/<%=Number(product.qty - 1)%>?_method=PATCH" method="POST">
+       <button><input type="submit" value="Buy"/></button>
+      </form>
+   <% }  else {%> 
+    <h3>Out of stock!</h3>
+   <% } %> -->
+    <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
+    <a href="/character/<%=character._id%>/shop"><button>Buy Gear.</button></a>
+    <a href="/character/<%=character._id%>/levelup"><button>LEVEL UP</button></a>
+    <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
+      <button><input type="button">Banish</input></button>
+    </form>
+    <a href="/character"><button>Back to Character Select</button></a>
+    <%- include ('./partials/footer.ejs') %>
+  </div>
+  </body>
+</html>
