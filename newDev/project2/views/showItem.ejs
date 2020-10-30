@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+     <%- include ('./partials/headers.ejs') %>
+     <div class="container">
+    <h1><%=item.name%></h1>
+    <p><%=item.type%></p>
+    <p>Level:<%=item.level%></p>
+    <p>Damage:<%=item.damage%></p>
+    <p>Cost:<%=item.cost%></p>
+    <img src="<%=item.img%>"></img>
+
+
+     <% if (character.gp >= item.cost && !character.items.includes(item)) { %>
+      <form action="/<%=character._id%>/<%=item._id%>/<%=`${itemCost}`)%>/buy?_method=PATCH" method="POST">
+       <button><input type="submit" value="Buy"/></button>
+      </form>
+   <% }  else if (character.gp < item.cost && !character.items.includes(item._id)) { %> 
+    <h3>Not enough gold</h3>
+   <% }  else if (character.items.includes(item)) {%>
+    <form action="/<%=character._id%>/<%=item._id%>/<%=item.level%>/sell?_method=DELETE" method="POST">
+      <button><input type="button">Sell Item</input></button>
+    </form>
+   <% }%>
+    <a href="/<%=character._id%>/<%=item._id%>/<%item.level%>/levelup?method=PATCH" method="POST"><button>Level Up Item</button></a>
+    <a href="/item"><button></button></a>
+    <%- include ('./partials/footer.ejs') %>
+  </div>
+  </body>
+</html>

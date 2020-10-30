@@ -15,19 +15,17 @@
     <% for (let ability of character.abilities) { %>
       <p><%=ability.name%></p>
       <p><%=ability.description%></p>
+
+    <% }%>
     <img src="<%=character.img%>"></img>
-
-
-    <!-- <% if (product.qty > 0) { %>
-      <form action="/product/<%=product._id%>/<%=Number(product.qty - 1)%>?_method=PATCH" method="POST">
-       <button><input type="submit" value="Buy"/></button>
-      </form>
-   <% }  else {%> 
-    <h3>Out of stock!</h3>
-   <% } %> -->
     <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
     <a href="/character/<%=character._id%>/shop"><button>Buy Gear.</button></a>
-    <a href="/character/<%=character._id%>/levelup"><button>LEVEL UP</button></a>
+    <% if (character.exp >= Number(character.level * 100)) { %>
+      <a href="/character/<%=character._id%>/levelup"><button>LEVEL UP</button></a>
+    <% }  else { %>
+      <p><%=`${Number((character.level * 100) - character.exp)}`%> more EXP needed to level up.</p>
+    <% }%>
+    <a href='/battle/<%=character._id%>'><button>Enter Battle With <%=character.name %></button></a>
     <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
       <button><input type="button">Banish</input></button>
     </form>
