@@ -42,19 +42,20 @@ router.post("/", (req, res) => {
 });
 
 // show is set up with mongoose
-router.get("/:id", (req, res) => {
+router.get("/:charId/:id", (req, res) => {
   Item.findById(req.params.id, (err, foundItem) => {
     res.render("show.ejs", {
       product: foundItem,
       tabTitle: foundItem.name,
+      characterId: req.params.charId,
     });
   });
 });
 
 // level up item with mongoose
-router.patch("/:id/:level", (req, res) => {
+router.patch("/:charId/:id/:level", (req, res) => {
   let itemId = req.params.id;
-
+  let characterId = req.params.charId;
   Item.findOneAndUpdate(
     { _id: productId },
     {
