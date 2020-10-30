@@ -40,7 +40,9 @@ db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
 
-const characterController = require("./controllers/Character.js");
+const characterController = require("./controllers/character.js");
+const fightController = require("./controllers/fight.js");
+const itemController = require("./controllers/item.js");
 // Product.create(productSeed, (err, data) => {
 //   if (err) console.log(err.message);
 //   console.log("added initial products");
@@ -64,3 +66,11 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// ======================================
+// To Do:
+// ======================================
+
+// Customize the different Update views, like respec and shop.
+// Create a fight mechanic, followed by a level up mechanic.
+// Make sure all of this actually works by creating seeds.
