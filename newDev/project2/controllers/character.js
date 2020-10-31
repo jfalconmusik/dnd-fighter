@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const Character = require("../models/character.js");
-const characterSeed = require("../models/characterSeed.js");
+// const Character = require("../server.js").Character;
+// const characterSeed = require("../models/characterSeed.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 //=============================
@@ -10,6 +10,12 @@ const bcrypt = require("bcrypt");
 //=============================
 // require('dotenv').config()
 // new product route
+const getCharacter = (req, res, next) => {
+  return req.app.get("character");
+};
+let Character = getCharacter();
+//
+//
 router.get("/new", (req, res) => {
   res.render("new.ejs", {
     tabTitle: "Create Character",

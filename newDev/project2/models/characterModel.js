@@ -16,12 +16,12 @@ const characterSchema = new mongoose.Schema(
     agility: { type: Number, default: 10 },
     strength: { type: Number, default: 10 },
     charisma: { type: Number, default: 10 },
-    sign: { type: String, required: True },
+    sign: { type: String, required: true },
     img: { type: String, required: true },
   },
   { timestamps: true }
 );
 
 const Character = mongoose.model("Character", characterSchema);
-
-module.export = Character;
+// export switched from Character to characterSchema because multiple databases.
+module.exports = Character;
