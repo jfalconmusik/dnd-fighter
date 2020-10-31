@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include ('./partials/headers.ejs') %>
+    <div class="container">
+      <h1>New Item</h1>
+      <form action="/item" method="POST">
+        Name: <input type="text" name="name" id="name" /> Type:<input
+          type="select"
+          name="type"
+          id="type"
+        />
+        Damage:
+        <input type="select" name="damage" id="damage" />
+        Image: <input type="text" name="img" id="img" />
+        <br />
+        <button><a href="/item/<%=characterId%>">Back to Item List</a></button>
+      </form>
+    </div>
+    <%- include ('./partials/footer.ejs') %>
+  </body>
+</html>

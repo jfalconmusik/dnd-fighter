@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('./partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include ('./partials/headers.ejs') %>
+    <div class="container">
+      <h1>New Character</h1>
+      <form action="/character" method="POST">
+        Name: <input type="text" name="name" id="name" /> Back Story:<input
+          type="textarea"
+          name="backStory"
+          id="backStory"
+        />
+        Sign:
+          <input type="select" name="sign" id="sign">
+              <option value="Dragon"></option>
+              <option value="Spider"></option>
+              <option value="Elemental"></option>
+              <option value="Serpent"></option>
+              <option value="Raven"></option>
+              <option value="Capricorn"></option>
+          </input>
+        Stats:
+        <label for="wisdom" value="wisdom"></label>
+          <input type="select" name="wisdom" id="wisdom">
+              <option value="0"></option>
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
+              <option value="9"></option>
+              <option value="10"></option>
+              <option value="11"></option>
+              <option value="12"></option>
+              <option value="13"></option>
+              <option value="14"></option>
+              <option value="15"></option>
+              <option value="16"></option>
+          </input>
+          <label for="agility" value="agility"></label>
+          <input type="select" name="agility" id="agility">
+              <option value="0"></option>
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
+              <option value="9"></option>
+              <option value="10"></option>
+              <option value="11"></option>
+              <option value="12"></option>
+              <option value="13"></option>
+              <option value="14"></option>
+              <option value="15"></option>
+              <option value="16"></option>
+          </input>
+          <label for="strength" value="strength"></label>
+          <input type="select" name="strength" id="strength">
+              <option value="0"></option>
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
+              <option value="9"></option>
+              <option value="10"></option>
+              <option value="11"></option>
+              <option value="12"></option>
+              <option value="13"></option>
+              <option value="14"></option>
+              <option value="15"></option>
+              <option value="16"></option>
+          </input>
+          <label for="charisma" value="charisma"></label>
+          <input type="select" name="charisma" id="charisma">
+              <option value="0"></option>
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
+              <option value="9"></option>
+              <option value="10"></option>
+              <option value="11"></option>
+              <option value="12"></option>
+              <option value="13"></option>
+              <option value="14"></option>
+              <option value="15"></option>
+              <option value="16"></option>
+          </input>
+          <label for="firstAbility" value="firstAbility"></label>
+            <input type="select" name="firstAbility" id="firstAbility">
+              <option value="Buddha's Palm"></option>
+              <option value="Sneak Attack"></option>
+              <option value="Magic Missile"></option>
+              <option value="Vicious Mockery"></option>
+            </input>
+
+
+        Image: <input type="text" name="img" id="img" />
+        <br />
+        <button><a href="/character">Back to Character Select</a></button>
+      </form>
+    </div>
+    <%- include ('./partials/footer.ejs') %>
+  </body>
+</html>

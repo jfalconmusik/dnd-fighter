@@ -19,7 +19,7 @@
     <% }%>
     <img src="<%=character.img%>"></img>
     <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
-    <a href="/character/<%=character._id%>/shop"><button>Buy Gear.</button></a>
+    <a href="/item/<%=character._id%>"><button>Buy Gear.</button></a>
     <% if (character.exp >= Number(character.level * 100)) { %>
       <a href="/character/<%=character._id%>/levelup"><button>LEVEL UP</button></a>
     <% }  else { %>

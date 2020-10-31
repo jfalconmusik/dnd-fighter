@@ -6,16 +6,17 @@
   <body>
     <%- include ('./partials/headers.ejs') %>
     <div class="container">
-      <a href="/character/new"><button>New Character</button></a>
+      <a href="/item/new"><button>Ye Olde Item Shoppe</button></a>
       <ul>
-        <% for (let character of characters) {%>
+        <% for (let item of items) {%>
 
-        <li><%=character.name%></li>
-        <li><%=character.level%></li>
-        <li><%=character.sign%></li>
+        <li><%=item.name%></li>
+        <li><%=item.type%></li>
+        <li>Damage: <%=item.damage%></li>
+        <li>Cost: <%=item.cost%></li>
 
-        <img src="<%=character.img%>" />
-        <a href="/character/<%=character._id%>">See Dossier</a>
+        <img src="<%=item.img%>" />
+        <a href="/item/<%=characterId%>/<%=item._id%>">Details</a>
         <% } %>
       </ul>
       <%- include ('./partials/footer.ejs') %>

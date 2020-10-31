@@ -84,6 +84,27 @@ router.get("/:id/edit", (req, res) => {
   });
 });
 
+router.patch("/:charId/:id/:itemplace/buy", (req, res) => {
+  if (req.params.itemPlace == "1") {
+    Character.findOneAndUpdate(
+      { _id: req.params.charId },
+      { item1: { itemId: req.params.id, level: 0 } },
+      (err, foundItem) => {
+        res.send("item bought.");
+      }
+    );
+  } else {
+    Character.findOneAndUpdate(
+      { _id: req.params.charId },
+      { item2: { itemId: req.params.id, level: 0 } },
+      (err, foundItem) => {
+        res.send("item bought.");
+      }
+    );
+  }
+  res.redirect(`/character/${charId}`);
+});
+
 // edit product with mongoose
 router.put("/:id", (req, res) => {
   let itemId = req.params.id;
@@ -111,8 +132,8 @@ router.put("/:id", (req, res) => {
 });
 //
 
-// delete log using mongoose
-router.delete("/:id", (req, res) => {
+// delete item using mongoose
+router.delete("/:id/delete", (req, res) => {
   Item.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
     if (err) {
       console.log(err);
@@ -124,12 +145,14 @@ router.delete("/:id", (req, res) => {
 });
 
 // index shows all logs with mongoose
-router.get("/", (req, res) => {
+router.get("/:charId", (req, res) => {
+  let characterId = req.params.charId;
   console.log(req.session);
   Item.find({}, (error, allItems) =>
     res.render("index.ejs", {
       items: allItems,
       tabTitle: "Ye Olde Item Shop",
+      characterId: characterId,
     })
   );
 });
