@@ -16,7 +16,7 @@ const mongoURIitems = process.env.MONGODBURI_ITEM;
 const PORT = process.env.PORT;
 
 // Connect to Mongo
-
+// currently trying to run multiple databases. Mistake? Consider.
 const chardb = mongoose.createConnection(
   mongoURIcharacters,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
@@ -76,23 +76,14 @@ const itemController = require("./controllers/item.js");
 //   if (err) console.log(err.message);
 //   console.log("added initial products");
 // });
-app.set("character", Character);
-app.set("item", Item);
+// console.log(Character);
+// console.log(Item);
+// app.set("ch", Character);
+// app.set("i", Item);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-
-app.use("/character", characterController);
-app.use("/item", itemController);
-// app.use("/battle", battleController);
-app.get("/", (req, res) => {
-  res.render("welcome.ejs");
-});
-
-app.listen(PORT, () => {
-  console.log(`Listening on`, PORT);
-});
 app.use(
   session({
     secret: process.env.SECRET,
@@ -101,9 +92,30 @@ app.use(
   })
 );
 
+app.use("/character", characterController);
+// app.get("/character", (req, res) => {
+//   res.send({ Character });
+// });
+// //
+app.use("/item", itemController);
+// app.get("/item", (req, res) => {
+//   res.send({ Item });
+// });
+// app.use("/battle", battleController);
+
+app.get("/", (req, res) => {
+  res.render("welcome.ejs");
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on`, PORT);
+});
+
 // ======================================
 // To Do:
 // ======================================
+
+// Make both character and item available either globally or in multiple places.
 
 // Customize the different Update views, like respec and shop.
 

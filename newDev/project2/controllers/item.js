@@ -1,7 +1,8 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const Item = require("../server.js").Item;
+// const Item = require("../server.js").Item;
 const itemSeed = require("../models/itemSeed.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -11,10 +12,7 @@ const bcrypt = require("bcrypt");
 //=============================
 
 // require('dotenv').config()
-const getItem = (req, res, next) => {
-  return req.app.get("item");
-};
-let Item = getItem();
+let Item = router.get("item");
 // new product route
 router.get("/new", (req, res) => {
   res.render("new.ejs", {
