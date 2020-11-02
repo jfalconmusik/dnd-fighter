@@ -1,22 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include ('./partials/head.ejs') %>
     <title><%=characterOne.name%> Vs <%=characterTwo.name%></title>
   </head>
   <body>
+    <!-- 
+// 1 v 1. On each turn, player has these options: Attack, Defend, Special Ability, Attempt to Flee (mana and health do not recover between fights. Opponent can choose
+// to allow the flee, or choose to pursue. tThere will be a roll)), Inventory.
+// A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
+ -->
     <div id="container">
       <% let currentTurn = 1; %>
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
 
       <% if (currentTurn === 1) { %>
 
-      <p>Player One's Turn</p>
+      <p><%=characterOne.name%>'s Turn</p>
+      <br />
+      <div class="flexRow">
+        <div class="flexColumn">
+          <p>
+            Health:
+            <%=`${characterOne.currentHealth}/${characterOne.maxHealth}`%>
+          </p>
+          <p>
+            Mana: <%=`${characterOne.currentMana}/${characterOne.maxMana}`%>
+          </p>
+        </div>
+        <div class="flexColumn">
+          <button id="charOneAttack" class="battleButton">Attack</button>
+          <button id="charOneDefend" class="battleButton">Defend</button>
+          <button id="charOneSpecial" class="battleButton">
+            Special Ability
+          </button>
+          <button id="charOneInventory" class="battleButton">Inventory</button>
+          <button id="charOneFlee" class="battleButton">Flee</button>
+        </div>
+      </div>
+      <script>
+        $("#charOneAttack").click(function () {});
+
+        $("#charOneDefend").click(function () {
+          $(this).toggleClass("on");
+          $(".UpvoteButton").removeClass("on");
+        });
+        $("#charOneSpecial").click(function () {
+          $(this).toggleClass("on");
+          $(".DownvoteButton").removeClass("on");
+        });
+
+        $("#charOneInventory").click(function () {
+          $(this).toggleClass("on");
+          $(".UpvoteButton").removeClass("on");
+        });
+        $("#charOneFlee").click(function () {
+          $(this).toggleClass("on");
+          $(".UpvoteButton").removeClass("on");
+        });
+      </script>
 
       <% } else { %>
 
-      <p></p>
+      <p><%=characterTwo.name%>'s Turn</p>
+      <br />
+      <div class="flexRow">
+        <div class="flexColumn">
+          <p>
+            Health:
+            <%=`${characterTwo.currentHealth}/${characterTwo.maxHealth}`%>
+          </p>
+          <p>
+            Mana: <%=`${characterTwo.currentMana}/${characterTwo.maxMana}`%>
+          </p>
+        </div>
+        <div class="flexColumn">
+          <button id="charTwoAttack" class="battleButton">Attack</button>
+          <button id="charTwoDefend" class="battleButton">Defend</button>
+          <button id="charTwoSpecial" class="battleButton">
+            Special Ability
+          </button>
+          <button id="charTwoInventory" class="battleButton">Inventory</button>
+          <button id="charTwoFlee" class="battleButton">Flee</button>
+        </div>
+      </div>
+
       <% } %>
 
       <h2></h2>

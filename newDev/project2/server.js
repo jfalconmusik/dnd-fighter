@@ -99,6 +99,11 @@ app.listen(PORT, () => {
 // to allow the flee, or choose to pursue. tThere will be a roll)), Inventory.
 // A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
 
+// Stats are: Mana, used for special abilities or magic items. Health, for health. Agility for Defense and Flee. Strength for Attack with physical weapons. Wisdom with magic weapons
+// and special abilities.
+
+// Attack: Character roles their stat plus rand versus opposing defense.
+
 // After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
 // the exp amount is linear so that defeating an enemy two levels higher will always level you up.
 
@@ -112,6 +117,8 @@ app.listen(PORT, () => {
 // random npcs will have a different tag in mongo.
 
 // Abilities.
+
+// Rules page.
 
 // Sudden death?
 
