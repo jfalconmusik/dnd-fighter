@@ -8,8 +8,14 @@ const characterSchema = new mongoose.Schema(
     exp: { type: Number, default: 0 },
     gp: { type: Number, default: 50 },
     abilities: [],
-    item1: { type: Object, default: {} },
-    item2: { type: Object, default: {} },
+    item1: {
+      type: Object,
+      default: {},
+    },
+    item2: {
+      type: Object,
+      default: {},
+    },
     mana: { type: Number, default: 10 },
     health: { type: Number, default: 10 },
     wisdom: { type: Number, default: 10 },
@@ -22,6 +28,6 @@ const characterSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// const Character = mongoose.model("Character", characterSchema);
+const Character = mongoose.model("Character", characterSchema);
 // export switched from Character to characterSchema because multiple databases.
-module.exports = characterSchema;
+module.exports = Character;

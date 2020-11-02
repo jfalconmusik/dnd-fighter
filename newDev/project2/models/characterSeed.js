@@ -15,8 +15,7 @@ module.exports = [
     strength: 10,
     charisma: 12,
     sign: "Spider",
-    img:
-      "https://www.geekgirlauthority.com/wp-content/uploads/2018/09/drizzt-1080982-1280x0-1280x640.jpeg",
+    img: "https://i.redd.it/ggdr2chi6i351.png",
   },
   {
     name: "Tasslehoff Burrfoot",

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const session = require("express-session");
-// const Character = require("../server.js").Character;
+const Character = require("../models/character.js");
 // const characterSeed = require("../models/characterSeed.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -24,9 +24,6 @@ router.get("/new", (req, res) => {
 // Create method
 
 router.post("/", (req, res) => {
-  // console.log(req.body);
-  let Character = req.session.Character;
-
   let newCharacter = new Character({
     name: req.body.name,
     backStory: req.body.backStory,
@@ -46,8 +43,6 @@ router.post("/", (req, res) => {
 
 // show is set up with mongoose
 router.get("/:id", (req, res) => {
-  let Character = req.session.Character;
-
   Character.findById(req.params.id, (err, foundCharacter) => {
     res.render("show.ejs", {
       character: foundCharacter,
@@ -80,8 +75,6 @@ router.get("/:id", (req, res) => {
 //
 // edit route and methods:
 router.get("/:id/respec", (req, res) => {
-  let Character = req.session.Character;
-
   Character.findById(req.params.id, (err, foundCharacter) => {
     res.render("edit.ejs", {
       product: foundCharacter,
@@ -92,8 +85,6 @@ router.get("/:id/respec", (req, res) => {
 
 // level up character with mongoose
 router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
-  let Character = req.session.Character;
-
   let characterId = req.params.id;
   let newLevel = req.params.level;
   let statLevel = req.params.statLevel;
@@ -173,8 +164,6 @@ router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
 
 // delete log using mongoose
 router.delete("/:id", (req, res) => {
-  let Character = req.session.Character;
-
   Character.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
     if (err) {
       console.log(err);
@@ -187,8 +176,6 @@ router.delete("/:id", (req, res) => {
 
 // index shows all logs with mongoose
 router.get("/", (req, res) => {
-  let Character = req.session.Character;
-  console.log(Character);
   console.log(req.session);
 
   Character.find({}, (error, allCharacters) =>

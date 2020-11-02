@@ -11,35 +11,21 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
-const mongoURIcharacters = process.env.MONGODBURI_CHAR;
+const mongoURI = process.env.MONGODBURI_CHAR;
 const mongoURIitems = process.env.MONGODBURI_ITEM;
 const PORT = process.env.PORT;
 
 // Connect to Mongo
 // currently trying to run multiple databases. Mistake? Consider.
-const chardb = mongoose.createConnection(
-  mongoURIcharacters,
+const Character = require("./models/character");
+
+mongoose.connect(
+  mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   () => {
-    console.log("The connection with mongod is established for characters");
+    console.log("The connection with mongod is established");
   }
 );
-
-const Character = chardb.model(
-  "Character",
-  require("./models/characterSchema")
-);
-
-const itemdb = mongoose.createConnection(
-  mongoURIitems,
-  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  () => {
-    console.log("The connection with mongod is established for items");
-  }
-);
-
-const Item = itemdb.model("Item", require("./models/itemSchema"));
-
 db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
@@ -48,10 +34,10 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 //     console.log(err);
 //   }
 // });
-// Seed command:
+// // Seed command:
 
 Character.init();
-Item.init();
+// Item.init();
 // Error / success
 
 // Character.create(characterSeed, (err, data) => {
@@ -61,17 +47,9 @@ Item.init();
 //     console.log("added initial characters.");
 //   }
 // });
-// Item.create(itemSeed, (err, data) => {
-//   if (err) {
-//     console.log(err.message);
-//   } else {
-//     console.log("added initial items.");
-//   }
-// });
 
 const characterController = require("./controllers/character.js");
-// const battleController = require("./controllers/battle.js");
-const itemController = require("./controllers/item.js");
+const battleController = require("./controllers/battle.js");
 // Product.create(productSeed, (err, data) => {
 //   if (err) console.log(err.message);
 //   console.log("added initial products");
@@ -97,11 +75,11 @@ app.use("/character", characterController);
 //   res.send({ Character });
 // });
 // //
-app.use("/item", itemController);
+// app.use("/item", itemController);
 // app.get("/item", (req, res) => {
 //   res.send({ Item });
 // });
-// app.use("/battle", battleController);
+app.use("/battle", battleController);
 
 app.get("/", (req, res) => {
   res.render("welcome.ejs");
@@ -115,14 +93,26 @@ app.listen(PORT, () => {
 // To Do:
 // ======================================
 
-// Make both character and item available either globally or in multiple places.
+// Fight.
 
-// Customize the different Update views, like respec and shop.
+// 1 v 1. On each turn, player has these options: Attack, Defend, Special Ability, Attempt to Flee (mana and health do not recover between fights. Opponent can choose
+// to allow the flee, or choose to pursue. tThere will be a roll)), Inventory.
+// A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
 
-// must select character and enter shop as that character.
+// After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
+// the exp amount is linear so that defeating an enemy two levels higher will always level you up.
 
-// Create a fight mechanic, followed by a level up mechanic.
+// Level Up.
 
-// Make sure all of this actually works by creating seeds.
+// Respec
+
+// Shop.
 
 // Random NPC gen.
+// random npcs will have a different tag in mongo.
+
+// Abilities.
+
+// Sudden death?
+
+// Sprites?

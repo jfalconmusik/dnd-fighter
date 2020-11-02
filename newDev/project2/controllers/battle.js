@@ -1,57 +1,73 @@
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const methodOverride = require("method-override");
-// const Product = require("../models/product.js");
-// const productSeed = require("../models/seed.js");
-// const router = express.Router();
-// const bcrypt = require("bcrypt");
-
-// //=============================
-// // Note: Pages must be refreshed for proper items and their counts can be displayed, after some operation.
-// //=============================
-
-// // require('dotenv').config()
-
-// // new product route
-// router.get("/new", (req, res) => {
-//   res.render("new.ejs", {
-//     tabTitle: "Add Product",
+const express = require("express");
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+const session = require("express-session");
+const Character = require("../models/character.js");
+// const characterSeed = require("../models/characterSeed.js");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+//=============================
+// Note: Pages must be refreshed for proper items and their counts can be displayed, after some operation.
+//=============================
+// require('dotenv').config()
+// new product route
+// let Character = router.get("character", (req, res) => {
+//   console.log(req, res);
+// });
+// console.log(Character);
+//
+// router.get("/", (req, res) => {
+//   res.render("newCharacter.ejs", {
+//     tabTitle: "Create Character",
 //   });
 // });
-// // Create method
-// router.post("/", (req, res) => {
-//   console.log(req.body);
+// Create method
+router.get("/:id1/:id2", (req, res) => {
+  let char1;
+  let char2;
+  Character.findById(req.params.id1, (err, foundCharacter) => {
+    char1 = foundCharacter;
+  });
 
-//   let newProduct = new Product({
-//     name: req.body.name,
+  Character.findById(req.params.id2, (err, foundCharacter) => {
+    char2 = foundCharacter;
+  });
 
-//     description: req.body.description,
-//     price: req.body.price,
-//     qty: req.body.qty,
-//     img: req.body.img,
-//   });
-//   //   res.send(req.body);
-//   Product.create(newProduct, (error, createdProduct) => {
-//     if (error) {
-//       console.log(error);
-//     } else if (createdProduct) {
-//       console.log(createdProduct);
-//       res.redirect("/product");
-//     }
-//   });
-// });
+  res.render("battle.ejs", {
+    characterOne: char1,
+    characterTwo: char2,
+  });
+});
 
-// // show is set up with mongoose
+router.post("/", (req, res) => {
+  let newCharacter = new Character({
+    name: req.body.name,
+    backStory: req.body.backStory,
+    img: req.body.img,
+    sign: req.body.sign,
+  });
+  //   res.send(req.body);
+  Character.create(newCharacter, (error, createdCharacter) => {
+    if (error) {
+      console.log(error);
+    } else if (createdCharacter) {
+      console.log(createdCharacter);
+      res.redirect("/character");
+    }
+  });
+});
+
+// show is set up with mongoose
 // router.get("/:id", (req, res) => {
-//   Product.findById(req.params.id, (err, foundProduct) => {
+//   Character.findById(req.params.id, (err, foundCharacter) => {
 //     res.render("show.ejs", {
-//       product: foundProduct,
-//       tabTitle: foundProduct.name,
+//       character: foundCharacter,
+//       tabTitle: foundCharacter.name,
 //     });
 //   });
 // });
 
-// // decrement product with mongoose
+// decrement product with mongoose
 // router.patch("/:id/:quant", (req, res) => {
 //   let productId = req.params.id;
 
@@ -72,91 +88,144 @@
 
 //   res.redirect(`/product/${productId}`);
 // });
-// //
-// // edit route and methods:
-// router.get("/:id/edit", (req, res) => {
-//   Product.findById(req.params.id, (err, foundProduct) => {
-//     res.render("edit.ejs", {
-//       product: foundProduct,
-//       tabTitle: "Edit",
-//     });
-//   });
-// });
+//
+// edit route and methods:
+router.get("/:id/respec", (req, res) => {
+  Character.findById(req.params.id, (err, foundCharacter) => {
+    res.render("edit.ejs", {
+      product: foundCharacter,
+      tabTitle: "Respec skill points",
+    });
+  });
+});
 
-// // edit product with mongoose
-// router.put("/:id", (req, res) => {
-//   let productId = req.params.id;
+// level up character with mongoose
+router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
+  let characterId = req.params.id;
+  let newLevel = req.params.level;
+  let statLevel = req.params.statLevel;
+  let statName = req.params.statName;
+  if (statName === "agility") {
+    Character.findOneAndUpdate(
+      { _id: characterId },
+      {
+        level: newLevel,
+        agility: statLevel,
+        //   amountBought: req.body.amountBought,
+      },
 
-//   Product.findOneAndUpdate(
-//     { _id: productId },
-//     {
-//       qty: req.body.qty,
-//       name: req.body.name,
-//       description: req.body.description,
-//       img: req.body.img,
+      (err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(docs);
+        }
+      }
+    );
+  } else if (statName === "strength") {
+    Character.findOneAndUpdate(
+      { _id: characterId },
+      {
+        level: newLevel,
+        strength: statLevel,
+        //   amountBought: req.body.amountBought,
+      },
 
-//       //   amountBought: req.body.amountBought,
-//     },
+      (err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(docs);
+        }
+      }
+    );
+  } else if (statName === "wisdom") {
+    Character.findOneAndUpdate(
+      { _id: characterId },
+      {
+        level: newLevel,
+        wisdom: statLevel,
+        //   amountBought: req.body.amountBought,
+      },
 
-//     (err, docs) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         console.log(docs);
-//       }
-//     }
-//   );
-//   res.redirect(`/product/${productId}`);
-// });
-// //
+      (err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(docs);
+        }
+      }
+    );
+  } else if (statName === "charisma") {
+    Character.findOneAndUpdate(
+      { _id: characterId },
+      {
+        level: newLevel,
+        charisma: statLevel,
+        //   amountBought: req.body.amountBought,
+      },
 
-// // delete log using mongoose
-// router.delete("/:id", (req, res) => {
-//   Product.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("Deleted Log : ", docs);
-//     }
-//   });
-//   res.redirect("/product");
-// });
+      (err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(docs);
+        }
+      }
+    );
+  }
+  res.redirect(`/character/${characterId}`);
+});
+//
 
-// // index shows all logs with mongoose
-// router.get("/", (req, res) => {
-//   console.log(req.session);
-//   Product.find({}, (error, allProducts) =>
-//     res.render("index.ejs", {
-//       products: allProducts,
-//       tabTitle: "Welcome Home",
-//     })
-//   );
-// });
+// delete log using mongoose
+router.delete("/:id", (req, res) => {
+  Character.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Deleted Log : ", docs);
+    }
+  });
+  res.redirect("/character");
+});
 
-// router.get("/create-session", (req, res) => {
-//   res.session.anyProperty = "stored session state.";
-//   const hashedString = bcrypt.hashSync(
-//     "your string here",
-//     bcrypt.genSaltSync(10)
-//   );
-// });
+// index shows all logs with mongoose
+router.get("/", (req, res) => {
+  console.log(req.session);
 
-// router.get("/retrieve-session", (req, res) => {
-//   if (bcrypt.compareSync("your guess here", req.session.passwoed)) {
-//     // return result
-//     console.log("passwords match.");
-//   }
-// });
-// router.get("/update-session", (req, res) => {
-//   if (req.session.anyProperty) {
-//     // return result
-//   }
-// });
+  Character.find({}, (error, allCharacters) =>
+    res.render("index.ejs", {
+      characters: allCharacters,
+      tabTitle: "Meet the Cast",
+    })
+  );
+});
 
-// router.get("/destroy-session", (req, res) => {
-//   if (req.session.anyProperty) {
-//     // return result
-//   }
-// });
+router.get("/create-session", (req, res) => {
+  res.session.anyProperty = "stored session state.";
+  const hashedString = bcrypt.hashSync(
+    "your string here",
+    bcrypt.genSaltSync(10)
+  );
+});
 
-// module.exports = router;
+router.get("/retrieve-session", (req, res) => {
+  if (bcrypt.compareSync("your guess here", req.session.password)) {
+    // return result
+    console.log("passwords match.");
+  }
+});
+router.get("/update-session", (req, res) => {
+  if (req.session.anyProperty) {
+    // return result
+  }
+});
+
+router.get("/destroy-session", (req, res) => {
+  if (req.session.anyProperty) {
+    // return result
+  }
+});
+
+module.exports = router;
