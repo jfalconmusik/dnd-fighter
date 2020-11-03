@@ -1,0 +1,17 @@
+.staticModal {
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  right: 50%;
+}
+
+.battleLog {
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  right: 50%;
+}
+
+.hiddenStack {
+  display: none;
+}

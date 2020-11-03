@@ -11,6 +11,8 @@
 // A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
  -->
     <div id="container">
+        <div class="hiddenStack"></div>
+        <div class="battleLog"></div>
       <% let currentTurn = 1; %>
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
 
@@ -20,13 +22,39 @@
       <br />
       <div class="flexRow">
         <div class="flexColumn">
-          <p>
-            Health:
-            <%=`${characterOne.currentHealth}/${characterOne.maxHealth}`%>
-          </p>
-          <p>
-            Mana: <%=`${characterOne.currentMana}/${characterOne.maxMana}`%>
-          </p>
+          <p>Current Health:</p>
+          <p><%=`${characterOne.currentHealth}`%></p>
+          <p>Max Health:</p>
+          <p><%=`${characterOne.maxHealth}`%></p>
+          <p>Current Mana:</p>
+          <p><%=characterOne.currentMana%></p>
+          <p>Max Mana:</p>
+          <p><%=characterOne.maxMana%></p>
+          <p>Wisdom:</p>
+          <p><%=characterOne.wisdom%></p>
+          <p>Strength:</p>
+          <p id="charOneStrength"><%=characterOne.strength%></p>
+          <p>Charima:</p>
+          <p><%=characterOne.charisma%></p>
+          <p>Agility:</p>
+          <p><%=characterOne.agility%></p>
+          <% if (characterOne.itemOne) { %>
+          <p>Item 1:</p>
+          <p>Damage:</p>
+          <p id="charOneWeaponOneDamage"><%=characterOne.itemOne.damage%></p>
+          <p>Level:</p>
+          <p id="charOneWeaponOneLevel"><%=characterOne.itemOne.level%></p>
+          <p>Type:</p>
+          <p id="charOneWeaponOneType"><%=characterOne.itemOne.type%></p>
+          <% } %> <% if (characterOne.itemTwo) { %>
+          <p>Item 2:</p>
+          <p>Damage:</p>
+          <p id="charOneWeaponTwoDamage"></p>><%=characterOne.itemTwo.damage%></p>
+          <p>Level:</p>
+          <p id="charOneWeaponTwoLevel"><%=characterOne.itemTwo.level%></p>
+          <p>Type:</p>
+          <p id="charOneWeaponTwoType"><%=characterOne.itemTwo.type%></p>
+          <% }%>
         </div>
         <div class="flexColumn">
           <button id="charOneAttack" class="battleButton">Attack</button>
@@ -37,13 +65,86 @@
           <button id="charOneInventory" class="battleButton">Inventory</button>
           <button id="charOneFlee" class="battleButton">Flee</button>
         </div>
+        <div class="staticModal">
+          <p>Attack with:</p>
+          <button id="modalItemOne">
+            <%=characterOne.itemOne.name%>
+          </button>
+          <button id="modalItemTwo">
+            <%=characterOne.itemTwo.name%>
+          </button>
+        </div>
       </div>
       <script>
-        $("#charOneAttack").click(function () {});
+        // Attack Logic:
+        //
+        let strength = Number($("#charOneStrength").text());
+        let wisdom = Number($("#charOneWisdom").text());
+        let agility = Number($("#charOneAgility").text());
+        let charisma = Number($("#charOneCharisma").text());
+        let mana = Number($("#charOneCurrentMana").text());
+        let health = Number($("#charOneCurrentHealth").text());
+        let defense = Number($("#charOneDefense").text());
 
+        let item1 = {damage: Number($("#charOneWeaponOneDamage").text()), level: Number($("#charOneWeaponOneLevel").text()), type: $("#charOneWeaponOneType").text()}
+        let item2 = {damage: Number($("#charOneWeaponTwoDamage").text()), level: Number($("#charOneWeaponTwoLevel").text()), type: $("#charOneWeaponTwoType").text()}
+        //
+        let actionCount = 0;
+
+        function incrementActions() {
+            actionCount++
+            if (actionCount >= 2) {
+                // change turn  
+                actionCount = 0;
+            }
+        }
+
+        
+
+        function handleAttack(weapon) {
+
+            let stat;
+            if (weapon.type === "melee") {
+                let stat = strength;
+            } else  if (weapon.type === "ranged") {
+                let stat = agility;
+            } else  if (weapon.type === "sorcery") {
+                let stat = wisdom;
+            }
+
+            let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat
+            console.log(`player one dealt ${damageDealt} damage.`)
+            $("#hiddenStack").append($(`<p>${damageDealt}</p>`).attr("class", `${weapon.type}`))
+            $("#battleLog").append($(`<p>${name} dealt ${damageDealt} damage</p>`))
+            incrementActions()
+        }
+
+        function hideModal() {
+          $("#staticModal").attr("display", "none");
+        }
+        hideModal();
+        //
+        $("#modalItemOne").click(function () {
+          hideModal();
+          handleAttack(item1)
+        });
+        $("#modalItemTwo").click(function () {
+          hideModal();
+          handleAttack(item2)
+        });
+
+        $("#charOneAttack").click(function () {
+          $("#staticModal").attr("display", "initial");
+        });
+            ///////////////
         $("#charOneDefend").click(function () {
-          $(this).toggleClass("on");
-          $(".UpvoteButton").removeClass("on");
+
+            let defended = Math.floor(Math.rand() * agility) + defense
+            console.log(`player one dealt ${defended} damage.`)
+            $("#hiddenStack").append($(`<p>${defended}</p>`).attr("class", `defended`))
+            $("#battleLog").append($(`<p>${name} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
+            incrementActions()
+
         });
         $("#charOneSpecial").click(function () {
           $(this).toggleClass("on");
@@ -83,6 +184,7 @@
           <button id="charTwoInventory" class="battleButton">Inventory</button>
           <button id="charTwoFlee" class="battleButton">Flee</button>
         </div>
+        <div class="staticModal"></div>
       </div>
 
       <% } %>
