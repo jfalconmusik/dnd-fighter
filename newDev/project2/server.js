@@ -50,6 +50,7 @@ Character.init();
 
 const characterController = require("./controllers/character.js");
 const battleController = require("./controllers/battle.js");
+const victoryController = require("./controllers/victory.js");
 // Product.create(productSeed, (err, data) => {
 //   if (err) console.log(err.message);
 //   console.log("added initial products");
@@ -80,6 +81,7 @@ app.use("/character", characterController);
 //   res.send({ Item });
 // });
 app.use("/battle", battleController);
+app.use("/victory", victoryController);
 
 app.get("/", (req, res) => {
   res.render("welcome.ejs");
@@ -93,10 +95,11 @@ app.listen(PORT, () => {
 // To Do:
 // ======================================
 
-// Fight.
+// =============== <Fight> ==============
+//
 
 // 1 v 1. On each turn, player has these options: Attack, Defend, Special Ability, Attempt to Flee (mana and health do not recover between fights. Opponent can choose
-// to allow the flee, or choose to pursue. tThere will be a roll)), Inventory.
+// to allow the flee, or choose to pursue. There will be a roll)), Inventory.
 // A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
 
 // Stats are: Mana, used for special abilities or magic items. Health, for health. Agility for Defense and Flee. Strength for Attack with physical weapons. Wisdom with magic weapons
@@ -104,8 +107,12 @@ app.listen(PORT, () => {
 
 // Attack: Character roles their stat plus rand versus opposing defense.
 
+// ============== </Fight> ==============
+
+// ==== NEXT: ====
+
 // After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
-// the exp amount is linear so that defeating an enemy two levels higher will always level you up.
+// 10 * level exp is required to level up. exp is gained at a rate of 8 * opponentLevel.
 
 // Level Up.
 
@@ -116,7 +123,7 @@ app.listen(PORT, () => {
 // Random NPC gen.
 // random npcs will have a different tag in mongo.
 
-// Abilities.
+// Abilities + Signs.
 
 // Rules page.
 

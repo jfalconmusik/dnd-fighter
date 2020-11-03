@@ -11,7 +11,6 @@
 // A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
  -->
     <div id="container">
-        <div class="hiddenStack"></div>
         <div class="battleLog"></div>
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
         <!--  -->
@@ -76,7 +75,7 @@
         </div>
         <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
-            <% for (ability of abilities) { %>
+            <% for (ability of characterOne.abilities) { %>
                 <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
             <% } %>
         </div>
@@ -146,7 +145,7 @@
         </div>
         <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
-            <% for (ability of abilities) { %>
+            <% for (ability of characterTwo.abilities) { %>
                 <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
             <% } %>
         </div>
@@ -161,10 +160,8 @@
       <h2></h2>
     </div>
     <script>
-      // ========================= Redesign to handle both characters =========================
-      
-              let char = 1; // turn will be one for character one, two for character two.
-              let actionCount = 0; // changes turns after every two actions.
+        let char = 1; // turn will be one for character one, two for character two.
+        let actionCount = 0; // changes turns after every two actions.
         //
         // Attack Logic:
         //
@@ -212,6 +209,7 @@
         // level up menu opens automatically at end up battle?
 
         function victory(num) {
+          
 
 
           let pathname = `${window.location.pathname}`.split("/"); 
@@ -236,13 +234,44 @@
                 }
 
               })
-          }
+          } else if (num === 2) {
 
+            $.ajax({
+                url: `/victory/${charTwoId}/${charOneId}`,
+                type: 'POST',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+
+              })
+              $.ajax({
+                url: `/victory/${charTwoId}/${charOneId}`,
+                type: 'GET',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+          }) 
+        } else if (num === 3) {
+
+          $.ajax({
+                url: `/mutually-assured-destruction/${charTwoId}/${charOneId}`,
+                type: 'POST',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+
+              })
+              $.ajax({
+                url: `/mutually-assured-destruction/${charTwoId}/${charOneId}`,
+                type: 'GET',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+        })
+          //
+          //
           // set up server logic for victories and leveling.
-
-
-
-        }
+      }}
 
 
         function incrementActions() {
