@@ -178,17 +178,24 @@
         //
         let actionCount = 0;
 
+        let turn = 1;
+
         function incrementActions() {
             actionCount++
             if (actionCount >= 2) {
                 // change turn  
+                if (turn === 1) {
+                  turn = 2;
+                } else {
+                  turn = 1;
+                }
                 actionCount = 0;
             }
         }
 
         
 
-        function handleAttack(weapon) {
+        function handleAttack(char, weapon) {
 
             let stat;
             if (weapon.type === "melee") {
@@ -196,13 +203,12 @@
             } else  if (weapon.type === "ranged") {
                 let stat = agility;
             } else  if (weapon.type === "sorcery") {
-                let stat = wisdom;
             }
 
             let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat
             console.log(`player one dealt ${damageDealt} damage.`)
-            $("#hiddenStack").append($(`<p>${damageDealt}</p>`).attr("class", `${weapon.type}`))
-            $("#battleLog").append($(`<p>${name} dealt ${damageDealt} damage</p>`))
+            $("#hiddenStack").append($(`<p>${char.name}, ${damageDealt}</p>`).attr("class", `${weapon.type}`))
+            $("#battleLog").append($(`<p>${char.name} dealt ${damageDealt} damage</p>`))
             incrementActions()
         }
 
