@@ -17,7 +17,7 @@
         <!--  -->
       <div id="playerOne">
         <!--  -->
-      <p><%=characterOne.name%>'s Turn</p>
+      <p id="charOneName"><%=characterOne.name%></p>
       <br />
       <div class="flexRow">
         <div class="flexColumn">
@@ -87,7 +87,7 @@
     </div>
      </div>
         <div id="playerTwo">
-      <p><%=characterTwo.name%>'s Turn</p>
+      <p id="charTwoName"><%=characterTwo.name%></p>
       <br />
       <div class="flexRow">
         <div class="flexColumn">
@@ -161,56 +161,193 @@
       <h2></h2>
     </div>
     <script>
-        // ========================= Redesign to handle both characters =========================
+      // ========================= Redesign to handle both characters =========================
+      
+              let char = 1; // turn will be one for character one, two for character two.
+              let actionCount = 0; // changes turns after every two actions.
         //
         // Attack Logic:
         //
-        let strength = Number($("#charOneStrength").text());
-        let wisdom = Number($("#charOneWisdom").text());
-        let agility = Number($("#charOneAgility").text());
-        let charisma = Number($("#charOneCharisma").text());
-        let mana = Number($("#charOneCurrentMana").text());
-        let health = Number($("#charOneCurrentHealth").text());
-        let defense = Number($("#charOneDefense").text());
-
-        let item1 = {damage: Number($("#charOneWeaponOneDamage").text()), level: Number($("#charOneWeaponOneLevel").text()), type: $("#charOneWeaponOneType").text()}
-        let item2 = {damage: Number($("#charOneWeaponTwoDamage").text()), level: Number($("#charOneWeaponTwoLevel").text()), type: $("#charOneWeaponTwoType").text()}
+        // character one stats:
+        let firstName = $("#charOneName").text()
         //
-        let actionCount = 0;
+        let firstStrength = Number($("#charOneStrength").text());
+        let firstWisdom = Number($("#charOneWisdom").text());
+        let firstAgility = Number($("#charOneAgility").text());
+        let firstCharisma = Number($("#charOneCharisma").text());
+        let firstMana = Number($("#charOneCurrentMana").text());
+        let firstHealth = Number($("#charOneCurrentHealth").text());
+        let firstDefense = Number($("#charOneDefense").text());
 
-        let turn = 1;
+        let firstItem1 = {damage: Number($("#charOneWeaponOneDamage").text()), level: Number($("#charOneWeaponOneLevel").text()), type: $("#charOneWeaponOneType").text()}
+        let firstItem2 = {damage: Number($("#charOneWeaponTwoDamage").text()), level: Number($("#charOneWeaponTwoLevel").text()), type: $("#charOneWeaponTwoType").text()}
+        //
+        // character two stats:
+        let secondName = $("#charTwoName").text()
+        //
+        let secondStrength = Number($("#charTwoStrength").text());
+        let secondWisdom = Number($("#charTwoWisdom").text());
+        let secondAgility = Number($("#charTwoAgility").text());
+        let secondCharisma = Number($("#charTwoCharisma").text());
+        let secondMana = Number($("#charTwoCurrentMana").text());
+        let secondHealth = Number($("#charTwoCurrentHealth").text());
+        let secondDefense = Number($("#charTwoDefense").text());
+
+        let secondItem1 = {damage: Number($("#charTwoWeaponOneDamage").text()), level: Number($("#charTwoWeaponOneLevel").text()), type: $("#charTwoWeaponOneType").text()}
+        let secondItem2 = {damage: Number($("#charTwoWeaponTwoDamage").text()), level: Number($("#charTwoWeaponTwoLevel").text()), type: $("#charTwoWeaponTwoType").text()}
+        //
+        //
+        // let strength
+        // let wisdom
+        // let agility
+        // let charisma
+        // let mana
+        // let health
+        // let defense
+
+        // let item1
+        // let item2
+        // //
+
+        // level up menu opens automatically at end up battle?
+
+        function victory(num) {
+
+
+          let pathname = `${window.location.pathname}`.split("/"); 
+          // should return /battle/:id1/:id2
+          let charOneId = pathname[1]
+          let charTwoId = pathname[2]
+          if (num === 1) {
+            // player 1 wins.
+            $.ajax({
+                url: `/victory/${charOneId}/${charTwoId}`,
+                type: 'POST',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+
+              })
+              $.ajax({
+                url: `/victory/${charOneId}/${charTwoId}`,
+                type: 'GET',
+                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+                success: function(response){
+                }
+
+              })
+          }
+
+          // set up server logic for victories and leveling.
+
+
+
+        }
+
 
         function incrementActions() {
             actionCount++
             if (actionCount >= 2) {
                 // change turn  
-                if (turn === 1) {
-                  turn = 2;
-                } else {
-                  turn = 1;
-                }
+                turn();
                 actionCount = 0;
             }
         }
+        // at beginning of each turn, determine if the characters are dead.
 
+        const turn = () => {
+          if (char === 1) {
+            char = 2;
+            // it's now second players turn
+          } else {
+            char = 1
+            // its now first players turn
+          }
+
+
+          if (firstHealth <= 0 && secondHealth <= 0) {
+            console.log("tie")
+            victory(3)
+          } else if (firstHealth <= 0) {
+            console.log("player two wins")
+            victory(2)
+          } else if (secondHealth <= 0) {
+            console.log("player one wins")
+            victory(1)
+          }
+
+        }
         
 
-        function handleAttack(char, weapon) {
+        function handleAttack(weapon) {
+          // who is attacking and with what? Determine stats and results accordingly.
+          // weapons are passed as objects.
 
             let stat;
-            if (weapon.type === "melee") {
-                let stat = strength;
-            } else  if (weapon.type === "ranged") {
-                let stat = agility;
-            } else  if (weapon.type === "sorcery") {
-            }
+            if (char === 1) {
 
-            let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat
-            console.log(`player one dealt ${damageDealt} damage.`)
-            $("#hiddenStack").append($(`<p>${char.name}, ${damageDealt}</p>`).attr("class", `${weapon.type}`))
-            $("#battleLog").append($(`<p>${char.name} dealt ${damageDealt} damage</p>`))
-            incrementActions()
+              if (weapon.type === "melee") {
+                let stat = firstStrength;
+              } else  if (weapon.type === "ranged") {
+                let stat = firstAgility;
+              } else  if (weapon.type === "sorcery") {
+                let stat = firstWisdom;
+              }
+              
+
+              let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat - secondDefense
+              console.log(`player one dealt ${damageDealt} damage.`)
+
+              // deal damage:
+              $("#charTwoCurrentHealth").text(`${secondHealth - damageDealt}`)
+              // reset defense:
+              $("#charOneDefense").text("0")
+              secondDefense = 0;
+
+              $("#battleLog").append($(`<p>${firstName} dealt ${damageDealt} damage to ${secondName}</p>`))
+              //
+              firstHealth = firstHealth - damageDealt;
+              //
+              incrementActions()
+              //
+              //
+              //
+
+            } else if (char === 2) {
+              // player two attacked?
+              if (weapon.type === "melee") {
+                let stat = secondStrength;
+              } else  if (weapon.type === "ranged") {
+                let stat = secondAgility;
+              } else  if (weapon.type === "sorcery") {
+                let stat = secondWisdom;
+              }
+              
+
+
+              // determine damage
+              let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat - firstDefense
+              console.log(`player one dealt ${damageDealt} damage.`)
+
+              // apply damage to player 1
+              $("#charOneCurrentHealth").text(`${firstHealth - damageDealt}`)
+              // reset defense:
+              $("#charTwoDefense").text("0")
+              firstDefense = 0;
+
+              // note this in log and increment actions.
+              $("#battleLog").append($(`<p>${secondName} dealt ${damageDealt} damage to ${firstName}</p>`))
+              //
+              secondHealth = secondHealth - damageDealt
+              //
+              incrementActions()
+
+            }
         }
+        
+                $("#attack").click(function () {
+                  $("#staticModal").css("display", "initial");
+                });
 
         function hideModal() {
           $("#staticModal").css("display", "none");
@@ -227,20 +364,32 @@
           handleAttack(item2)
         });
 
-        $("#charOneAttack").click(function () {
-          $("#staticModal").css("display", "initial");
-        });
+        // make only a single options menu with characters remapped each time char increments.
             ///////////////
-        $("#charOneDefend").click(function () {
 
-            let defended = Math.floor(Math.rand() * agility) + defense;
+        $("#defend").click(function () {
+
+          if (char === 1) {
+
+            let defended = Math.floor(Math.rand() * firstAgility)
             console.log(`player one defended for ${defended}.`)
-            $("#hiddenStack").append($(`<p>${defended}</p>`).attr("class", `defended`))
-            $("#battleLog").append($(`<p>${name} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
+            $("#battleLog").append($(`<p>${firstName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
+            $("#charOneDefense").text(`${firstDefense + defended}`)
+            firstDefense = firstDefense + defended;
             incrementActions()
+          } else if (char === 2) {
+
+            let defended = Math.floor(Math.rand() * secondAgility)
+            console.log(`player one defended for ${defended}.`)
+            $("#battleLog").append($(`<p>${secondName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
+            $("#charTwoDefense").text(`${secondDefense + defended}`)
+            secondDefense = secondDefense + defended;
+            incrementActions()
+          }
+
 
         });
-        $("#charOneSpecial").click(function () {
+        $("#special").click(function () {
             if (actions !== 0) {
                 $("#specialPopup").css("display", "initial")
             } else {
@@ -261,13 +410,13 @@
 
         // Design an inventory system
 
-        $("#charOneInventory").click(function () {
+        $("#inventory").click(function () {
 
         });
 
 
         // Design a flee mechanic. Remember that characters do not naturally heal. remember to put those abilities in.
-        $("#charOneFlee").click(function () {
+        $("#flee").click(function () {
 
             if (actions !== 0) {
                 $("#modalFlee").css("display", "initial")
