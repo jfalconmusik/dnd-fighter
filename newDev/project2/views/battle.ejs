@@ -13,11 +13,10 @@
     <div id="container">
         <div class="hiddenStack"></div>
         <div class="battleLog"></div>
-      <% let currentTurn = 1; %>
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
-
-      <% if (currentTurn === 1) { %>
-
+        <!--  -->
+      <div id="playerOne">
+        <!--  -->
       <p><%=characterOne.name%>'s Turn</p>
       <br />
       <div class="flexRow">
@@ -64,6 +63,7 @@
           </button>
           <button id="charOneInventory" class="battleButton">Inventory</button>
           <button id="charOneFlee" class="battleButton">Flee</button>
+          
         </div>
         <div class="staticModal">
           <p>Attack with:</p>
@@ -74,8 +74,95 @@
             <%=characterOne.itemTwo.name%>
           </button>
         </div>
+        <div id="specialAbilitiesList">
+            <h4>Special Abilities:</h4>
+            <% for (ability of abilities) { %>
+                <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
+            <% } %>
+        </div>
+        <div class="staticModal" id="modalFlee">
+            <p>You cannot flee if you've acted this turn.</p>
+            <button id="modalFleeButton">OK</button>
+        </div>
+    </div>
+     </div>
+        <div id="playerTwo">
+      <p><%=characterTwo.name%>'s Turn</p>
+      <br />
+      <div class="flexRow">
+        <div class="flexColumn">
+          <p>Current Health:</p>
+          <p><%=`${characterTwo.currentHealth}`%></p>
+          <p>Max Health:</p>
+          <p><%=`${characterTwo.maxHealth}`%></p>
+          <p>Current Mana:</p>
+          <p><%=characterTwo.currentMana%></p>
+          <p>Max Mana:</p>
+          <p><%=characterTwo.maxMana%></p>
+          <p>Wisdom:</p>
+          <p><%=characterTwo.wisdom%></p>
+          <p>Strength:</p>
+          <p id="charTwoStrength"><%=characterTwo.strength%></p>
+          <p>Charima:</p>
+          <p><%=characterTwo.charisma%></p>
+          <p>Agility:</p>
+          <p><%=characterTwo.agility%></p>
+          <% if (characterTwo.itemOne) { %>
+          <p>Item 1:</p>
+          <p>Damage:</p>
+          <p id="charTowWeaponOneDamage"><%=characterTwo.itemOne.damage%></p>
+          <p>Level:</p>
+          <p id="charTwoWeaponOneLevel"><%=characterTwo.itemOne.level%></p>
+          <p>Type:</p>
+          <p id="charTwoWeaponOneType"><%=characterTwo.itemOne.type%></p>
+          <% } %> <% if (characterOne.itemTwo) { %>
+          <p>Item 2:</p>
+          <p>Damage:</p>
+          <p id="charTwoWeaponTwoDamage"></p>><%=characterTwo.itemTwo.damage%></p>
+          <p>Level:</p>
+          <p id="charTwoWeaponTwoLevel"><%=characterTwo.itemTwo.level%></p>
+          <p>Type:</p>
+          <p id="charTwoWeaponTwoType"><%=characterTwo.itemTwo.type%></p>
+          <% }%>
+        </div>
+        <div class="flexColumn">
+          <button id="charTwoAttack" class="battleButton">Attack</button>
+          <button id="charTwoDefend" class="battleButton">Defend</button>
+          <button id="charTwoSpecial" class="battleButton">
+            Special Ability
+          </button>
+          <button id="charTwoInventory" class="battleButton">Inventory</button>
+          <button id="charTwoFlee" class="battleButton">Flee</button>
+          
+        </div>
+        <div class="staticModal">
+          <p>Attack with:</p>
+          <button id="modalItemOne">
+            <%=characterTwo.itemOne.name%>
+          </button>
+          <button id="modalItemTwo">
+            <%=characterTwo.itemTwo.name%>
+          </button>
+        </div>
+        <div id="specialAbilitiesList">
+            <h4>Special Abilities:</h4>
+            <% for (ability of abilities) { %>
+                <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
+            <% } %>
+        </div>
+        <div class="staticModal" id="modalFlee">
+            <p>You cannot flee if you've acted this turn.</p>
+            <button id="modalFleeButton">OK</button>
+        </div>
       </div>
-      <script>
+      
+     </div>
+
+      <h2></h2>
+    </div>
+    <script>
+        // ========================= Redesign to handle both characters =========================
+        //
         // Attack Logic:
         //
         let strength = Number($("#charOneStrength").text());
@@ -120,10 +207,11 @@
         }
 
         function hideModal() {
-          $("#staticModal").attr("display", "none");
+          $("#staticModal").css("display", "none");
         }
         hideModal();
         //
+        // attack with which item?
         $("#modalItemOne").click(function () {
           hideModal();
           handleAttack(item1)
@@ -134,62 +222,64 @@
         });
 
         $("#charOneAttack").click(function () {
-          $("#staticModal").attr("display", "initial");
+          $("#staticModal").css("display", "initial");
         });
             ///////////////
         $("#charOneDefend").click(function () {
 
-            let defended = Math.floor(Math.rand() * agility) + defense
-            console.log(`player one dealt ${defended} damage.`)
+            let defended = Math.floor(Math.rand() * agility) + defense;
+            console.log(`player one defended for ${defended}.`)
             $("#hiddenStack").append($(`<p>${defended}</p>`).attr("class", `defended`))
             $("#battleLog").append($(`<p>${name} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
             incrementActions()
 
         });
         $("#charOneSpecial").click(function () {
-          $(this).toggleClass("on");
-          $(".DownvoteButton").removeClass("on");
+            if (actions !== 0) {
+                $("#specialPopup").css("display", "initial")
+            } else {
+                $("#specialAbilityList").css("display", "initial")
+            
+            }
+
         });
+        /////////////////////////////////////
+        // Make a list of all special abilities as functions.
+        //
+        /////////////////////////////////////
+        $(".specialAbility").click(function (e) {
+
+            incrementActions();
+            incrementActions();
+        })
+
+        // Design an inventory system
 
         $("#charOneInventory").click(function () {
-          $(this).toggleClass("on");
-          $(".UpvoteButton").removeClass("on");
+
         });
+
+
+        // Design a flee mechanic. Remember that characters do not naturally heal. remember to put those abilities in.
         $("#charOneFlee").click(function () {
-          $(this).toggleClass("on");
-          $(".UpvoteButton").removeClass("on");
+
+            if (actions !== 0) {
+                $("#modalFlee").css("display", "initial")
+                
+            } else {
+                    let fleeAttempt = Math.floor(Math.rand() * agility);
+                    $("#hiddenStack").append($(`<p>${fleeAttempt}</p>`).attr("class", `flee`))
+                    $("#battleLog").append($(`<p>${name} attempted to flee and rolled ${fleeAttempt}.</p>`))
+                    incrementActions();
+                    incrementActions();
+            }
+
         });
-      </script>
 
-      <% } else { %>
-
-      <p><%=characterTwo.name%>'s Turn</p>
-      <br />
-      <div class="flexRow">
-        <div class="flexColumn">
-          <p>
-            Health:
-            <%=`${characterTwo.currentHealth}/${characterTwo.maxHealth}`%>
-          </p>
-          <p>
-            Mana: <%=`${characterTwo.currentMana}/${characterTwo.maxMana}`%>
-          </p>
-        </div>
-        <div class="flexColumn">
-          <button id="charTwoAttack" class="battleButton">Attack</button>
-          <button id="charTwoDefend" class="battleButton">Defend</button>
-          <button id="charTwoSpecial" class="battleButton">
-            Special Ability
-          </button>
-          <button id="charTwoInventory" class="battleButton">Inventory</button>
-          <button id="charTwoFlee" class="battleButton">Flee</button>
-        </div>
-        <div class="staticModal"></div>
-      </div>
-
-      <% } %>
-
-      <h2></h2>
-    </div>
+        $("#modalFleeButton").click(function () {
+            $("#modalFleeButton").css("display", "none")
+                
+        })
+            </script>
   </body>
 </html>
