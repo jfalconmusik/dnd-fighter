@@ -220,7 +220,7 @@
             // player 1 wins.
             $.ajax({
                 url: `/victory/${charOneId}/${charTwoId}`,
-                type: 'POST',
+                type: 'PATCH',
                 data: JSON.stringify({"viewedProfiles": viewedProfiles}),
                 success: function(response){
                 }

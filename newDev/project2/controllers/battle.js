@@ -39,23 +39,23 @@ router.get("/:id1/:id2", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  let newCharacter = new Character({
-    name: req.body.name,
-    backStory: req.body.backStory,
-    img: req.body.img,
-    sign: req.body.sign,
-  });
-  //   res.send(req.body);
-  Character.create(newCharacter, (error, createdCharacter) => {
-    if (error) {
-      console.log(error);
-    } else if (createdCharacter) {
-      console.log(createdCharacter);
-      res.redirect("/character");
-    }
-  });
-});
+// router.post("/", (req, res) => {
+//   let newCharacter = new Character({
+//     name: req.body.name,
+//     backStory: req.body.backStory,
+//     img: req.body.img,
+//     sign: req.body.sign,
+//   });
+//   //   res.send(req.body);
+//   Character.create(newCharacter, (error, createdCharacter) => {
+//     if (error) {
+//       console.log(error);
+//     } else if (createdCharacter) {
+//       console.log(createdCharacter);
+//       res.redirect("/character");
+//     }
+//   });
+// });
 
 // show is set up with mongoose
 // router.get("/:id", (req, res) => {
@@ -90,14 +90,14 @@ router.post("/", (req, res) => {
 // });
 //
 // edit route and methods:
-router.get("/:id/respec", (req, res) => {
-  Character.findById(req.params.id, (err, foundCharacter) => {
-    res.render("edit.ejs", {
-      product: foundCharacter,
-      tabTitle: "Respec skill points",
-    });
-  });
-});
+// router.get("/:id/respec", (req, res) => {
+//   Character.findById(req.params.id, (err, foundCharacter) => {
+//     res.render("edit.ejs", {
+//       product: foundCharacter,
+//       tabTitle: "Respec skill points",
+//     });
+//   });
+// });
 
 // level up character with mongoose
 router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
@@ -179,28 +179,28 @@ router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
 //
 
 // delete log using mongoose
-router.delete("/:id", (req, res) => {
-  Character.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Deleted Log : ", docs);
-    }
-  });
-  res.redirect("/character");
-});
+// router.delete("/:id", (req, res) => {
+//   Character.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Deleted Log : ", docs);
+//     }
+//   });
+//   res.redirect("/character");
+// });
 
 // index shows all logs with mongoose
-router.get("/", (req, res) => {
-  console.log(req.session);
+// router.get("/", (req, res) => {
+//   console.log(req.session);
 
-  Character.find({}, (error, allCharacters) =>
-    res.render("index.ejs", {
-      characters: allCharacters,
-      tabTitle: "Meet the Cast",
-    })
-  );
-});
+//   Character.find({}, (error, allCharacters) =>
+//     res.render("index.ejs", {
+//       characters: allCharacters,
+//       tabTitle: "Meet the Cast",
+//     })
+//   );
+// });
 
 router.get("/create-session", (req, res) => {
   res.session.anyProperty = "stored session state.";

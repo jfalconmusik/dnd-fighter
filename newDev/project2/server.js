@@ -71,7 +71,6 @@ app.use(
   })
 );
 
-app.use("/character", characterController);
 // app.get("/character", (req, res) => {
 //   res.send({ Character });
 // });
@@ -80,6 +79,7 @@ app.use("/character", characterController);
 // app.get("/item", (req, res) => {
 //   res.send({ Item });
 // });
+app.use("/character", characterController);
 app.use("/battle", battleController);
 app.use("/victory", victoryController);
 
