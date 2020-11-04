@@ -226,48 +226,29 @@
                 }
 
               })
-              $.ajax({
-                url: `/victory/${charOneId}/${charTwoId}`,
-                type: 'GET',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
-                }
 
-              })
           } else if (num === 2) {
 
             $.ajax({
                 url: `/victory/${charTwoId}/${charOneId}`,
-                type: 'POST',
+                type: 'PATCH',
                 data: JSON.stringify({"viewedProfiles": viewedProfiles}),
                 success: function(response){
                 }
 
               })
-              $.ajax({
-                url: `/victory/${charTwoId}/${charOneId}`,
-                type: 'GET',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
-                }
-          }) 
         } else if (num === 3) {
 
           $.ajax({
-                url: `/mutually-assured-destruction/${charTwoId}/${charOneId}`,
-                type: 'POST',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
-                }
-
-              })
-              $.ajax({
-                url: `/mutually-assured-destruction/${charTwoId}/${charOneId}`,
+                url: `/victory/mutually-assured-destruction/${charTwoId}/${charOneId}`,
                 type: 'GET',
                 data: JSON.stringify({"viewedProfiles": viewedProfiles}),
                 success: function(response){
+
                 }
-        })
+
+              })
+
           //
           //
           // set up server logic for victories and leveling.

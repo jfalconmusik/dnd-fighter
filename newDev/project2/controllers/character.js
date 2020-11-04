@@ -47,6 +47,7 @@ router.get("/:id", (req, res) => {
     res.render("show.ejs", {
       character: foundCharacter,
       tabTitle: foundCharacter.name,
+      levelup: false,
     });
   });
 });
@@ -186,6 +187,27 @@ router.get("/", (req, res) => {
   );
 });
 
+router.get("/levelup/:id", (req, res) => {
+  Character.findById(req.params.id, (err, foundCharacter) => {
+    res.render("show.ejs", {
+      character: foundCharacter,
+      tabTitle: foundCharacter.name,
+      levelup: true,
+    });
+  });
+});
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 router.get("/create-session", (req, res) => {
   res.session.anyProperty = "stored session state.";
   const hashedString = bcrypt.hashSync(

@@ -20,7 +20,7 @@ router.patch("/:id1/:id2", (req, res) => {
     char2 = foundCharacter;
   });
 
-  let expGained = Number(char2.level * 10);
+  let expGained = Number(char2.level * 8);
 
   let char1exp = Number(char1.exp + expGained);
   let char2exp = 0;
@@ -35,12 +35,23 @@ router.patch("/:id1/:id2", (req, res) => {
 
   Character.findOneAndUpdate(
     { _id: req.params.id1 },
-    { currentHealth: char1health },
+    { currentHealth: char1health, exp: char1exp },
     (err, docs) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(docs.rating);
+        console.log(docs);
+      }
+    }
+  );
+  Character.findOneAndUpdate(
+    { _id: req.params.id2 },
+    { currentHealth: char2health, exp: char2exp },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(docs);
       }
     }
   );
@@ -48,4 +59,76 @@ router.patch("/:id1/:id2", (req, res) => {
   // winner gets more exp, loser loses all exp gained since last level. Winner regains a third of health, loser is healed completely.
 
   // If winner has enough exp to level, res redirect to level up screen. Otherwise, redirect to standard victory screen.
+  res.redirect(`/victory/${req.params.id1}/${req.params.id2}`);
+});
+
+router.get("/:id1:/id2", (req, res) => {
+  Character.findById(req.params.id1, (err, foundCharacter) => {
+    character1 = foundCharacter;
+  });
+
+  Character.findById(req.params.id2, (err, foundCharacter) => {
+    character2 = foundCharacter;
+  });
+
+  res.render("victory.ejs", {
+    characterOne: character1,
+    characterTwo: character2,
+    mutual: false,
+  });
+});
+
+router.get("/mutually-assured-destruction/:id1:/id2", (req, res) => {
+  let character1;
+  let character2;
+  Character.findById(req.params.id1, (err, foundCharacter) => {
+    character1 = foundCharacter;
+  });
+
+  Character.findById(req.params.id2, (err, foundCharacter) => {
+    character2 = foundCharacter;
+  });
+
+  Character.findOneAndUpdate(
+    { _id: req.params.id1 },
+    {
+      currentHealth: Number(character1.maxHealth * 0.5),
+      exp: Number(character1.exp + character2.level * 4),
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(docs);
+      }
+    }
+  );
+  Character.findOneAndUpdate(
+    { _id: req.params.id2 },
+    {
+      currentHealth: Number(character2.maxHealth * 0.5),
+      exp: Number(character2.exp + character1.level * 4),
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(docs);
+      }
+    }
+  );
+
+  Character.findById(req.params.id1, (err, foundCharacter) => {
+    character1 = foundCharacter;
+  });
+
+  Character.findById(req.params.id2, (err, foundCharacter) => {
+    character2 = foundCharacter;
+  });
+
+  res.render("victory.ejs", {
+    characterOne: character1,
+    characterTwo: character2,
+    mutual: true,
+  });
 });

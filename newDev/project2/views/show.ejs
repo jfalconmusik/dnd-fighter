@@ -6,31 +6,93 @@
   <body>
      <%- include ('./partials/headers.ejs') %>
      <div class="container">
+    <img src="<%=character.img%>"></img>
     <h1><%=character.name%></h1>
     <p><%=character.backStory%></p>
-    <p>Level:<%=character.level%></p>
-    <p>Exp:<%=character.exp%></p>
-    <p>Gp:<%=character.gp%></p>
+    <p>Items:</p>
+    <% if (character.itemOne) { %>
+      <p><%=character.itemOne.name%>, level: <%=character.itemOne.level%>, type: <%=character.itemOne.type%>, damage: <%=character.itemOne.damage%></p>
+    <% } %>
+    <% if (character.itemTwo) { %>
+      <p><%=character.itemTwo.name%>, level: <%=character.itemTwo.level%>, type: <%=character.itemTwo.type%>, damage: <%=character.itemTwo.damage%></p>
+    <% } %>
     <p>Abilities:</p>
     <% for (let ability of character.abilities) { %>
       <p><%=ability.name%></p>
       <p><%=ability.description%></p>
 
     <% }%>
-    <img src="<%=character.img%>"></img>
-    <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
-    <a href="/item/<%=character._id%>"><button>Buy Gear.</button></a>
-    <% if (character.exp >= Number(character.level * 100)) { %>
-      <a href="/character/<%=character._id%>/levelup"><button>LEVEL UP</button></a>
-    <% }  else { %>
-      <p><%=`${Number((character.level * 100) - character.exp)}`%> more EXP needed to level up.</p>
-    <% }%>
-    <a href='/battle/<%=character._id%>'><button>Enter Battle With <%=character.name %></button></a>
-    <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
-      <button><input type="button">Banish</input></button>
-    </form>
+    <% if (levelup === false) { %>
+
+    <p>Level:<%=character.level%></p>
+    <p>Exp:<%=character.exp%></p>
+    <p>Gp:<%=character.gp%></p>
+
+        <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
+        <a href="/item/<%=character._id%>"><button>Buy Gear.</button></a>
+        <% if (character.exp >= Number(character.level * 10)) { %>
+          <a href="/character/levelup/<%=character._id%>"><button>LEVEL UP</button></a>
+        <% }  else { %>
+          <p><%=`${Number((character.level * 10) - character.exp)}`%> more EXP needed to level up.</p>
+        <% }%>
+        <a href='/battle/<%=character._id%>'><button>Enter Battle With <%=character.name %></button></a>
+        <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
+          <button><input type="button">Banish</input></button>
+        </form>
+  <% } else {  %>
+
+    <p><%=character.name%> reached Level <%=character.level + 1%></p>
+    <p>Max Health gains <%=character.strength%> from Strength and is now <%=character.maxHealth + character.strength%></p>
+    <p>Max Mana gains <%=character.wisdom%> from Wisdom and is now <%=character.maxMana + character.wisdom%></p>
+
+
+    <!-- <form action="/character/levelup/<%=character._id%>?_method=PATCH" method="POST"> -->
+
+
+        <button id="buttonWisdom">Level Up Wisdom to <%=character.wisdom + 1%></button>
+        <button id="buttonStrength">Level Up Strength to <%=character.strength + 1%></button>
+        <button id="buttonAgility">Level Up Agility to <%=character.agility + 1%></button>
+        <button id="buttonCharisma">Level Up Charisma to <%=character.charisma + 1%></button>
+
+        <% if ((character.level + 1) % 3 === 0) { %>
+
+          <p>You may now level up one of your items:</p>
+
+          <% if (character.itemOne) { %>
+            <button id="buttonItemOne">Level Up <%=characterOne.itemOne.name%></button>
+
+
+          <% } %>
+          <% if (character.itemTwo) { %>
+
+            <button id="buttonItemTwo">Level Up <%=characterOne.itemTwo.name%></button>
+
+
+            <% } %>
+
+        <% } %>
+
+        <button id="confirmLevel">Confirm Level Up</button>
+ 
+
+  <% } %>
     <a href="/character"><button>Back to Character Select</button></a>
     <%- include ('./partials/footer.ejs') %>
   </div>
+  <script>
+
+    //  call this on level Up Button
+    $("#confirmlevel").click(function () {
+      $.ajax({
+          url: "/character/levelup/<%=character._id%>",
+          type: 'PATCH',
+          data: JSON.stringify({"viewedProfiles": viewedProfiles}),
+          success: function(response){
+
+          }
+        })
+    })
+
+  </script>
   </body>
 </html>

@@ -6,7 +6,46 @@
     <title>Victory</title>
   </head>
   <body>
+    <% if (mutual = false) { %>
     <h1><%=characterOne.name%> Was Victorious Over <%=characterTwo.name%></h1>
+    <!-- Victory: -->
+    <p>
+      <%=characterOne.name%> gained <%=`${Number(characterTwo.level * 8)}`%> exp
+      and was restored to <%=characterOne.currentHealth%> health.
+    </p>
+
+    <p>
+      <%=characterTwo.name%> was restored to full health but lost all exp since
+      last level.
+    </p>
+
+    <% } else { %>
+
+    <!-- If both characters were reduced to 0 hp: -->
+    <h1>
+      <%=characterOne.name%> And <%=characterTwo.name%> Killed One Another.
+      There Are No Winners In Violence.
+    </h1>
+    <p>Both gained some exp and were restored to half health.</p>
+
+    <% } %> <% if (characterOne.exp >= Number(characterOne.level * 10)) { %>
+
+    <a href="/levelup/<%=characterOne._id%>"
+      ><button>level up <%=characterOne.name%></button></a
+    >
+
+    <% } %> <% if (characterTwo.exp >= Number(characterTwo.level * 10)) { %>
+
+    <a href="/levelup/<%=characterTwo._id%>"
+      ><button>level up <%=characterTwo.name%></button></a
+    >
+
+    <% } %>
+
+    <a href="/battle/<%=characterOne._id%>/<%=characterTwo._id%>"
+      ><button>Fight Again</button></a
+    >
+    <a href="/character"><button>Back To Character Select</button></a>
     <!-- rest of readout and level up, if applicable. Remember to push to databases before viewing this page. -->
   </body>
 </html>
