@@ -6,7 +6,7 @@ const Character = require("../models/character.js");
 // const characterSeed = require("../models/characterSeed.js");
 const router = express.Router();
 
-router.patch("/:id1/:id2", (req, res) => {
+router.patch("/:id1/:id2/:gold", (req, res) => {
   // the characters may be identified by the opposing number to the one they are given in the battle screen.
   // for post requests, the winner will always be called id1.
 
@@ -33,9 +33,12 @@ router.patch("/:id1/:id2", (req, res) => {
 
   let char2health = char2.maxHealth;
 
+  let goldGained = req.params.gold;
+  let totalGold = goldGained + char1.gp;
+
   Character.findOneAndUpdate(
     { _id: req.params.id1 },
-    { currentHealth: char1health, exp: char1exp },
+    { currentHealth: char1health, exp: char1exp, gp: totalGold },
     (err, docs) => {
       if (err) {
         console.log(err);
@@ -59,10 +62,10 @@ router.patch("/:id1/:id2", (req, res) => {
   // winner gets more exp, loser loses all exp gained since last level. Winner regains a third of health, loser is healed completely.
 
   // If winner has enough exp to level, res redirect to level up screen. Otherwise, redirect to standard victory screen.
-  res.redirect(`/victory/${req.params.id1}/${req.params.id2}`);
+  res.redirect(`/victory/${req.params.id1}/${req.params.id2}/${goldGained}`);
 });
 
-router.get("/:id1:/id2", (req, res) => {
+router.get("/:id1:/id2/:gold", (req, res) => {
   Character.findById(req.params.id1, (err, foundCharacter) => {
     character1 = foundCharacter;
   });
@@ -74,6 +77,7 @@ router.get("/:id1:/id2", (req, res) => {
   res.render("victory.ejs", {
     characterOne: character1,
     characterTwo: character2,
+    goldGained: req.params.gold,
     mutual: false,
   });
 });
@@ -129,6 +133,7 @@ router.get("/mutually-assured-destruction/:id1:/id2", (req, res) => {
   res.render("victory.ejs", {
     characterOne: character1,
     characterTwo: character2,
+    goldGained: 0,
     mutual: true,
   });
 });

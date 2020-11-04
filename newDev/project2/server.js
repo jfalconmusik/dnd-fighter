@@ -113,6 +113,7 @@ app.listen(PORT, () => {
 
 // After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
 // 10 * level exp is required to level up. exp is gained at a rate of 8 * opponentLevel.
+// in show screen, should be able to pay exp to gain hp.
 
 // Level Up.
 

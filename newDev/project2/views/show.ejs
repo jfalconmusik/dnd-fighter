@@ -72,6 +72,17 @@
 
         <% } %>
 
+        <% if ((character.level + 1) % 4 === 0) { %>
+
+          <p>You may now learn a new special Ability:</p>
+
+          <% for (ability of newAbilities) { %>
+<!-- 
+            <button>learn <%=ability.name%></button> -->
+
+        <% } %>
+      <% } %>
+
         <button id="confirmLevel">Confirm Level Up</button>
  
 
@@ -81,10 +92,35 @@
   </div>
   <script>
 
+    let statChoice = "none";
+    let itemChoice = "none";
+    let abilityChoice = "none";
+
+    $("#buttonWisdom").click(function () {
+      statChoice = "wisdom"
+    })
+    $("#buttonStrength").click(function () {
+      statChoice = "strength"
+    })
+    $("#buttonAgility").click(function () {
+      statChoice = "agility"
+    })
+    $("#buttonCharisma").click(function () {
+      statChoice = "charisma"
+    })
+    $("#buttonItemOne").click(function () {
+      itemChoice = "one"
+    })
+    $("#buttonItemTwo").click(function () {
+      itemChoice = "two"
+    })
+
+
+
     //  call this on level Up Button
     $("#confirmlevel").click(function () {
       $.ajax({
-          url: "/character/levelup/<%=character._id%>",
+          url: `/character/levelup/<%=character._id%>/${statChoice}/${itemChoice}/${abilityChoice}`,
           type: 'PATCH',
           data: JSON.stringify({"viewedProfiles": viewedProfiles}),
           success: function(response){

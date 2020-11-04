@@ -20,6 +20,8 @@
       <br />
       <div class="flexRow">
         <div class="flexColumn">
+          <p>Level:</p>
+          <p id="charOneLevel"><%=`${characterOne.level}`%></p>
           <p>Current Health:</p>
           <p><%=`${characterOne.currentHealth}`%></p>
           <p>Max Health:</p>
@@ -90,6 +92,8 @@
       <br />
       <div class="flexRow">
         <div class="flexColumn">
+          <p>Level:</p>
+          <p id="charTwoLevel"><%=`${characterTwo.level}`%></p>
           <p>Current Health:</p>
           <p><%=`${characterTwo.currentHealth}`%></p>
           <p>Max Health:</p>
@@ -167,6 +171,7 @@
         //
         // character one stats:
         let firstName = $("#charOneName").text()
+        let firstLevel = $("#charOneLevel").text()
         //
         let firstStrength = Number($("#charOneStrength").text());
         let firstWisdom = Number($("#charOneWisdom").text());
@@ -181,6 +186,7 @@
         //
         // character two stats:
         let secondName = $("#charTwoName").text()
+        let secondLevel = $("#charTwoLevel").text()
         //
         let secondStrength = Number($("#charTwoStrength").text());
         let secondWisdom = Number($("#charTwoWisdom").text());
@@ -216,10 +222,14 @@
           // should return /battle/:id1/:id2
           let charOneId = pathname[1]
           let charTwoId = pathname[2]
+
+          let player2GoldGen = Math.floor(Math.rand() * firstLevel);
+          let player1GoldGen = Math.floor(Math.rand() * secondLevel)
+
           if (num === 1) {
             // player 1 wins.
             $.ajax({
-                url: `/victory/${charOneId}/${charTwoId}`,
+                url: `/victory/${charOneId}/${charTwoId}/${player1GoldGen}`,
                 type: 'PATCH',
                 data: JSON.stringify({"viewedProfiles": viewedProfiles}),
                 success: function(response){
@@ -230,7 +240,7 @@
           } else if (num === 2) {
 
             $.ajax({
-                url: `/victory/${charTwoId}/${charOneId}`,
+                url: `/victory/${charTwoId}/${charOneId}/${player2GoldGen}`,
                 type: 'PATCH',
                 data: JSON.stringify({"viewedProfiles": viewedProfiles}),
                 success: function(response){
