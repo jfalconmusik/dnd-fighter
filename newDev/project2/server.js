@@ -31,23 +31,23 @@ db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
 //
 Character.init();
-Character.deleteMany({}, (err, deleted) => {
-  if (err) {
-    console.log(err);
-  }
-});
+// Character.deleteMany({}, (err, deleted) => {
+//   if (err) {
+//     console.log(err);
+//   }
+// });
 // Seed command:
 
 // Item.init();
 // Error / success
 
-Character.create(characterSeed, (err, data) => {
-  if (err) {
-    console.log(err.message);
-  } else {
-    console.log("added initial characters.");
-  }
-});
+// Character.create(characterSeed, (err, data) => {
+//   if (err) {
+//     console.log(err.message);
+//   } else {
+//     console.log("added initial characters.");
+//   }
+// });
 
 const characterController = require("./controllers/character.js");
 const battleController = require("./controllers/battle.js");
@@ -96,20 +96,6 @@ app.listen(PORT, () => {
 // To Do:
 // ======================================
 
-// =============== <Fight> ==============
-//
-
-// 1 v 1. On each turn, player has these options: Attack, Defend, Special Ability, Attempt to Flee (mana and health do not recover between fights. Opponent can choose
-// to allow the flee, or choose to pursue. There will be a roll)), Inventory.
-// A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
-
-// Stats are: Mana, used for special abilities or magic items. Health, for health. Agility for Defense and Flee. Strength for Attack with physical weapons. Wisdom with magic weapons
-// and special abilities.
-
-// Attack: Character roles their stat plus rand versus opposing defense.
-
-// ============== </Fight> ==============
-
 // ==== NEXT: ====
 
 // After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
@@ -125,7 +111,7 @@ app.listen(PORT, () => {
 // Random NPC gen.
 // random npcs will have a different tag in mongo.
 
-// Abilities + Signs.
+// Abilities.
 
 // Rules page.
 
@@ -133,6 +119,6 @@ app.listen(PORT, () => {
 
 // Sprites?
 
-// next steps... Selecting the characters to fight,
-// then fighting, then updating the characters, leveling up, then back to character select screen. Basic code is written, much of it doesn't play well. Debug.
-//
+// must have a put route.
+
+// next steps... Fighting. Only option now is to attack.

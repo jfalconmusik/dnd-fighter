@@ -46,6 +46,12 @@
   <% } else {  %>
 
     <p><%=character.name%> reached Level <%=character.level + 1%></p>
+    <p>Max Health gains <%=character.strength%> from Strength and is now <%=character.maxHealth + character.strength%></p>
+    <p>Max Mana gains <%=character.wisdom%> from Wisdom and is now <%=character.maxMana + character.wisdom%></p>
+
+
+    <!-- <form action="/character/levelup/<%=character._id%>?_method=PATCH" method="POST"> -->
+
 
         <button id="buttonWisdom">Level Up Wisdom to <%=character.wisdom + 1%></button>
         <button id="buttonStrength">Level Up Strength to <%=character.strength + 1%></button>

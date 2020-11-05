@@ -219,23 +219,24 @@ router.get("/levelup/:id", (req, res) => {
   });
 });
 
-router.patch(`/levelup/:id/:stat/:item/:ability`, (req, res) => {
+router.patch(`/levelup/:id/`, (req, res) => {
+  console.log("level up started");
   let plusStrength = 0;
   let plusWisdom = 0;
   let plusCharisma = 0;
   let plusAgility = 0;
-  let ability = req.params.ability;
-  if (ability === "wisdom") {
+  let stat = req.body.statChoice;
+  if (stat === "wisdom") {
     plusWisdom = 1;
-  } else if (ability === "agility") {
+  } else if (stat === "agility") {
     plusAgility = 1;
-  } else if (ability === "charisma") {
+  } else if (stat === "charisma") {
     plusCharisma = 1;
-  } else if (ability === "strength") {
+  } else if (stat === "strength") {
     plusStrength = 1;
   }
-  let item = req.params.item;
-  let stat = req.params.stat;
+  let item = req.body.itemChoice;
+  let ability = req.body.ability;
   let id = req.params.id;
   let itemOne;
   let itemTwo;
@@ -246,44 +247,52 @@ router.patch(`/levelup/:id/:stat/:item/:ability`, (req, res) => {
     character = foundCharacter;
     itemOne = foundCharacter.itemOne;
     itemTwo = foundCharacter.itemTwo;
+    maxHealth = foundCharacter.maxHealth;
+    maxMana = foundCharacter.maxMana;
+
+    if (item === "one") {
+      itemOne = {
+        name: itemOne.name,
+        level: Number(itemOne.level + 1),
+        type: itemOne.type,
+        damage: itemOne.damage,
+      };
+    } else if (item === "two") {
+      itemOne = {
+        name: itemTwo.name,
+        level: Number(itemTwo.level + 1),
+        type: itemTwo.type,
+        damage: itemTwo.damage,
+      };
+    }
+
+    Character.findOneAndUpdate(
+      { _id: id },
+      {
+        strength: character.strength + plusStrength,
+        agility: character.agility + plusAgility,
+        wisdom: character.wisdom + plusWisdom,
+        charisma: character.charisma + plusCharisma,
+        maxHealth: Number(character.strength + plusStrength + maxHealth),
+        currentHealth: Number(character.strength + plusStrength + maxHealth),
+        maxMana: Number(character.wisdom + plusWisdom + maxMana),
+        currentMana: Number(character.wisdom + plusWisdom + maxMana),
+        itemOne: itemOne,
+        itemTwo: itemTwo,
+        level: character.level + 1,
+        exp: Number(character.exp - character.level * 10),
+      },
+      (err, foundCharacter) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Updated", foundCharacter);
+        }
+      }
+    );
   });
 
-  if (item === "one") {
-    itemOne = {
-      name: itemOne.name,
-      level: Number(itemOne.level + 1),
-      type: itemOne.type,
-      damage: itemOne.damage,
-    };
-  } else if (item === "two") {
-    itemOne = {
-      name: itemTwo.name,
-      level: Number(itemTwo.level + 1),
-      type: itemTwo.type,
-      damage: itemTwo.damage,
-    };
-  }
-
-  Character.findOneAndUpdate(
-    { _id: id },
-    {
-      strength: character.strength + plusStrength,
-      agility: character.agility + plusAgility,
-      wisdom: character.wisdom + plusWisdom,
-      charisma: character.charisma + plusCharisma,
-      itemOne: itemOne,
-      itemTwo: itemTwo,
-      level: character.level + 1,
-      exp: Number(character.exp - (character.level + 1) * 10),
-    },
-    (err, foundCharacter) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Updated", foundCharacter);
-      }
-    }
-  );
+  console.log("level up finished");
 
   res.redirect(`/character/${id}`);
 });

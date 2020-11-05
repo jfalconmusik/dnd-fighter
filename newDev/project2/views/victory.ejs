@@ -6,12 +6,12 @@
     <title>Victory</title>
   </head>
   <body>
-    <% if (mutual = false) { %>
+    <% if (mutual === false) { %>
     <h1><%=characterOne.name%> Was Victorious Over <%=characterTwo.name%></h1>
     <!-- Victory: -->
     <p>
       <%=characterOne.name%> gained <%=`${Number(characterTwo.level * 8)}`%> exp
-      and was restored to <%=characterOne.currentHealth%> health.
+      and was restored <%=characterOne.currentHealth * 0.3%> health.
     </p>
 
     <p>
@@ -30,13 +30,13 @@
 
     <% } %> <% if (characterOne.exp >= Number(characterOne.level * 10)) { %>
 
-    <a href="/levelup/<%=characterOne._id%>"
+    <a href="/character/levelup/<%=characterOne._id%>"
       ><button>level up <%=characterOne.name%></button></a
     >
 
     <% } %> <% if (characterTwo.exp >= Number(characterTwo.level * 10)) { %>
 
-    <a href="/levelup/<%=characterTwo._id%>"
+    <a href="/character/levelup/<%=characterTwo._id%>"
       ><button>level up <%=characterTwo.name%></button></a
     >
 

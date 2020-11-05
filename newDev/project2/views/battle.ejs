@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <%- include ('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/Users/jessefalconmusik/newDev/project2/style.css">
+    <link
+      rel="stylesheet"
+      href="/Users/jessefalconmusik/newDev/project2/style.css"
+    />
     <title><%=characterOne.name%> Vs <%=characterTwo.name%></title>
   </head>
   <body>
@@ -12,424 +15,603 @@
 // A player can do two of the above actions per turn, except for special ability, which takes up the entire turn.
  -->
     <div id="container">
-        <div class="battleLog"></div>
-        
+      <div class="battleLog"></div>
+
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
-        <!--  -->
-      <div id="flex">
-            <div id="playerOne">
-              <!--  -->
-            <p id="charOneName"><%=characterOne.name%></p>
-            <br />
-            <div class="flexRow">
-              <div class="flexColumn">
-                <p>Level: <span id="charOneLevel"><%=characterOne.level%></span></p>
-                <p>Current Health: <span id="charOneCurrentHealth"><%=characterOne.currentHealth%></span></p>
-                <p>Max Health: <span id="charOneMaxHealth"><%=characterOne.maxHealth%></span></p>
-                <p>Current Mana: <span id="charOneCurrentMana"><%=characterOne.currentMana%></span></p>
-                <p>Max Mana: <span id="charOneMaxMana"><%=characterOne.maxMana%></span></p>
-                <p>Wisdom: <span id="charOneWisdom"><%=characterOne.wisdom%></span></p>
-                <p>Strength: <span id="charOneStrength"><%=characterOne.strength%></span></p>
-                <p>Charima: <span id="charOneCharisma"><%=characterOne.charisma%></span></p>
-                <p>Agility: <span id="charOneAgility"><%=characterOne.agility%></span></p>
-                <% if (characterOne.item1) { %>
-                <p>Item 1: <span id="charOneItemOneName"><%=characterOne.item1.name%></span></p>
-                <p>Damage: <span id="charOneWeaponOneDamage"><%=characterOne.item1.damage%></span></p>
-                <p>Level: <span id="charOneWeaponOneLevel"><%=characterOne.item1.level%></span></p>
-                <p>Type: <span id="charOneWeaponOneType"><%=characterOne.item1.type%></span></p>
-                <% } %> <% if (characterOne.item2 && characterOne.item2.name) { %>
-                <p>Item 2: <span id="charOneItemTwoName"><%=characterOne.item2.name%></span></p>
-                <p>Damage: <span id="charOneWeaponTwoDamage"><%=characterOne.item2.damage%></span></p>
-                <p>Level: <span id="charOneWeaponTwoLevel"><%=characterOne.item2.level%></span></p>
-                <p>Type: <span id="charOneWeaponTwoType"><%=characterOne.item2.type%></span></p>
-                <% }%>
-              </div>
-              <div class="flexColumn">
-                <button id="charOneAttack" class="battleButton">Attack</button>
-                <button id="charOneDefend" class="battleButton">Defend</button>
-                <button id="charOneSpecial" class="battleButton">
-                  Special Ability
-                </button>
-                <button id="charOneInventory" class="battleButton">Inventory</button>
-                <button id="charOneFlee" class="battleButton">Flee</button>
-                
-              </div>
-              <div class="staticModal">
-                <p>Attack with:</p>
-                <% if (characterOne.item1) { %>
-                  <button id="modalItemOne">
-                    <%=characterOne.item1.name%>
-                  </button>
-                <% } %>
-                <% if (characterOne.item2) { %>
-                  <button id="modalItemTwo">
-                    <%=characterOne.item2.name%>
-                  </button>
-                <% } %>
-              </div>
-              <!-- <div id="specialAbilitiesList">
+      <p id="charOneId"><%=characterOne._id%></p>
+      <p id="charTwoId"><%=characterTwo._id%></p>
+      <p></p>
+      <div>
+        <p id="victoryDisplay"></p>
+        <a id="victoryDisplay1" href="/victory/<%=characterOne._id%>/<%=characterTwo._id%>">Victory</a>
+        <a id="victoryDisplay2" href="/victory/<%=characterTwo._id%>/<%=characterOne._id%>">Victory</a>
+        <a id="victoryDisplay3" href="/victory/mutually-assured-destruction/<%=characterOne._id%>/<%=characterTwo._id%>">Victory</a>
+      </div>
+      <div class="flexColumn">
+        <p id="playerOptions">Player 1:</p>
+        <button id="attack" class="battleButton">Attack</button>
+        <button id="defend" class="battleButton">Defend</button>
+        <button id="special" class="battleButton">Special Ability</button>
+        <button id="inventory" class="battleButton">Inventory</button>
+        <button id="flee" class="battleButton">Flee</button>
+      </div>
+      <div id="staticModal1">
+        <p>Attack with:</p>
+        <% if (characterOne.item1) { %>
+          <button id="oneModalItemOne">
+            <%=characterOne.item1.name%>
+          </button>
+        <% } %>
+        <% if (characterOne.item2) { %>
+          <button id="oneModalItemTwo">
+            <%=characterOne.item2.name%>
+          </button>
+        <% } %>
+      </div>
+      <div id="staticModal2">
+        <p>Attack with:</p>
+        <% if (characterTwo.item1) { %>
+          <button id="twoModalItemOne">
+            <%=characterTwo.item1.name%>
+          </button>
+        <% } %>
+        <% if (characterTwo.item2) { %>
+          <button id="twoModalItemTwo">
+            <%=characterTwo.item2.name%>
+          </button>
+        <% } %>
+    </div>
+    <div id="flex">
+      <div id="playerOne">
+        <p id="charOneName"><%=characterOne.name%></p>
+        <br />
+        <div class="flexRow">
+          <div class="flexColumn">
+            <p>Level: <span id="charOneLevel"><%=characterOne.level%></span></p>
+            <p>
+              Current Health:
+              <span id="charOneCurrentHealth"
+                ><%=characterOne.currentHealth%></span
+              >
+            </p>
+            <p>
+              Max Health:
+              <span id="charOneMaxHealth"><%=characterOne.maxHealth%></span>
+            </p>
+            <p>
+              Current Mana:
+              <span id="charOneCurrentMana"><%=characterOne.currentMana%></span>
+            </p>
+            <p>
+              Max Mana:
+              <span id="charOneMaxMana"><%=characterOne.maxMana%></span>
+            </p>
+            <p>
+              Wisdom: <span id="charOneWisdom"><%=characterOne.wisdom%></span>
+            </p>
+            <p>
+              Strength:
+              <span id="charOneStrength"><%=characterOne.strength%></span>
+            </p>
+            <p>
+              Charima:
+              <span id="charOneCharisma"><%=characterOne.charisma%></span>
+            </p>
+            <p>
+              Agility:
+              <span id="charOneAgility"><%=characterOne.agility%></span>
+            </p>
+            <% if (characterOne.item1) { %>
+            <p>
+              Item 1:
+              <span id="charOneItemOneName"><%=characterOne.item1.name%></span>
+            </p>
+            <p>
+              Damage:
+              <span id="charOneWeaponOneDamage"
+                ><%=characterOne.item1.damage%></span
+              >
+            </p>
+            <p>
+              Level:
+              <span id="charOneWeaponOneLevel"
+                ><%=characterOne.item1.level%></span
+              >
+            </p>
+            <p>
+              Type:
+              <span id="charOneWeaponOneType"
+                ><%=characterOne.item1.type%></span
+              >
+            </p>
+            <% } %> <% if (characterOne.item2 && characterOne.item2.name) { %>
+            <p>
+              Item 2:
+              <span id="charOneItemTwoName"><%=characterOne.item2.name%></span>
+            </p>
+            <p>
+              Damage:
+              <span id="charOneWeaponTwoDamage"
+                ><%=characterOne.item2.damage%></span
+              >
+            </p>
+            <p>
+              Level:
+              <span id="charOneWeaponTwoLevel"
+                ><%=characterOne.item2.level%></span
+              >
+            </p>
+            <p>
+              Type:
+              <span id="charOneWeaponTwoType"
+                ><%=characterOne.item2.type%></span
+              >
+            </p>
+            <% }%>
+          </div>
+          <!-- <div id="specialAbilitiesList">
                   <h4>Special Abilities:</h4>
               </div> -->
-              <div class="staticModal" id="modalFlee">
-                  <p>You cannot flee if you've acted this turn.</p>
-                  <button id="modalFleeButton">OK</button>
-              </div>
+          <div class="staticModal" id="modalFlee">
+            <p>You cannot flee if you've acted this turn.</p>
+            <button id="modalFleeButton">OK</button>
           </div>
+        </div>
         <div id="playerTwo">
-      <p id="charTwoName"><%=characterTwo.name%></p>
-      <br />
-      <div class="flexRow">
-        <div class="flexColumn">
-          <p>Level: <span id="charTwoLevel"><%=characterTwo.level%></span></p>
-          <p>Current Health: <span id="charTwoCurrentHealth"><%=characterTwo.currentHealth%></span></p>
-          <p>Max Health: <span id="charTwoMaxHealth"><%=characterTwo.maxHealth%></span></p>
-          <p>Current Mana: <span id="charTwoCurrentMana"><%=characterTwo.currentMana%></span></p>
-          <p>Max Mana: <span id="charTwoMaxMana"><%=characterTwo.maxMana%></span></p>
-          <p>Wisdom: <span id="charTwoWisdom"><%=characterTwo.wisdom%></span></p>
-          <p>Strength: <span id="charTwoStrength"><%=characterTwo.strength%></span></p>
-          <p>Charima: <span id="charTwoCharisma"><%=characterTwo.charisma%></span></p>
-          <p>Agility: <span id="charTwoAgility"><%=characterTwo.agility%></span></p>
-          <% if (characterTwo.item1) { %>
-          <p>Item 1: <span id="charTwoItemOneName"><%=characterTwo.item1.name%></span></p>
-          <p>Damage: <span id="charTwoWeaponOneDamage"><%=characterTwo.item1.damage%></span></p>
-          <p>Level: <span id="charTwoWeaponOneLevel"><%=characterTwo.item1.level%></span></p>
-          <p>Type: <span id="charTwoWeaponOneType"><%=characterTwo.item1.type%></span></p>
-          <% } %> <% if (characterTwo.item2 && characterTwo.item2.name) { %>
-          <p>Item 2: <span id="charTwoItemTwoName"><%=characterTwo.item2.name%></span></p>
-          <p>Damage: <span id="charTwoWeaponTwoDamage"><%=characterTwo.item2.damage%></span></p>
-          <p>Level: <span id="charTwoWeaponTwoLevel"><%=characterTwo.item2.level%></span></p>
-          <p>Type: <span id="charTwoWeaponTwoType"><%=characterTwo.item2.type%></span></p>
-          <% }%>
-        </div>
-        <div class="flexColumn">
-          <button id="charTwoAttack" class="battleButton">Attack</button>
-          <button id="charTwoDefend" class="battleButton">Defend</button>
-          <button id="charTwoSpecial" class="battleButton">
-            Special Ability
-          </button>
-          <button id="charTwoInventory" class="battleButton">Inventory</button>
-          <button id="charTwoFlee" class="battleButton">Flee</button>
-          
-        </div>
-        <div class="staticModal">
-          <p>Attack with:</p>
-          <% if (characterTwo.item1) { %>
-            <button id="modalItemOne">
-              <%=characterTwo.item1.name%>
-            </button>
-          <% } %>
-          <% if (characterTwo.item2 && characterTwo.item2.name) { %>
-            <button id="modalItemTwo">
-              <%=characterTwo.item2.name%>
-            </button>
-          <% } %>
-        </div>
-        <!-- <div id="specialAbilitiesList">
+          <p id="charTwoName"><%=characterTwo.name%></p>
+          <br />
+          <div class="flexRow">
+            <div class="flexColumn">
+              <p>
+                Level: <span id="charTwoLevel"><%=characterTwo.level%></span>
+              </p>
+              <p>
+                Current Health:
+                <span id="charTwoCurrentHealth"
+                  ><%=characterTwo.currentHealth%></span
+                >
+              </p>
+              <p>
+                Max Health:
+                <span id="charTwoMaxHealth"><%=characterTwo.maxHealth%></span>
+              </p>
+              <p>
+                Current Mana:
+                <span id="charTwoCurrentMana"
+                  ><%=characterTwo.currentMana%></span
+                >
+              </p>
+              <p>
+                Max Mana:
+                <span id="charTwoMaxMana"><%=characterTwo.maxMana%></span>
+              </p>
+              <p>
+                Wisdom: <span id="charTwoWisdom"><%=characterTwo.wisdom%></span>
+              </p>
+              <p>
+                Strength:
+                <span id="charTwoStrength"><%=characterTwo.strength%></span>
+              </p>
+              <p>
+                Charima:
+                <span id="charTwoCharisma"><%=characterTwo.charisma%></span>
+              </p>
+              <p>
+                Agility:
+                <span id="charTwoAgility"><%=characterTwo.agility%></span>
+              </p>
+              <% if (characterTwo.item1) { %>
+              <p>
+                Item 1:
+                <span id="charTwoItemOneName"
+                  ><%=characterTwo.item1.name%></span
+                >
+              </p>
+              <p>
+                Damage:
+                <span id="charTwoWeaponOneDamage"
+                  ><%=characterTwo.item1.damage%></span
+                >
+              </p>
+              <p>
+                Level:
+                <span id="charTwoWeaponOneLevel"
+                  ><%=characterTwo.item1.level%></span
+                >
+              </p>
+              <p>
+                Type:
+                <span id="charTwoWeaponOneType"
+                  ><%=characterTwo.item1.type%></span
+                >
+              </p>
+              <% } %> <% if (characterTwo.item2 && characterTwo.item2.name) { %>
+              <p>
+                Item 2:
+                <span id="charTwoItemTwoName"
+                  ><%=characterTwo.item2.name%></span
+                >
+              </p>
+              <p>
+                Damage:
+                <span id="charTwoWeaponTwoDamage"
+                  ><%=characterTwo.item2.damage%></span
+                >
+              </p>
+              <p>
+                Level:
+                <span id="charTwoWeaponTwoLevel"
+                  ><%=characterTwo.item2.level%></span
+                >
+              </p>
+              <p>
+                Type:
+                <span id="charTwoWeaponTwoType"
+                  ><%=characterTwo.item2.type%></span
+                >
+              </p>
+              <% }%>
+            </div>
+
+            <!-- <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
 
         </div> -->
-        <div class="staticModal" id="modalFlee">
-            <p>You cannot flee if you've acted this turn.</p>
-            <button id="modalFleeButton">OK</button>
+            <div class="staticModal" id="modalFlee">
+              <p>You cannot flee if you've acted this turn.</p>
+              <button id="modalFleeButton">OK</button>
+            </div>
+          </div>
         </div>
       </div>
-        </div>
-     </div>
     </div>
     <script>
-        let char = 1; // turn will be one for character one, two for character two.
-        let actionCount = 0; // changes turns after every two actions.
+        $("#staticModal1").css("display", "none");
+        $("#staticModal2").css("display", "none");
+        $("#victoryDisplay1").css("display", "none")
+        $("#victoryDisplay2").css("display", "none")
+        $("#victoryDisplay3").css("display", "none")
+        $("#victoryDisplay").css("display", "none")
+        $("#charOneId").css("display", "none")
+        $("#charTwoId").css("display", "none")
         //
-        // Attack Logic:
-        //
-        // character one stats:
-        let firstName = $("#charOneName").text()
-        let firstLevel = $("#charOneLevel").text()
-        //
-        let firstStrength = Number($("#charOneStrength").text());
-        let firstWisdom = Number($("#charOneWisdom").text());
-        let firstAgility = Number($("#charOneAgility").text());
-        let firstCharisma = Number($("#charOneCharisma").text());
-        let firstMana = Number($("#charOneCurrentMana").text());
-        let firstHealth = Number($("#charOneCurrentHealth").text());
-        let firstDefense = Number($("#charOneDefense").text());
+        let charOneId = $("#charOneId").text()
+        let charTwoId = $("#charTwoId").text()
+      //
+      //
+      let char = 1; // turn will be one for character one, two for character two.
+      let actionCount = 0; // changes turns after every two actions.
+      //
+      // Attack Logic:
+      //
+      // character one stats:
+      let firstName = $("#charOneName").text();
+      let firstLevel = $("#charOneLevel").text();
+      //
+      let firstStrength = Number($("#charOneStrength").text());
+      let firstWisdom = Number($("#charOneWisdom").text());
+      let firstAgility = Number($("#charOneAgility").text());
+      let firstCharisma = Number($("#charOneCharisma").text());
+      let firstMana = Number($("#charOneCurrentMana").text());
+      let firstHealth = Number($("#charOneCurrentHealth").text());
+      let firstDefense = Number($("#charOneDefense").text());
 
-        let firstItem1 = {damage: Number($("#charOneWeaponOneDamage").text()), level: Number($("#charOneWeaponOneLevel").text()), type: $("#charOneWeaponOneType").text()}
-        let firstItem2 = {damage: Number($("#charOneWeaponTwoDamage").text()), level: Number($("#charOneWeaponTwoLevel").text()), type: $("#charOneWeaponTwoType").text()}
-        //
-        // character two stats:
-        let secondName = $("#charTwoName").text()
-        let secondLevel = $("#charTwoLevel").text()
-        //
-        let secondStrength = Number($("#charTwoStrength").text());
-        let secondWisdom = Number($("#charTwoWisdom").text());
-        let secondAgility = Number($("#charTwoAgility").text());
-        let secondCharisma = Number($("#charTwoCharisma").text());
-        let secondMana = Number($("#charTwoCurrentMana").text());
-        let secondHealth = Number($("#charTwoCurrentHealth").text());
-        let secondDefense = Number($("#charTwoDefense").text());
+      let firstItem1 = {
+        damage: Number($("#charOneWeaponOneDamage").text()),
+        level: Number($("#charOneWeaponOneLevel").text()),
+        type: $("#charOneWeaponOneType").text(),
+      };
+      let firstItem2 = {
+        damage: Number($("#charOneWeaponTwoDamage").text()),
+        level: Number($("#charOneWeaponTwoLevel").text()),
+        type: $("#charOneWeaponTwoType").text(),
+      };
+      //
+      // character two stats:
+      let secondName = $("#charTwoName").text();
+      let secondLevel = $("#charTwoLevel").text();
+      //
+      let secondStrength = Number($("#charTwoStrength").text());
+      let secondWisdom = Number($("#charTwoWisdom").text());
+      let secondAgility = Number($("#charTwoAgility").text());
+      let secondCharisma = Number($("#charTwoCharisma").text());
+      let secondMana = Number($("#charTwoCurrentMana").text());
+      let secondHealth = Number($("#charTwoCurrentHealth").text());
+      let secondDefense = Number($("#charTwoDefense").text());
 
-        let secondItem1 = {damage: Number($("#charTwoWeaponOneDamage").text()), level: Number($("#charTwoWeaponOneLevel").text()), type: $("#charTwoWeaponOneType").text()}
-        let secondItem2 = {damage: Number($("#charTwoWeaponTwoDamage").text()), level: Number($("#charTwoWeaponTwoLevel").text()), type: $("#charTwoWeaponTwoType").text()}
-        //
-        //
-        // let strength
-        // let wisdom
-        // let agility
-        // let charisma
-        // let mana
-        // let health
-        // let defense
+      let secondItem1 = {
+        damage: Number($("#charTwoWeaponOneDamage").text()),
+        level: Number($("#charTwoWeaponOneLevel").text()),
+        type: $("#charTwoWeaponOneType").text(),
+      };
+      let secondItem2 = {
+        damage: Number($("#charTwoWeaponTwoDamage").text()),
+        level: Number($("#charTwoWeaponTwoLevel").text()),
+        type: $("#charTwoWeaponTwoType").text(),
+      };
+      //
+      //
+      // let strength
+      // let wisdom
+      // let agility
+      // let charisma
+      // let mana
+      // let health
+      // let defense
 
-        // let item1
-        // let item2
-        // //
+      // let item1
+      // let item2
+      // //
 
-        // level up menu opens automatically at end up battle?
+      // level up menu opens automatically at end up battle?
 
-        function victory(num) {
-          
+      function victory(num) {
+        // let pathname = `${window.location.pathname}`.split("/");
+        // // should return /battle/:id1/:id2
+        // let charOneId = pathname[1];
+        // let charTwoId = pathname[2];
+        console.log("victory fired.")
+        let player2GoldGen = Math.floor(Math.random() * firstLevel);
+        let player1GoldGen = Math.floor(Math.random() * secondLevel);
 
-
-          let pathname = `${window.location.pathname}`.split("/"); 
-          // should return /battle/:id1/:id2
-          let charOneId = pathname[1]
-          let charTwoId = pathname[2]
-
-          let player2GoldGen = Math.floor(Math.rand() * firstLevel);
-          let player1GoldGen = Math.floor(Math.rand() * secondLevel)
-
-          if (num === 1) {
-            // player 1 wins.
-            $.ajax({
-                url: `/victory/${charOneId}/${charTwoId}/${player1GoldGen}`,
-                type: 'PATCH',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
-                }
-
-              })
-
-          } else if (num === 2) {
-
-            $.ajax({
-                url: `/victory/${charTwoId}/${charOneId}/${player2GoldGen}`,
-                type: 'PATCH',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
-                }
-
-              })
-        } else if (num === 3) {
-
+        if (num === 1) {
+          // player 1 wins.
+          $("#victoryDisplay").text(`${firstName} defeated ${secondName}`)
+          $("#victoryDisplay1").css("display", "initial")
+          //
           $.ajax({
-                url: `/victory/mutually-assured-destruction/${charTwoId}/${charOneId}`,
-                type: 'GET',
-                data: JSON.stringify({"viewedProfiles": viewedProfiles}),
-                success: function(response){
+            url: `/victory/`,
+            type: "PATCH",
+            data: {victor: charOneId, loser: charTwoId, gold: player1GoldGen, victorHealth: firstHealth},
+            success: function (response) {
+              console.log(response)
+            },
+          });
+        } else if (num === 2) {
+          $("#victoryDisplay").text(`${secondName} defeated ${firstName}`)
+          $("#victoryDisplay2").css("display", "initial")
+          $.ajax({
+            url: `/victory/`,
+            type: "PATCH",
+            data: {victor: charTwoId, loser: charOneId, gold: player2GoldGen, victorHealth: secondHealth},
+            success: function (response) {
+              console.log(response)
+            },
+          });
+        } else if (num === 3) {
+          $("#victoryDisplay").text(`aww, ties aren't fun`)
+          $("#victoryDisplay3").css("display", "initial")
+          $.ajax({
+            url: `/victory/mutually-assured-destruction/`,
+            type: "PATCH",
+            data: {charOne: charOneId, charTwo: charTwoId, player2GoldGen, player1GoldGen},
+            success: function (response) {
+              console.log(response)
+            },
+          });
 
-                }
-
-              })
-
+          $("#victoryDisplay").css("display", "initial")
           //
           //
           // set up server logic for victories and leveling.
-      }}
-
-
-        function incrementActions() {
-            actionCount++
-            if (actionCount >= 2) {
-                // change turn  
-                turn();
-                actionCount = 0;
-            }
         }
-        // at beginning of each turn, determine if the characters are dead.
+      }
 
-        const turn = () => {
-          if (char === 1) {
-            char = 2;
-            // it's now second players turn
-          } else {
-            char = 1
-            // its now first players turn
+      function incrementActions() { 
+         if (firstHealth <= 0 && secondHealth <= 0) {
+          console.log("tie");
+          victory(3);
+        } else if (firstHealth <= 0) {
+          console.log("player two wins");
+          victory(2);
+        } else if (secondHealth <= 0) {
+          console.log("player one wins");
+          victory(1);
+        }
+        actionCount++;
+        if (actionCount >= 2) {
+          // change turn
+          turn();
+          actionCount = 0;
+        }
+      }
+      // at beginning of each turn, determine if the characters are dead.
+
+      const turn = () => {
+        if (char === 1) {
+          char = 2;
+          $("#playerOptions").text("Player 2:");
+          // it's now second players turn
+        } else {
+          $("#playerOptions").text("Player 1:");
+          char = 1;
+          // its now first players turn
+        }
+
+      
+      };
+
+      function handleAttack(weapon) {
+        // who is attacking and with what? Determine stats and results accordingly.
+        // weapons are passed as objects.
+
+        let stat;
+        if (char === 1) {
+          if (weapon.type === "melee") {
+            stat = firstStrength;
+          } else if (weapon.type === "ranged") {
+            stat = firstAgility;
+          } else if (weapon.type === "sorcery") {
+            stat = firstWisdom;
           }
 
+          let damageDealt =
+            Number(Math.floor(Math.random() * Number(weapon.damage) * Number(weapon.level)) +
+            Number(stat) -
+            Number(secondDefense));
+          console.log(`player one dealt ${damageDealt} damage.`);
 
-          if (firstHealth <= 0 && secondHealth <= 0) {
-            console.log("tie")
-            victory(3)
-          } else if (firstHealth <= 0) {
-            console.log("player two wins")
-            victory(2)
-          } else if (secondHealth <= 0) {
-            console.log("player one wins")
-            victory(1)
+          // deal damage:
+          $("#charTwoCurrentHealth").text(`${Number(secondHealth) - Number(damageDealt)}`);
+          // reset defense:
+          $("#charOneDefense").text("0");
+          secondDefense = 0;
+
+          $("#battleLog").append(
+            $(
+              `<p>${firstName} dealt ${damageDealt} damage to ${secondName}</p>`
+            )
+          );
+          //
+          secondHealth = secondHealth - damageDealt;
+          //
+          incrementActions();
+          //
+          //
+          //
+        } else {
+          // player two attacked?
+          if (weapon.type === "melee") {
+            stat = secondStrength;
+          } else if (weapon.type === "ranged") {
+            stat = secondAgility;
+          } else if (weapon.type === "sorcery") {
+            stat = secondWisdom;
           }
 
-        }
-        
+          // determine damage
+          let damageDealt =
+            Number(Math.floor(Math.random() * Number(weapon.damage) * Number(weapon.level)) +
+            Number(stat) -
+            Number(firstDefense));
+          console.log(`player two dealt ${damageDealt} damage.`);
 
-        function handleAttack(weapon) {
-          // who is attacking and with what? Determine stats and results accordingly.
-          // weapons are passed as objects.
+          // apply damage to player 1
+          $("#charOneCurrentHealth").text(`${Number(firstHealth) - Number(damageDealt)}`);
+          // reset defense:
+          $("#charTwoDefense").text("0");
+          firstDefense = 0;
 
-            let stat;
-            if (char === 1) {
+          // note this in log and increment actions.
+          $("#battleLog").append(
+            $(
+              `<p>${secondName} dealt ${damageDealt} damage to ${firstName}</p>`
+            )
+          );
+          //
+          firstHealth = firstHealth - damageDealt;
+          //
 
-              if (weapon.type === "melee") {
-                let stat = firstStrength;
-              } else  if (weapon.type === "ranged") {
-                let stat = firstAgility;
-              } else  if (weapon.type === "sorcery") {
-                let stat = firstWisdom;
-              }
-              
-
-              let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat - secondDefense
-              console.log(`player one dealt ${damageDealt} damage.`)
-
-              // deal damage:
-              $("#charTwoCurrentHealth").text(`${secondHealth - damageDealt}`)
-              // reset defense:
-              $("#charOneDefense").text("0")
-              secondDefense = 0;
-
-              $("#battleLog").append($(`<p>${firstName} dealt ${damageDealt} damage to ${secondName}</p>`))
-              //
-              firstHealth = firstHealth - damageDealt;
-              //
-              incrementActions()
-              //
-              //
-              //
-
-            } else if (char === 2) {
-              // player two attacked?
-              if (weapon.type === "melee") {
-                let stat = secondStrength;
-              } else  if (weapon.type === "ranged") {
-                let stat = secondAgility;
-              } else  if (weapon.type === "sorcery") {
-                let stat = secondWisdom;
-              }
-              
-
-
-              // determine damage
-              let damageDealt = Math.floor(Math.rand() * weapon.damage * weapon.level) + stat - firstDefense
-              console.log(`player one dealt ${damageDealt} damage.`)
-
-              // apply damage to player 1
-              $("#charOneCurrentHealth").text(`${firstHealth - damageDealt}`)
-              // reset defense:
-              $("#charTwoDefense").text("0")
-              firstDefense = 0;
-
-              // note this in log and increment actions.
-              $("#battleLog").append($(`<p>${secondName} dealt ${damageDealt} damage to ${firstName}</p>`))
-              //
-              secondHealth = secondHealth - damageDealt
-              //
-              incrementActions()
-
-            }
-        }
-        
-                $("#attack").click(function () {
-                  $("#staticModal").css("display", "initial");
-                });
-
-        function hideModal() {
-          $("#staticModal").css("display", "none");
+          incrementActions();
         }
         hideModal();
-        //
-        // attack with which item?
-        $("#modalItemOne").click(function () {
-          hideModal();
-          handleAttack(item1)
-        });
-        $("#modalItemTwo").click(function () {
-          hideModal();
-          handleAttack(item2)
-        });
+      }
 
-        // make only a single options menu with characters remapped each time char increments.
-            ///////////////
+      $("#attack").click(function () {
+        if (char === 1) {
+          $("#staticModal1").css("display", "initial");
+        } else if (char === 2) {
+          $("#staticModal2").css("display", "initial");
+        }
+      });
 
-        $("#defend").click(function () {
+      function hideModal() {
+        $("#staticModal1").css("display", "none");
+        $("#staticModal2").css("display", "none");
+      }
+      hideModal();
+      //
+      // attack with which item?
+      $("#oneModalItemOne").click(function () {
+        hideModal();
+        handleAttack(firstItem1);
+      });
+      $("#oneModalItemTwo").click(function () {
+        hideModal();
+        handleAttack(firstItem2);
+      });
+      $("#twoModalItemOne").click(function () {
+        hideModal();
+        handleAttack(secondItem1);
+      });
+      $("twoModalItemTwo").click(function () {
+        hideModal();
+        handleAttack(secondItem2);
+      });
 
-          if (char === 1) {
+      // make only a single options menu with characters remapped each time char increments.
+      ///////////////
 
-            let defended = Math.floor(Math.rand() * firstAgility)
-            console.log(`player one defended for ${defended}.`)
-            $("#battleLog").append($(`<p>${firstName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
-            $("#charOneDefense").text(`${firstDefense + defended}`)
-            firstDefense = firstDefense + defended;
-            incrementActions()
-          } else if (char === 2) {
+      $("#defend").click(function () {
+        if (char === 1) {
+          let defended = Math.floor(Math.rand() * firstAgility);
+          console.log(`player one defended for ${defended}.`);
+          $("#battleLog").append(
+            $(
+              `<p>${firstName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`
+            )
+          );
+          $("#charOneDefense").text(`${firstDefense + defended}`);
+          firstDefense = firstDefense + defended;
+          incrementActions();
+        } else if (char === 2) {
+          let defended = Math.floor(Math.rand() * secondAgility);
+          console.log(`player one defended for ${defended}.`);
+          $("#battleLog").append(
+            $(
+              `<p>${secondName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`
+            )
+          );
+          $("#charTwoDefense").text(`${secondDefense + defended}`);
+          secondDefense = secondDefense + defended;
+          incrementActions();
+        }
+      });
+      $("#special").click(function () {
+        if (actions !== 0) {
+          $("#specialPopup").css("display", "initial");
+        } else {
+          $("#specialAbilityList").css("display", "initial");
+        }
+      });
+      /////////////////////////////////////
+      // Make a list of all special abilities as functions.
+      //
+      /////////////////////////////////////
+      $(".specialAbility").click(function (e) {
+        incrementActions();
+        incrementActions();
+      });
 
-            let defended = Math.floor(Math.rand() * secondAgility)
-            console.log(`player one defended for ${defended}.`)
-            $("#battleLog").append($(`<p>${secondName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`))
-            $("#charTwoDefense").text(`${secondDefense + defended}`)
-            secondDefense = secondDefense + defended;
-            incrementActions()
-          }
+      // Design an inventory system
 
+      $("#inventory").click(function () {});
 
-        });
-        $("#special").click(function () {
-            if (actions !== 0) {
-                $("#specialPopup").css("display", "initial")
-            } else {
-                $("#specialAbilityList").css("display", "initial")
-            
-            }
+      // Design a flee mechanic. Remember that characters do not naturally heal. remember to put those abilities in.
+      $("#flee").click(function () {
+        if (actions !== 0) {
+          $("#modalFlee").css("display", "initial");
+        } else {
+          let fleeAttempt = Math.floor(Math.rand() * agility);
+          $("#hiddenStack").append(
+            $(`<p>${fleeAttempt}</p>`).attr("class", `flee`)
+          );
+          $("#battleLog").append(
+            $(`<p>${name} attempted to flee and rolled ${fleeAttempt}.</p>`)
+          );
+          incrementActions();
+          incrementActions();
+        }
+      });
 
-        });
-        /////////////////////////////////////
-        // Make a list of all special abilities as functions.
-        //
-        /////////////////////////////////////
-        $(".specialAbility").click(function (e) {
+      $("#modalFleeButton").click(function () {
+        $("#modalFleeButton").css("display", "none");
+      });
 
-            incrementActions();
-            incrementActions();
-        })
-
-        // Design an inventory system
-
-        $("#inventory").click(function () {
-
-        });
-
-
-        // Design a flee mechanic. Remember that characters do not naturally heal. remember to put those abilities in.
-        $("#flee").click(function () {
-
-            if (actions !== 0) {
-                $("#modalFlee").css("display", "initial")
-                
-            } else {
-                    let fleeAttempt = Math.floor(Math.rand() * agility);
-                    $("#hiddenStack").append($(`<p>${fleeAttempt}</p>`).attr("class", `flee`))
-                    $("#battleLog").append($(`<p>${name} attempted to flee and rolled ${fleeAttempt}.</p>`))
-                    incrementActions();
-                    incrementActions();
-            }
-
-        });
-
-        $("#modalFleeButton").click(function () {
-            $("#modalFleeButton").css("display", "none")
-                
-        })
-
-        $("#flex").css("flexDirection", "column").css("display", "inlineBlock").css("position", "relative")
-            </script>
+      $("#flex")
+        .css("flexDirection", "column")
+        .css("display", "inlineBlock")
+        .css("position", "relative");
+    </script>
   </body>
 </html>
