@@ -28,14 +28,12 @@
     <p>Exp:<%=character.exp%></p>
     <p>Gp:<%=character.gp%></p>
 
-        <a href="/character/<%=character._id%>/respec"><button>Respec <%=character.name%>.</button></a>
-        <a href="/item/<%=character._id%>"><button>Buy Gear.</button></a>
         <% if (character.exp >= Number(character.level * 10)) { %>
           <a href="/character/levelup/<%=character._id%>"><button>LEVEL UP</button></a>
         <% }  else { %>
           <p><%=`${Number((character.level * 10) - character.exp)}`%> more EXP needed to level up.</p>
         <% }%>
-        <a href='/battle/<%=character._id%>'><button>Enter Battle With <%=character.name %></button></a>
+        <a href='/character/<%=character._id%>/versus'><button>Enter Battle With <%=character.name %></button></a>
         <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
           <button><input type="button">Banish</input></button>
         </form>

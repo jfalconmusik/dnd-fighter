@@ -29,14 +29,15 @@ mongoose.connect(
 db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
+//
+Character.init();
 // Character.deleteMany({}, (err, deleted) => {
 //   if (err) {
 //     console.log(err);
 //   }
 // });
-// // Seed command:
+// Seed command:
 
-Character.init();
 // Item.init();
 // Error / success
 
@@ -117,7 +118,7 @@ app.listen(PORT, () => {
 
 // Level Up.
 
-// Respec
+// Respec <---- Can Remove ---->
 
 // Shop.
 
@@ -131,3 +132,7 @@ app.listen(PORT, () => {
 // Sudden death?
 
 // Sprites?
+
+// next steps... Selecting the characters to fight,
+// then fighting, then updating the characters, leveling up, then back to character select screen. Basic code is written, much of it doesn't play well. Debug.
+//

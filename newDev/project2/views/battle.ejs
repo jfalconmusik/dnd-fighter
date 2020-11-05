@@ -38,22 +38,22 @@
           <p><%=characterOne.charisma%></p>
           <p>Agility:</p>
           <p><%=characterOne.agility%></p>
-          <% if (characterOne.itemOne) { %>
+          <% if (characterOne.item1) { %>
           <p>Item 1:</p>
           <p>Damage:</p>
-          <p id="charOneWeaponOneDamage"><%=characterOne.itemOne.damage%></p>
+          <p id="charOneWeaponOneDamage"><%=characterOne.item1.damage%></p>
           <p>Level:</p>
-          <p id="charOneWeaponOneLevel"><%=characterOne.itemOne.level%></p>
+          <p id="charOneWeaponOneLevel"><%=characterOne.item1.level%></p>
           <p>Type:</p>
-          <p id="charOneWeaponOneType"><%=characterOne.itemOne.type%></p>
-          <% } %> <% if (characterOne.itemTwo) { %>
+          <p id="charOneWeaponOneType"><%=characterOne.item1.type%></p>
+          <% } %> <% if (characterOne.item2) { %>
           <p>Item 2:</p>
           <p>Damage:</p>
-          <p id="charOneWeaponTwoDamage"></p>><%=characterOne.itemTwo.damage%></p>
+          <p id="charOneWeaponTwoDamage"></p>><%=characterOne.item2.damage%></p>
           <p>Level:</p>
-          <p id="charOneWeaponTwoLevel"><%=characterOne.itemTwo.level%></p>
+          <p id="charOneWeaponTwoLevel"><%=characterOne.item2.level%></p>
           <p>Type:</p>
-          <p id="charOneWeaponTwoType"><%=characterOne.itemTwo.type%></p>
+          <p id="charOneWeaponTwoType"><%=characterOne.item2.type%></p>
           <% }%>
         </div>
         <div class="flexColumn">
@@ -68,18 +68,19 @@
         </div>
         <div class="staticModal">
           <p>Attack with:</p>
-          <button id="modalItemOne">
-            <%=characterOne.itemOne.name%>
-          </button>
-          <button id="modalItemTwo">
-            <%=characterOne.itemTwo.name%>
-          </button>
+          <% if (characterOne.item1) { %>
+            <button id="modalItemOne">
+              <%=characterOne.item1.name%>
+            </button>
+          <% } %>
+          <% if (characterOne.item2) { %>
+            <button id="modalItemTwo">
+              <%=characterOne.item2.name%>
+            </button>
+          <% } %>
         </div>
         <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
-            <% for (ability of characterOne.abilities) { %>
-                <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
-            <% } %>
         </div>
         <div class="staticModal" id="modalFlee">
             <p>You cannot flee if you've acted this turn.</p>
@@ -110,22 +111,22 @@
           <p><%=characterTwo.charisma%></p>
           <p>Agility:</p>
           <p><%=characterTwo.agility%></p>
-          <% if (characterTwo.itemOne) { %>
+          <% if (characterTwo.item1) { %>
           <p>Item 1:</p>
           <p>Damage:</p>
-          <p id="charTowWeaponOneDamage"><%=characterTwo.itemOne.damage%></p>
+          <p id="charTowWeaponOneDamage"><%=characterTwo.item1.damage%></p>
           <p>Level:</p>
-          <p id="charTwoWeaponOneLevel"><%=characterTwo.itemOne.level%></p>
+          <p id="charTwoWeaponOneLevel"><%=characterTwo.item1.level%></p>
           <p>Type:</p>
-          <p id="charTwoWeaponOneType"><%=characterTwo.itemOne.type%></p>
-          <% } %> <% if (characterOne.itemTwo) { %>
+          <p id="charTwoWeaponOneType"><%=characterTwo.item1.type%></p>
+          <% } %> <% if (characterOne.item2) { %>
           <p>Item 2:</p>
           <p>Damage:</p>
-          <p id="charTwoWeaponTwoDamage"></p>><%=characterTwo.itemTwo.damage%></p>
+          <p id="charTwoWeaponTwoDamage"></p>><%=characterTwo.item2.damage%></p>
           <p>Level:</p>
-          <p id="charTwoWeaponTwoLevel"><%=characterTwo.itemTwo.level%></p>
+          <p id="charTwoWeaponTwoLevel"><%=characterTwo.item2.level%></p>
           <p>Type:</p>
-          <p id="charTwoWeaponTwoType"><%=characterTwo.itemTwo.type%></p>
+          <p id="charTwoWeaponTwoType"><%=characterTwo.item2.type%></p>
           <% }%>
         </div>
         <div class="flexColumn">
@@ -140,18 +141,20 @@
         </div>
         <div class="staticModal">
           <p>Attack with:</p>
-          <button id="modalItemOne">
-            <%=characterTwo.itemOne.name%>
-          </button>
-          <button id="modalItemTwo">
-            <%=characterTwo.itemTwo.name%>
-          </button>
+          <% if (characterTwo.item1) { %>
+            <button id="modalItemOne">
+              <%=characterTwo.item1.name%>
+            </button>
+          <% } %>
+          <% if (characterTwo.item2) { %>
+            <button id="modalItemTwo">
+              <%=characterTwo.item2.name%>
+            </button>
+          <% } %>
         </div>
         <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
-            <% for (ability of characterTwo.abilities) { %>
-                <button class="specialAbility" id="<%=`${ability.name}`%>"><%=ability.name%></button>
-            <% } %>
+
         </div>
         <div class="staticModal" id="modalFlee">
             <p>You cannot flee if you've acted this turn.</p>

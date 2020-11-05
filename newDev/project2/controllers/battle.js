@@ -23,20 +23,21 @@ const bcrypt = require("bcrypt");
 // });
 // Create method
 router.get("/:id1/:id2", (req, res) => {
-  let char1;
-  let char2;
-  Character.findById(req.params.id1, (err, foundCharacter) => {
-    char1 = foundCharacter;
+  Character.findById(req.params.id1, (err, foundCharacter1) => {
+    char1 = foundCharacter1;
+    console.log(foundCharacter1.item1);
+
+    return Character.findById(req.params.id2, (err, foundCharacter2) => {
+      return res.render("battle.ejs", {
+        characterOne: foundCharacter1,
+        characterTwo: foundCharacter2,
+        tabTitle: "Good at Violence!",
+      });
+    });
   });
 
-  Character.findById(req.params.id2, (err, foundCharacter) => {
-    char2 = foundCharacter;
-  });
-
-  res.render("battle.ejs", {
-    characterOne: char1,
-    characterTwo: char2,
-  });
+  // console.log(char1);
+  // console.log(char2);
 });
 
 // router.post("/", (req, res) => {

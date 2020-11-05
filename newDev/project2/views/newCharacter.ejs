@@ -7,115 +7,162 @@
     <%- include ('./partials/headers.ejs') %>
     <div class="container">
       <h1>New Character</h1>
-      <form action="/character" method="POST">
         Name: <input type="text" name="name" id="name" /> Back Story:<input
           type="textarea"
           name="backStory"
           id="backStory"
         />
-        Sign:
-          <input type="select" name="sign" id="sign">
-              <option value="Dragon"></option>
-              <option value="Spider"></option>
-              <option value="Elemental"></option>
-              <option value="Serpent"></option>
-              <option value="Raven"></option>
-              <option value="Capricorn"></option>
-          </input>
+        <br>
         Stats:
-        <label for="wisdom" value="wisdom"></label>
-          <input type="select" name="wisdom" id="wisdom">
-              <option value="0"></option>
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
-              <option value="8"></option>
-              <option value="9"></option>
-              <option value="10"></option>
-              <option value="11"></option>
-              <option value="12"></option>
-              <option value="13"></option>
-              <option value="14"></option>
-              <option value="15"></option>
-              <option value="16"></option>
-          </input>
-          <label for="agility" value="agility"></label>
-          <input type="select" name="agility" id="agility">
-              <option value="0"></option>
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
-              <option value="8"></option>
-              <option value="9"></option>
-              <option value="10"></option>
-              <option value="11"></option>
-              <option value="12"></option>
-              <option value="13"></option>
-              <option value="14"></option>
-              <option value="15"></option>
-              <option value="16"></option>
-          </input>
-          <label for="strength" value="strength"></label>
-          <input type="select" name="strength" id="strength">
-              <option value="0"></option>
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
-              <option value="8"></option>
-              <option value="9"></option>
-              <option value="10"></option>
-              <option value="11"></option>
-              <option value="12"></option>
-              <option value="13"></option>
-              <option value="14"></option>
-              <option value="15"></option>
-              <option value="16"></option>
-          </input>
-          <label for="charisma" value="charisma"></label>
-          <input type="select" name="charisma" id="charisma">
-              <option value="0"></option>
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
-              <option value="8"></option>
-              <option value="9"></option>
-              <option value="10"></option>
-              <option value="11"></option>
-              <option value="12"></option>
-              <option value="13"></option>
-              <option value="14"></option>
-              <option value="15"></option>
-              <option value="16"></option>
-          </input>
-          <label for="firstAbility" value="firstAbility"></label>
+        <p id="pointsLeft"></p>
+        <p>Wisdom: <span id="scoreWis">10</span></p>
+        <button id="wisPlus" class="modStat">+</button><button id="wis-" class="modStat">-</button>
+        <p>Strength: <span id="scoreStr">10</span></p>
+        <button id="strPlus" class="modStat">+</button><button id="str-" class="modStat">-</button>
+        <p>Agility: <span id="scoreAgi">10</span></p>
+        <button id="agiPlus" class="modStat">+</button><button id="agiMinus" class="modStat">-</button>
+        <p>Charisma: <span id="scoreCha">10</span></p>
+        <button id="chaPlus" class="modStat">+</button><button id="chaMinus" class="modStat">-</button>
+        
+          <!-- <label for="firstAbility" value="firstAbility"></label>
             <input type="select" name="firstAbility" id="firstAbility">
               <option value="Buddha's Palm"></option>
               <option value="Sneak Attack"></option>
               <option value="Magic Missile"></option>
               <option value="Vicious Mockery"></option>
-            </input>
-
+            </input> -->
+        <br>
 
         Image: <input type="text" name="img" id="img" />
         <br />
+        <p>Forge Item:</p>
+        <label for="itemName" value="Item Name">Item Name</label>
+          <input type="text" id="itemName"/>
+        <p>Type:</p>
+            <button id="melee">Melee</button>
+            <button id="ranged">Ranged</button>
+            <button id="sorcery">Sorcery</button>
+          <br>
+          <br>
+
+          <button id="confirm">Create Character</button>
+
         <button><a href="/character">Back to Character Select</a></button>
       </form>
+      <script>
+       
+        let scoreWis = Number($("#scoreWis").text());
+        $("#wisPlus").click(function () {
+          $("#scoreWis").text(`${scoreWis + 1}`)
+          scoreWis = scoreWis + 1;
+        })
+        $("#wis-").click(function () {
+          $("#scoreWis").text(`${scoreWis - 1}`)
+          scoreWis = scoreWis - 1;
+          if (scoreWis <= 0) {
+            scoreWis = 1;
+          }
+        })
+        let scoreStr = Number($("#scoreStr").text());
+        $("#strPlus").click(function () {
+          $("#scoreStr").text(`${scoreStr + 1}`)
+          scoreStr = scoreStr + 1;
+        })
+        $("#str-").click(function () {
+          $("#scoreStr").text(`${scoreStr - 1}`)
+          scoreStr = scoreStr - 1;
+          if (scoreStr <= 0) {
+            scoreStr = 1;
+          }
+        })
+        let scoreAgi = Number($("#scoreAgi").text());
+        $("#agiPlus").click(function () {
+          $("#scoreAgi").text(`${scoreAgi + 1}`)
+          scoreAgi = scoreAgi + 1;
+        })
+        $("#agiMinus").click(function () {
+          $("#scoreAgi").text(`${scoreAgi - 1}`)
+          scoreAgi = scoreAgi - 1;
+          if (scoreAgi <= 0) {
+            scoreAgi = 1;
+          }
+        })
+        let scoreCha = Number($("#scoreCha").text());
+        $("#chaPlus").click(function () {
+          $("#scoreCha").text(`${scoreCha + 1}`)
+          scoreCha = scoreCha + 1;
+        })
+        $("#chaMinus").click(function () {
+          $("#scoreCha").text(`${scoreCha - 1}`)
+          scoreCha = scoreCha - 1;
+          if (scoreCha <= 0) {
+            scoreCha = 1;
+          }
+        })
+        let pointsLeft = Number($("#pointsLeft").text());
+        $(".modStat").click(function () {
+          pointsLeft = Number($("#pointsLeft").text());
+          let scoreStr = Number($("#scoreStr").text());
+          let scoreWis = Number($("#scoreWis").text());
+          let scoreAgi = Number($("#scoreAgi").text());
+          let scoreCha = Number($("#scoreCha").text());
+
+          let total = (scoreStr + scoreWis + scoreAgi + scoreCha)
+
+          if (total !== 0) {
+            $("#pointsLeft").text(`Points Left: ${40 - total}`)
+            pointsLeft = 40 - total
+          } else {
+            $("#pointsLeft").text(``)
+            pointsLeft = 0;
+          }
+
+        })
+
+        let weaponType = "none"
+
+        $("#melee").click(function() {
+          weaponType = "melee"
+          $("#melee").css("fontWeight", "bold")
+          $("#ranged").css("fontWeight", "normal")
+          $("#sorcery").css("fontWeight", "normal")
+        })
+        $("#sorcery").click(function() {
+          weaponType = "sorcery"
+          $("#melee").css("fontWeight", "normal")
+          $("#ranged").css("fontWeight", "normal")
+          $("#sorcery").css("fontWeight", "bold")
+        })
+        $("#ranged").click(function() {
+          weaponType = "ranged"
+          $("#melee").css("fontWeight", "normal")
+          $("#ranged").css("fontWeight", "bold")
+          $("#sorcery").css("fontWeight", "normal")
+        })
+
+        $("#confirm").click(function () {
+          $("#confirm").css('fontweight', "bold")
+          // console.log('confirm clicked')
+          if (pointsLeft === 0) {
+
+            let itemName = $("#itemName").val()
+            let name = $("#name").val()
+            let img = $("#img").val()
+
+            $.ajax({
+              url: `/character/`,
+              type: 'POST',
+              data: {name, scoreWis, scoreStr, scoreAgi, scoreCha, itemName, weaponType, img},
+              success: function(response){
+                console.log('successful post to /character/new', response)
+              }
+              
+            })
+            
+            location.href = "/character"
+          }}) 
+          
+      </script>
     </div>
     <%- include ('./partials/footer.ejs') %>
   </body>

@@ -7,16 +7,20 @@
     <%- include ('./partials/headers.ejs') %>
     <div class="container">
       <a href="/character/new"><button>New Character</button></a>
+      <% if (secondCharacter) { %>
+      <p>Select Your Opponent:</p>
+      <% } %>
       <ul>
         <% for (let character of characters) {%>
 
         <li><%=character.name%></li>
         <li><%=character.level%></li>
-        <li><%=character.sign%></li>
-
         <img src="<%=character.img%>" />
+        <%if (!secondCharacter) { %>
         <a href="/character/<%=character._id%>">See Dossier</a>
-        <% } %>
+        <% } else { %>
+        <a href="/battle/<%=firstId%>/<%=character._id%>">To Battle!</a>
+        <% }} %>
       </ul>
       <%- include ('./partials/footer.ejs') %>
     </div>

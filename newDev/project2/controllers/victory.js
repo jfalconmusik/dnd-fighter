@@ -137,3 +137,5 @@ router.get("/mutually-assured-destruction/:id1:/id2", (req, res) => {
     mutual: true,
   });
 });
+
+module.exports = router;

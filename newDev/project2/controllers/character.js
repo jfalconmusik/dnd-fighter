@@ -28,30 +28,60 @@ router.post("/", (req, res) => {
     name: req.body.name,
     backStory: req.body.backStory,
     img: req.body.img,
-    sign: req.body.sign,
+    agility: req.body.scoreAgi,
+    strength: req.body.scoreStr,
+    charisma: req.body.scoreCha,
+    wisdom: req.body.scoreWis,
+    health: Number(req.body.scoreStr * 10),
+    mana: Number(req.body.scoreWis * 10),
+    item1: {
+      name: req.body.itemName,
+      type: req.body.weaponType,
+      level: 0,
+      damage: 6,
+    },
   });
   //   res.send(req.body);
+  let id;
   Character.create(newCharacter, (error, createdCharacter) => {
     if (error) {
       console.log(error);
     } else if (createdCharacter) {
       console.log(createdCharacter);
-      res.redirect("/character");
+      id = createdCharacter._id;
+      console.log(id);
+      // res.redirect(`/character/${createdCharacter._id}`);
     }
   });
+
+  // res.redirect(`/character/`);
 });
 
 // show is set up with mongoose
+
+router.get("/:id/versus", (req, res) => {
+  Character.find({}, (err, allCharacters) => {
+    res.render("index.ejs", {
+      characters: allCharacters,
+      tabTitle: "Meet the Cast",
+      secondCharacter: true,
+      firstId: req.params.id,
+    });
+  });
+});
 router.get("/:id", (req, res) => {
   Character.findById(req.params.id, (err, foundCharacter) => {
+    let title = "For Blood And Glory";
+    if (foundCharacter) {
+      title = foundCharacter.name;
+    }
     res.render("show.ejs", {
       character: foundCharacter,
-      tabTitle: foundCharacter.name,
+      tabTitle: title,
       levelup: false,
     });
   });
 });
-
 // decrement product with mongoose
 // router.patch("/:id/:quant", (req, res) => {
 //   let productId = req.params.id;
@@ -75,93 +105,93 @@ router.get("/:id", (req, res) => {
 // });
 //
 // edit route and methods:
-router.get("/:id/respec", (req, res) => {
-  Character.findById(req.params.id, (err, foundCharacter) => {
-    res.render("edit.ejs", {
-      product: foundCharacter,
-      tabTitle: "Respec skill points",
-    });
-  });
-});
+// router.get("/:id/respec", (req, res) => {
+//   Character.findById(req.params.id, (err, foundCharacter) => {
+//     res.render("edit.ejs", {
+//       product: foundCharacter,
+//       tabTitle: "Respec skill points",
+//     });
+//   });
+// });
 
-// level up character with mongoose
-router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
-  let characterId = req.params.id;
-  let newLevel = req.params.level;
-  let statLevel = req.params.statLevel;
-  let statName = req.params.statName;
-  if (statName === "agility") {
-    Character.findOneAndUpdate(
-      { _id: characterId },
-      {
-        level: newLevel,
-        agility: statLevel,
-        //   amountBought: req.body.amountBought,
-      },
+// // level up character with mongoose
+// router.patch("/:id/:level/:statname/:statlevel", (req, res) => {
+//   let characterId = req.params.id;
+//   let newLevel = req.params.level;
+//   let statLevel = req.params.statLevel;
+//   let statName = req.params.statName;
+//   if (statName === "agility") {
+//     Character.findOneAndUpdate(
+//       { _id: characterId },
+//       {
+//         level: newLevel,
+//         agility: statLevel,
+//         //   amountBought: req.body.amountBought,
+//       },
 
-      (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(docs);
-        }
-      }
-    );
-  } else if (statName === "strength") {
-    Character.findOneAndUpdate(
-      { _id: characterId },
-      {
-        level: newLevel,
-        strength: statLevel,
-        //   amountBought: req.body.amountBought,
-      },
+//       (err, docs) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log(docs);
+//         }
+//       }
+//     );
+//   } else if (statName === "strength") {
+//     Character.findOneAndUpdate(
+//       { _id: characterId },
+//       {
+//         level: newLevel,
+//         strength: statLevel,
+//         //   amountBought: req.body.amountBought,
+//       },
 
-      (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(docs);
-        }
-      }
-    );
-  } else if (statName === "wisdom") {
-    Character.findOneAndUpdate(
-      { _id: characterId },
-      {
-        level: newLevel,
-        wisdom: statLevel,
-        //   amountBought: req.body.amountBought,
-      },
+//       (err, docs) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log(docs);
+//         }
+//       }
+//     );
+//   } else if (statName === "wisdom") {
+//     Character.findOneAndUpdate(
+//       { _id: characterId },
+//       {
+//         level: newLevel,
+//         wisdom: statLevel,
+//         //   amountBought: req.body.amountBought,
+//       },
 
-      (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(docs);
-        }
-      }
-    );
-  } else if (statName === "charisma") {
-    Character.findOneAndUpdate(
-      { _id: characterId },
-      {
-        level: newLevel,
-        charisma: statLevel,
-        //   amountBought: req.body.amountBought,
-      },
+//       (err, docs) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log(docs);
+//         }
+//       }
+//     );
+//   } else if (statName === "charisma") {
+//     Character.findOneAndUpdate(
+//       { _id: characterId },
+//       {
+//         level: newLevel,
+//         charisma: statLevel,
+//         //   amountBought: req.body.amountBought,
+//       },
 
-      (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(docs);
-        }
-      }
-    );
-  }
-  res.redirect(`/character/${characterId}`);
-});
-//
+//       (err, docs) => {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log(docs);
+//         }
+//       }
+//     );
+//   }
+//   res.redirect(`/character/${characterId}`);
+// });
+// //
 
 // delete log using mongoose
 router.delete("/:id", (req, res) => {
@@ -175,17 +205,7 @@ router.delete("/:id", (req, res) => {
   res.redirect("/character");
 });
 
-// index shows all logs with mongoose
-router.get("/", (req, res) => {
-  console.log(req.session);
-
-  Character.find({}, (error, allCharacters) =>
-    res.render("index.ejs", {
-      characters: allCharacters,
-      tabTitle: "Meet the Cast",
-    })
-  );
-});
+// index shows all logs with mongoos
 
 router.get("/levelup/:id", (req, res) => {
   Character.findById(req.params.id, (err, foundCharacter) => {
@@ -197,7 +217,7 @@ router.get("/levelup/:id", (req, res) => {
   });
 });
 
-router.patch(`/character/levelup/:id/:stat/:item/:ability`, (req, res) => {
+router.patch(`/levelup/:id/:stat/:item/:ability`, (req, res) => {
   let plusStrength = 0;
   let plusWisdom = 0;
   let plusCharisma = 0;
@@ -277,6 +297,18 @@ router.patch(`/character/levelup/:id/:stat/:item/:ability`, (req, res) => {
 //
 //
 //
+
+router.get("/", (req, res) => {
+  Character.find({}, (error, allCharacters) =>
+    res.render("index.ejs", {
+      characters: allCharacters,
+      tabTitle: "Meet the Cast",
+      secondCharacter: false,
+      firstId: "none",
+    })
+  );
+});
+
 router.get("/create-session", (req, res) => {
   res.session.anyProperty = "stored session state.";
   const hashedString = bcrypt.hashSync(
