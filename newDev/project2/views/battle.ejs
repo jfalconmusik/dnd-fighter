@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include ('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/Users/jessefalconmusik/newDev/project2/style.css">
     <title><%=characterOne.name%> Vs <%=characterTwo.name%></title>
   </head>
   <body>
@@ -12,121 +13,92 @@
  -->
     <div id="container">
         <div class="battleLog"></div>
+        
       <h1><%=characterOne.name%> Vs <%=characterTwo.name%></h1>
         <!--  -->
-      <div id="playerOne">
-        <!--  -->
-      <p id="charOneName"><%=characterOne.name%></p>
-      <br />
-      <div class="flexRow">
-        <div class="flexColumn">
-          <p>Level:</p>
-          <p id="charOneLevel"><%=`${characterOne.level}`%></p>
-          <p>Current Health:</p>
-          <p><%=`${characterOne.currentHealth}`%></p>
-          <p>Max Health:</p>
-          <p><%=`${characterOne.maxHealth}`%></p>
-          <p>Current Mana:</p>
-          <p><%=characterOne.currentMana%></p>
-          <p>Max Mana:</p>
-          <p><%=characterOne.maxMana%></p>
-          <p>Wisdom:</p>
-          <p><%=characterOne.wisdom%></p>
-          <p>Strength:</p>
-          <p id="charOneStrength"><%=characterOne.strength%></p>
-          <p>Charima:</p>
-          <p><%=characterOne.charisma%></p>
-          <p>Agility:</p>
-          <p><%=characterOne.agility%></p>
-          <% if (characterOne.item1) { %>
-          <p>Item 1:</p>
-          <p>Damage:</p>
-          <p id="charOneWeaponOneDamage"><%=characterOne.item1.damage%></p>
-          <p>Level:</p>
-          <p id="charOneWeaponOneLevel"><%=characterOne.item1.level%></p>
-          <p>Type:</p>
-          <p id="charOneWeaponOneType"><%=characterOne.item1.type%></p>
-          <% } %> <% if (characterOne.item2) { %>
-          <p>Item 2:</p>
-          <p>Damage:</p>
-          <p id="charOneWeaponTwoDamage"></p>><%=characterOne.item2.damage%></p>
-          <p>Level:</p>
-          <p id="charOneWeaponTwoLevel"><%=characterOne.item2.level%></p>
-          <p>Type:</p>
-          <p id="charOneWeaponTwoType"><%=characterOne.item2.type%></p>
-          <% }%>
-        </div>
-        <div class="flexColumn">
-          <button id="charOneAttack" class="battleButton">Attack</button>
-          <button id="charOneDefend" class="battleButton">Defend</button>
-          <button id="charOneSpecial" class="battleButton">
-            Special Ability
-          </button>
-          <button id="charOneInventory" class="battleButton">Inventory</button>
-          <button id="charOneFlee" class="battleButton">Flee</button>
-          
-        </div>
-        <div class="staticModal">
-          <p>Attack with:</p>
-          <% if (characterOne.item1) { %>
-            <button id="modalItemOne">
-              <%=characterOne.item1.name%>
-            </button>
-          <% } %>
-          <% if (characterOne.item2) { %>
-            <button id="modalItemTwo">
-              <%=characterOne.item2.name%>
-            </button>
-          <% } %>
-        </div>
-        <div id="specialAbilitiesList">
-            <h4>Special Abilities:</h4>
-        </div>
-        <div class="staticModal" id="modalFlee">
-            <p>You cannot flee if you've acted this turn.</p>
-            <button id="modalFleeButton">OK</button>
-        </div>
-    </div>
-     </div>
+      <div id="flex">
+            <div id="playerOne">
+              <!--  -->
+            <p id="charOneName"><%=characterOne.name%></p>
+            <br />
+            <div class="flexRow">
+              <div class="flexColumn">
+                <p>Level: <span id="charOneLevel"><%=characterOne.level%></span></p>
+                <p>Current Health: <span id="charOneCurrentHealth"><%=characterOne.currentHealth%></span></p>
+                <p>Max Health: <span id="charOneMaxHealth"><%=characterOne.maxHealth%></span></p>
+                <p>Current Mana: <span id="charOneCurrentMana"><%=characterOne.currentMana%></span></p>
+                <p>Max Mana: <span id="charOneMaxMana"><%=characterOne.maxMana%></span></p>
+                <p>Wisdom: <span id="charOneWisdom"><%=characterOne.wisdom%></span></p>
+                <p>Strength: <span id="charOneStrength"><%=characterOne.strength%></span></p>
+                <p>Charima: <span id="charOneCharisma"><%=characterOne.charisma%></span></p>
+                <p>Agility: <span id="charOneAgility"><%=characterOne.agility%></span></p>
+                <% if (characterOne.item1) { %>
+                <p>Item 1: <span id="charOneItemOneName"><%=characterOne.item1.name%></span></p>
+                <p>Damage: <span id="charOneWeaponOneDamage"><%=characterOne.item1.damage%></span></p>
+                <p>Level: <span id="charOneWeaponOneLevel"><%=characterOne.item1.level%></span></p>
+                <p>Type: <span id="charOneWeaponOneType"><%=characterOne.item1.type%></span></p>
+                <% } %> <% if (characterOne.item2 && characterOne.item2.name) { %>
+                <p>Item 2: <span id="charOneItemTwoName"><%=characterOne.item2.name%></span></p>
+                <p>Damage: <span id="charOneWeaponTwoDamage"><%=characterOne.item2.damage%></span></p>
+                <p>Level: <span id="charOneWeaponTwoLevel"><%=characterOne.item2.level%></span></p>
+                <p>Type: <span id="charOneWeaponTwoType"><%=characterOne.item2.type%></span></p>
+                <% }%>
+              </div>
+              <div class="flexColumn">
+                <button id="charOneAttack" class="battleButton">Attack</button>
+                <button id="charOneDefend" class="battleButton">Defend</button>
+                <button id="charOneSpecial" class="battleButton">
+                  Special Ability
+                </button>
+                <button id="charOneInventory" class="battleButton">Inventory</button>
+                <button id="charOneFlee" class="battleButton">Flee</button>
+                
+              </div>
+              <div class="staticModal">
+                <p>Attack with:</p>
+                <% if (characterOne.item1) { %>
+                  <button id="modalItemOne">
+                    <%=characterOne.item1.name%>
+                  </button>
+                <% } %>
+                <% if (characterOne.item2) { %>
+                  <button id="modalItemTwo">
+                    <%=characterOne.item2.name%>
+                  </button>
+                <% } %>
+              </div>
+              <!-- <div id="specialAbilitiesList">
+                  <h4>Special Abilities:</h4>
+              </div> -->
+              <div class="staticModal" id="modalFlee">
+                  <p>You cannot flee if you've acted this turn.</p>
+                  <button id="modalFleeButton">OK</button>
+              </div>
+          </div>
         <div id="playerTwo">
       <p id="charTwoName"><%=characterTwo.name%></p>
       <br />
       <div class="flexRow">
         <div class="flexColumn">
-          <p>Level:</p>
-          <p id="charTwoLevel"><%=`${characterTwo.level}`%></p>
-          <p>Current Health:</p>
-          <p><%=`${characterTwo.currentHealth}`%></p>
-          <p>Max Health:</p>
-          <p><%=`${characterTwo.maxHealth}`%></p>
-          <p>Current Mana:</p>
-          <p><%=characterTwo.currentMana%></p>
-          <p>Max Mana:</p>
-          <p><%=characterTwo.maxMana%></p>
-          <p>Wisdom:</p>
-          <p><%=characterTwo.wisdom%></p>
-          <p>Strength:</p>
-          <p id="charTwoStrength"><%=characterTwo.strength%></p>
-          <p>Charima:</p>
-          <p><%=characterTwo.charisma%></p>
-          <p>Agility:</p>
-          <p><%=characterTwo.agility%></p>
+          <p>Level: <span id="charTwoLevel"><%=characterTwo.level%></span></p>
+          <p>Current Health: <span id="charTwoCurrentHealth"><%=characterTwo.currentHealth%></span></p>
+          <p>Max Health: <span id="charTwoMaxHealth"><%=characterTwo.maxHealth%></span></p>
+          <p>Current Mana: <span id="charTwoCurrentMana"><%=characterTwo.currentMana%></span></p>
+          <p>Max Mana: <span id="charTwoMaxMana"><%=characterTwo.maxMana%></span></p>
+          <p>Wisdom: <span id="charTwoWisdom"><%=characterTwo.wisdom%></span></p>
+          <p>Strength: <span id="charTwoStrength"><%=characterTwo.strength%></span></p>
+          <p>Charima: <span id="charTwoCharisma"><%=characterTwo.charisma%></span></p>
+          <p>Agility: <span id="charTwoAgility"><%=characterTwo.agility%></span></p>
           <% if (characterTwo.item1) { %>
-          <p>Item 1:</p>
-          <p>Damage:</p>
-          <p id="charTowWeaponOneDamage"><%=characterTwo.item1.damage%></p>
-          <p>Level:</p>
-          <p id="charTwoWeaponOneLevel"><%=characterTwo.item1.level%></p>
-          <p>Type:</p>
-          <p id="charTwoWeaponOneType"><%=characterTwo.item1.type%></p>
-          <% } %> <% if (characterOne.item2) { %>
-          <p>Item 2:</p>
-          <p>Damage:</p>
-          <p id="charTwoWeaponTwoDamage"></p>><%=characterTwo.item2.damage%></p>
-          <p>Level:</p>
-          <p id="charTwoWeaponTwoLevel"><%=characterTwo.item2.level%></p>
-          <p>Type:</p>
-          <p id="charTwoWeaponTwoType"><%=characterTwo.item2.type%></p>
+          <p>Item 1: <span id="charTwoItemOneName"><%=characterTwo.item1.name%></span></p>
+          <p>Damage: <span id="charTwoWeaponOneDamage"><%=characterTwo.item1.damage%></span></p>
+          <p>Level: <span id="charTwoWeaponOneLevel"><%=characterTwo.item1.level%></span></p>
+          <p>Type: <span id="charTwoWeaponOneType"><%=characterTwo.item1.type%></span></p>
+          <% } %> <% if (characterTwo.item2 && characterTwo.item2.name) { %>
+          <p>Item 2: <span id="charTwoItemTwoName"><%=characterTwo.item2.name%></span></p>
+          <p>Damage: <span id="charTwoWeaponTwoDamage"><%=characterTwo.item2.damage%></span></p>
+          <p>Level: <span id="charTwoWeaponTwoLevel"><%=characterTwo.item2.level%></span></p>
+          <p>Type: <span id="charTwoWeaponTwoType"><%=characterTwo.item2.type%></span></p>
           <% }%>
         </div>
         <div class="flexColumn">
@@ -146,25 +118,23 @@
               <%=characterTwo.item1.name%>
             </button>
           <% } %>
-          <% if (characterTwo.item2) { %>
+          <% if (characterTwo.item2 && characterTwo.item2.name) { %>
             <button id="modalItemTwo">
               <%=characterTwo.item2.name%>
             </button>
           <% } %>
         </div>
-        <div id="specialAbilitiesList">
+        <!-- <div id="specialAbilitiesList">
             <h4>Special Abilities:</h4>
 
-        </div>
+        </div> -->
         <div class="staticModal" id="modalFlee">
             <p>You cannot flee if you've acted this turn.</p>
             <button id="modalFleeButton">OK</button>
         </div>
       </div>
-      
+        </div>
      </div>
-
-      <h2></h2>
     </div>
     <script>
         let char = 1; // turn will be one for character one, two for character two.
@@ -458,6 +428,8 @@
             $("#modalFleeButton").css("display", "none")
                 
         })
+
+        $("#flex").css("flexDirection", "column").css("display", "inlineBlock").css("position", "relative")
             </script>
   </body>
 </html>

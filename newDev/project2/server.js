@@ -31,23 +31,23 @@ db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
 //
 Character.init();
-// Character.deleteMany({}, (err, deleted) => {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
+Character.deleteMany({}, (err, deleted) => {
+  if (err) {
+    console.log(err);
+  }
+});
 // Seed command:
 
 // Item.init();
 // Error / success
 
-// Character.create(characterSeed, (err, data) => {
-//   if (err) {
-//     console.log(err.message);
-//   } else {
-//     console.log("added initial characters.");
-//   }
-// });
+Character.create(characterSeed, (err, data) => {
+  if (err) {
+    console.log(err.message);
+  } else {
+    console.log("added initial characters.");
+  }
+});
 
 const characterController = require("./controllers/character.js");
 const battleController = require("./controllers/battle.js");

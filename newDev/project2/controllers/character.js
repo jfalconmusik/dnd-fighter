@@ -32,8 +32,10 @@ router.post("/", (req, res) => {
     strength: req.body.scoreStr,
     charisma: req.body.scoreCha,
     wisdom: req.body.scoreWis,
-    health: Number(req.body.scoreStr * 10),
-    mana: Number(req.body.scoreWis * 10),
+    maxHealth: Number(req.body.scoreStr * 10),
+    currentHealth: Number(req.body.scoreStr * 10),
+    maxMana: Number(req.body.scoreWis * 10),
+    currentMana: Number(req.body.scoreWis * 10),
     item1: {
       name: req.body.itemName,
       type: req.body.weaponType,

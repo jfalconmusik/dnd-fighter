@@ -15,3 +15,29 @@
 .hiddenStack {
   display: none;
 }
+
+#flex {
+  flex-direction: column;
+  flex-flow: initial;
+  display: inline-block;
+  position: relative;
+}
+
+#playerOne {
+  flex-direction: column;
+  flex-flow: initial;
+  display: inline-block;
+  max-height: 100vh;
+}
+
+#playerTwo {
+  flex-direction: column;
+  flex-flow: initial;
+  display: inline-block;
+  max-height: 100vh;
+  left: 50%;
+}
+
+body {
+  color: red;
+}
