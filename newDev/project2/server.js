@@ -113,4 +113,4 @@ app.listen(PORT, () => {
 
 // Sprites?
 
-// Make sure the only seed images are small. Deploy to heroku. And then do the outcomes work.
+// Make README. Deploy to heroku. And then do the outcomes work.

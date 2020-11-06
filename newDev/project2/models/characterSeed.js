@@ -15,8 +15,7 @@ module.exports = [
     agility: 12,
     strength: 10,
     charisma: 12,
-    sign: "Spider",
-    img: "https://i.redd.it/ggdr2chi6i351.png",
+    img: "https://upload.wikimedia.org/wikipedia/en/c/cf/Drizzt.png",
   },
   {
     name: "Tasslehoff Burrfoot",
@@ -57,7 +56,7 @@ module.exports = [
     strength: 10,
     charisma: 14,
     img:
-      "https://www.geekgirlauthority.com/wp-content/uploads/2018/09/drizzt-1080982-1280x0-1280x640.jpeg",
+      "https://i.pinimg.com/originals/37/35/c2/3735c202cf08e357e74a916f758fc962.jpg",
   },
   {
     name: "Raistlin",
