@@ -20,8 +20,11 @@
         <a href="/character/<%=character._id%>">See Dossier</a>
         <% } else { %>
         <a href="/battle/<%=firstId%>/<%=character._id%>">To Battle!</a>
-        <% }} %>
+        <% } %>
+        <br />
+        <% } %>
       </ul>
+
       <%- include ('./partials/footer.ejs') %>
     </div>
   </body>
