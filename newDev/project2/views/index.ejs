@@ -13,14 +13,16 @@
       <ul>
         <% for (let character of characters) {%>
 
-        <li><%=character.name%></li>
+        <li><h5><%=character.name%></h5></li>
         <li><%=character.level%></li>
-        <img src="<%=character.img%>" />
         <%if (!secondCharacter) { %>
-        <a href="/character/<%=character._id%>">See Dossier</a>
+        <li><a href="/character/<%=character._id%>">See Dossier</a></li>
         <% } else { %>
-        <a href="/battle/<%=firstId%>/<%=character._id%>">To Battle!</a>
+        <li>
+          <a href="/battle/<%=firstId%>/<%=character._id%>">To Battle!</a>
+        </li>
         <% } %>
+        <img src="<%=character.img%>" />
         <br />
         <br />
         <br />
