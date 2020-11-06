@@ -113,4 +113,4 @@ app.listen(PORT, () => {
 
 // Sprites?
 
-// Make it look good => just get fighters on opposing sides and make sure the only seed images are small. Deploy to heroku. And then do the outcomes work.
+// Make sure the only seed images are small. Deploy to heroku. And then do the outcomes work.

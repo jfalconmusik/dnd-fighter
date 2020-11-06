@@ -27,8 +27,8 @@
         <a id="victoryDisplay2" href="/victory/<%=characterTwo._id%>/<%=characterOne._id%>">Victory</a>
         <a id="victoryDisplay3" href="/victory/mutually-assured-destruction/<%=characterOne._id%>/<%=characterTwo._id%>">Victory</a>
       </div>
-      <div class="flexColumn">
-        <p id="playerOptions">Player 1:</p>
+      <div id="fightingOptions">
+        <h4 id="playerOptions">Player 1:</h4>
         <button id="attack" class="battleButton">Attack</button>
         <button id="defend" class="battleButton">Defend</button>
         <!-- <button id="special" class="battleButton">Special Ability</button>
@@ -63,7 +63,7 @@
     </div>
     <div id="flex">
       <div id="playerOne">
-        <p id="charOneName"><%=characterOne.name%></p>
+        <h5 id="charOneName"><%=characterOne.name%></h5>
         <br />
         <div class="flexRow">
           <div class="flexColumn">
@@ -159,7 +159,7 @@
           </div>
         </div>
         <div id="playerTwo">
-          <p id="charTwoName"><%=characterTwo.name%></p>
+          <h5 id="charTwoName"><%=characterTwo.name%></h5>
           <br />
           <div class="flexRow">
             <div class="flexColumn">
@@ -612,9 +612,10 @@
       });
 
       $("#flex")
-        .css("flexDirection", "column")
+        .css("flexDirection", "row")
         .css("display", "inlineBlock")
-        .css("position", "relative");
+        .css("position", "relative")
+        .css("maxWidth", "100vw");
     </script>
   </body>
 </html>

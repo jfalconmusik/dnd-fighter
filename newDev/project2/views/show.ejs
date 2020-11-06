@@ -39,11 +39,13 @@
         <% }  else { %>
           <p><%=`${Number((character.level * 10) - character.exp)}`%> more EXP needed to level up.</p>
         <% }%>
-        <a href="/character/<%=character._id%>/update"><button>Reset Character</button></a>
-        <a href='/character/<%=character._id%>/versus'><button>Enter Battle With <%=character.name %></button></a>
-        <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
-          <button><input type="button">Banish</input></button>
-        </form>
+        <div id="flex">
+          <a href='/character/<%=character._id%>/versus'><button>Enter Battle With <%=character.name %></button></a>
+          <a href="/character/<%=character._id%>/update"><button>Reset Character</button></a>
+          <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
+            <button><input type="button">Banish</input></button>
+          </form>
+      </div>
   <% } else {  %>
 
     <p><%=character.name%> reached Level <%=character.level + 1%></p>
@@ -139,6 +141,7 @@
     })
 
 
+    $("#flex").css(flexDirection, "row")
 
     //  call this on level Up Button
     $("#confirmLevel").click(function () {
