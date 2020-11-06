@@ -6,7 +6,15 @@
   <body>
     <%- include ('./partials/headers.ejs') %>
     <div class="container">
+
+      <% if (reset == false) { %> 
       <h1>New Character</h1>
+      
+      <% } else { %>
+      <h1>Update Character</h1>
+      <div id="charId"><%=charId%></div>
+      <% } %>
+      <div id="reset"><%=reset%></div>
         Name: <input type="text" name="name" id="name" /> Back Story:<input
           type="textarea"
           name="backStory"
@@ -45,12 +53,28 @@
           <br>
           <br>
 
-          <button id="confirm">Create Character</button>
+          <% if (reset == false) { %>
+          <a href="/character"><button class="confirm">Create Character</button></a>
+          <% } else { %>
+            <button class="confirm">Update Character</button>
+          <% } %>
 
         <button><a href="/character">Back to Character Select</a></button>
       </form>
       <script>
-       
+        let resetBool;
+        $("#reset").css("display", "none")
+        $("#charId").css("display", "none")
+
+        let charId = $("#charId").text()
+
+        if ($("#reset").text() === "true") {
+          resetBool === true
+        } else {
+          resetBool === false
+        }
+
+      
         let scoreWis = Number($("#scoreWis").text());
         $("#wisPlus").click(function () {
           $("#scoreWis").text(`${scoreWis + 1}`)
@@ -140,8 +164,8 @@
           $("#sorcery").css("fontWeight", "normal")
         })
 
-        $("#confirm").click(function () {
-          $("#confirm").css('fontweight', "bold")
+        $(".confirm").click(function () {
+          $(".confirm").css('fontweight', "bold")
           // console.log('confirm clicked')
           if (pointsLeft === 0) {
 
@@ -149,15 +173,41 @@
             let name = $("#name").val()
             let img = $("#img").val()
 
-            $.ajax({
+            console.log("reset", resetBool)
+            if (!resetBool) { 
+              $.ajax({
               url: `/character/`,
               type: 'POST',
-              data: {name, scoreWis, scoreStr, scoreAgi, scoreCha, itemName, weaponType, img},
+              data: {name, scoreWis, scoreStr, scoreAgi, scoreCha, itemName, weaponType, img, id: charId},
               success: function(response){
                 console.log('successful post to /character/new', response)
               }
               
             })
+          } else {
+            console.log("client put")
+            //
+            $.ajax({
+              url: `/character/${charId}`,
+              type: 'DELETE',
+              data: {},
+              success: function(response){
+                console.log('successful put to /character/new', response)
+              }
+              
+            })
+            //
+            $.ajax({
+              url: `/character/${charId}/update`,
+              type: 'POST',
+              data: {name, scoreWis, scoreStr, scoreAgi, scoreCha, itemName, weaponType, img},
+              success: function(response){
+                console.log('successful put to /character/new', response)
+              }
+              
+            })
+          }
+          
             
             location.href = "/character"
           }}) 

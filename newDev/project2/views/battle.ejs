@@ -31,9 +31,9 @@
         <p id="playerOptions">Player 1:</p>
         <button id="attack" class="battleButton">Attack</button>
         <button id="defend" class="battleButton">Defend</button>
-        <button id="special" class="battleButton">Special Ability</button>
-        <button id="inventory" class="battleButton">Inventory</button>
-        <button id="flee" class="battleButton">Flee</button>
+        <!-- <button id="special" class="battleButton">Special Ability</button>
+        <button id="inventory" class="battleButton">Inventory</button> -->
+        <a href="/character/"><button id="flee" class="battleButton">Flee</button></a>
       </div>
       <div id="staticModal1">
         <p>Attack with:</p>
@@ -148,6 +148,7 @@
               >
             </p>
             <% }%>
+            <p>Defense: <span id="charOneDefense">0</span></p>
           </div>
           <!-- <div id="specialAbilitiesList">
                   <h4>Special Abilities:</h4>
@@ -251,6 +252,7 @@
                 >
               </p>
               <% }%>
+              <p>Defense: <span id="charTwoDefense">0</span></p>
             </div>
 
             <!-- <div id="specialAbilitiesList">
@@ -454,8 +456,13 @@
           // deal damage:
           $("#charTwoCurrentHealth").text(`${Number(secondHealth) - Number(damageDealt)}`);
           // reset defense:
-          $("#charOneDefense").text("0");
-          secondDefense = 0;
+          $("#charTwoDefense").text("0");
+          secondDefense = secondDefense - Number(Math.floor(Math.random() * Number(weapon.damage) * Number(weapon.level)) +
+            Number(stat));
+
+          if (secondDefense < 0) {
+            secondDefense = 0;
+          }
 
           $("#battleLog").append(
             $(
@@ -489,8 +496,12 @@
           // apply damage to player 1
           $("#charOneCurrentHealth").text(`${Number(firstHealth) - Number(damageDealt)}`);
           // reset defense:
-          $("#charTwoDefense").text("0");
-          firstDefense = 0;
+          $("#charOneDefense").text("0");
+          firstDefense = firstDefense - Number(Math.floor(Math.random() * Number(weapon.damage) * Number(weapon.level)) +
+            Number(stat));
+          if (firstDefense < 0) {
+            firstDefense = 0;
+          }
 
           // note this in log and increment actions.
           $("#battleLog").append(
@@ -544,24 +555,16 @@
 
       $("#defend").click(function () {
         if (char === 1) {
-          let defended = Math.floor(Math.rand() * firstAgility);
+          let defended = Math.floor(Math.random() * firstAgility);
           console.log(`player one defended for ${defended}.`);
-          $("#battleLog").append(
-            $(
-              `<p>${firstName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`
-            )
-          );
+          
           $("#charOneDefense").text(`${firstDefense + defended}`);
           firstDefense = firstDefense + defended;
           incrementActions();
         } else if (char === 2) {
-          let defended = Math.floor(Math.rand() * secondAgility);
+          let defended = Math.floor(Math.random() * secondAgility);
           console.log(`player one defended for ${defended}.`);
-          $("#battleLog").append(
-            $(
-              `<p>${secondName} defended, subtracting ${defended} from their opponent's next attack roll.</p>`
-            )
-          );
+          
           $("#charTwoDefense").text(`${secondDefense + defended}`);
           secondDefense = secondDefense + defended;
           incrementActions();

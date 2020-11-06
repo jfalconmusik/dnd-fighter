@@ -98,12 +98,6 @@ app.listen(PORT, () => {
 
 // ==== NEXT: ====
 
-// After a fight, the victors heal somewhat. The losers are healed completely, but lose all experience gained since their last level. Winners gain xp based on the level of their opponent.
-// 10 * level exp is required to level up. exp is gained at a rate of 8 * opponentLevel.
-// in show screen, should be able to pay exp to gain hp.
-
-// Level Up.
-
 // Respec <---- Can Remove ---->
 
 // Shop.
@@ -119,6 +113,4 @@ app.listen(PORT, () => {
 
 // Sprites?
 
-// must have a put route.
-
-// next steps... Fighting. Only option now is to attack.
+// Make it look good => just get fighters on opposing sides and make sure the only seed images are small. Deploy to heroku. And then do the outcomes work.

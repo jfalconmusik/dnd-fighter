@@ -19,11 +19,20 @@ const bcrypt = require("bcrypt");
 router.get("/new", (req, res) => {
   res.render("newCharacter.ejs", {
     tabTitle: "Create Character",
+    reset: false,
   });
 });
 // Create method
 
 router.post("/", (req, res) => {
+  Character.findOneAndDelete({ _id: req.body.id }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(docs);
+    }
+  });
+
   let newCharacter = new Character({
     name: req.body.name,
     backStory: req.body.backStory,
@@ -205,6 +214,60 @@ router.delete("/:id", (req, res) => {
     }
   });
   res.redirect("/character");
+});
+
+router.get("/:id/update", (req, res) => {
+  res.render("newCharacter.ejs", {
+    tabTitle: "Reset Character",
+    reset: true,
+    charId: req.params.id,
+  });
+});
+
+router.post("/:id/update", (req, res) => {
+  Character.findOneAndDelete({ _id: req.params.id }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(docs);
+    }
+  });
+  console.log("put started");
+
+  let newCharacter = new Character({
+    _id: req.params.id,
+    name: req.body.name,
+    backStory: req.body.backStory,
+    img: req.body.img,
+    agility: req.body.scoreAgi,
+    strength: req.body.scoreStr,
+    charisma: req.body.scoreCha,
+    wisdom: req.body.scoreWis,
+    maxHealth: Number(req.body.scoreStr * 10),
+    currentHealth: Number(req.body.scoreStr * 10),
+    maxMana: Number(req.body.scoreWis * 10),
+    currentMana: Number(req.body.scoreWis * 10),
+    item1: {
+      name: req.body.itemName,
+      type: req.body.weaponType,
+      level: 0,
+      damage: 6,
+    },
+  });
+  //   res.send(req.body);
+  let id;
+  Character.create(newCharacter, (error, createdCharacter) => {
+    if (error) {
+      console.log(error);
+    } else if (createdCharacter) {
+      console.log(createdCharacter);
+      id = createdCharacter._id;
+      console.log(id);
+      // res.redirect(`/character/${createdCharacter._id}`);
+    }
+  });
+  console.log("put ended");
+  res.redirect(`/character/${req.params.id}`);
 });
 
 // index shows all logs with mongoos

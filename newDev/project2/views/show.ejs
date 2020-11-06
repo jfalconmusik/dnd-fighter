@@ -39,6 +39,7 @@
         <% }  else { %>
           <p><%=`${Number((character.level * 10) - character.exp)}`%> more EXP needed to level up.</p>
         <% }%>
+        <a href="/character/<%=character._id%>/update"><button>Reset Character</button></a>
         <a href='/character/<%=character._id%>/versus'><button>Enter Battle With <%=character.name %></button></a>
         <form action="/character/<%=character._id%>?_method=DELETE" method="POST">
           <button><input type="button">Banish</input></button>
