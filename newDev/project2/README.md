@@ -12,3 +12,4 @@ There are three kinds of weapons. Ranged, which receives points from Agility. So
 Charisma is a useless stat as of v1.0. Until we update, you might as well set it to 0. Mana is also useless as present.
 
 ...
+Link: https://dnd-fighter.herokuapp.com/
